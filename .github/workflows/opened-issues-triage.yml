@@ -1,0 +1,14 @@
+name: Move new issues into Kanban
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.3.0
+        with:
+          project: Kanban
+          column: インボックス
+          repo-token: ${{ secrets.QUITCOST_GITHUB_TOKEN }}
