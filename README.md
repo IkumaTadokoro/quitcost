@@ -1,6 +1,6 @@
 # quitcost
 
-![image](https://user-images.githubusercontent.com/61409641/140842126-3d1e3da0-402d-4415-9e0f-3613dce99062.png)
+![image](https://user-images.githubusercontent.com/61409641/140843415-ff8d5d7c-3aa2-4128-9749-0d4528dc6e21.png)
 
 ## About
 
@@ -17,6 +17,8 @@
 ## Features
 
 ## Setup
+
+## Seeds
 
 ## Lint & Tests
 
