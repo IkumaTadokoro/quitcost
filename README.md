@@ -18,6 +18,26 @@
 
 ## Setup
 
+```bash
+# コンテナを起動
+$ docker-compose up -d
+
+# コンテナ内でbin/rails s
+$ docker-compose exec web bash
+$ bin/rails s
+=> Booting Puma
+=> Rails 6.1.4.1 application starting in development
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 5.5.1 (ruby 2.7.4-p191) ("Zawgyi")
+*  Min threads: 5
+*  Max threads: 5
+*  Environment: development
+*          PID: 3496
+* Listening on http://0.0.0.0:3000
+Use Ctrl-C to stop
+```
+
 ## Seeds
 
 ## Lint & Tests
