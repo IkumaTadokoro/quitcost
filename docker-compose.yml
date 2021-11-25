@@ -13,6 +13,7 @@ services:
     command: tail -f /dev/null
     volumes:
       - .:/quitcost
+      - node_modules:/quitcost/node_modules
     ports:
       - "3000:3000"
       # Ports required for debugging
@@ -22,3 +23,5 @@ services:
       BINDING: "0.0.0.0"
     depends_on:
       - db
+volumes:
+  node_modules:
