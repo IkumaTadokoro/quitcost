@@ -1,6 +1,10 @@
 {
   "name": "quitcost",
   "private": true,
+  "scripts": {
+    "lint:prettier": "prettier 'app/javascript/**/*.{js,vue}' --check",
+    "fix:prettier": "yarn lint:prettier --write"
+  },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "4",
     "@rails/actioncable": "^6.0.0",
@@ -21,8 +25,11 @@
   "version": "0.1.0",
   "devDependencies": {
     "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^8.2.0",
     "eslint-webpack-plugin": "^3.1.1",
+    "prettier": "2.5.1",
+    "prettier-config-standard": "^4.0.0",
     "webpack-dev-server": "^3"
   }
 }
