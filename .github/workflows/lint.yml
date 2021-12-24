@@ -1,0 +1,37 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Cache node modules
+        uses: actions/cache@v2.1.4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: yarn install
+        run:  yarn install --check-files
+
+      - name: Rubocop
+        run: bundle exec rubocop
+
+      - name: Slim Lint
+        run: bundle exec slim-lint app/views -c config/slim_lint.yml
+
+      - name: JS Lint
+        run: bin/yarn lint
