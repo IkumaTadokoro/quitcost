@@ -1,0 +1,21 @@
+name: 新機能提案
+description: 新機能の提案はこちらから
+assignees: IkumaTadookoro
+labels: ["新機能"]
+body:
+  - type: markdown
+    attributes:
+      value: "新機能提案ありがとうございます！以下のフォームに入力をお願いします"
+  - type: textarea
+    id: description
+    attributes:
+      label: 機能の説明
+      description: 簡潔な説明
+    validations:
+      required: false
+  - type: textarea
+    id: reason
+    attributes:
+      label: なぜこの機能が必要なのか
+    validations:
+      required: false

@@ -1,0 +1,21 @@
+name: タスク
+description: タスクを追加する場合はこちらから
+assignees: IkumaTadookoro
+body:
+  - type: markdown
+    attributes:
+      value: "タスク"
+  - type: textarea
+    id: subtask
+    attributes:
+      label: サブタスク
+      value: |
+        - [ ]
+    validations:
+      required: false
+  - type: textarea
+    id: note
+    attributes:
+      label: メモ
+    validations:
+      required: false
