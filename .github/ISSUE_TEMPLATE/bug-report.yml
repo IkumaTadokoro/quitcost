@@ -1,0 +1,54 @@
+name: バグレポート
+description: バグを見つけたらレポートお願いします。
+assignees: IkumaTadookoro
+labels: ["バグ"]
+body:
+  - type: markdown
+    attributes:
+      value: "バグ報告ありがとうございます！以下のフォームに入力をお願いします"
+  - type: textarea
+    id: description
+    attributes:
+      label: 概要
+      description: 簡潔な説明
+    validations:
+      required: false
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 再現手順
+      description: バグの再現手順
+      placeholder: |
+        1. /fooにアクセス。
+        2. 「投稿」をクリック。
+        3. エラーが表示される。
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待される振る舞い
+      description: 簡潔な説明
+    validations:
+      required: false
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: スクリーンショット
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      placeholder: |
+        - OS: [e.g. iOS]
+        - ブラウザ: [e.g. chrome, safari]
+        - バージョン: [e.g. 22]
+    validations:
+      required: false
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+      placeholder: "Ref: #3899"
