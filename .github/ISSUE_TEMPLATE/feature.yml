@@ -1,6 +1,6 @@
 name: 新機能提案
 description: 新機能の提案はこちらから
-assignees: IkumaTadookoro
+assignees: IkumaTadokoro
 labels: ["新機能"]
 body:
   - type: markdown

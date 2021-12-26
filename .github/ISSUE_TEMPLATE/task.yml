@@ -1,10 +1,10 @@
 name: タスク
 description: タスクを追加する場合はこちらから
-assignees: IkumaTadookoro
+assignees: IkumaTadokoro
 body:
   - type: markdown
     attributes:
-      value: "タスク"
+      value: "タスクの登録。以下のフォームを入力してください。"
   - type: textarea
     id: subtask
     attributes:
