@@ -1,6 +1,6 @@
 name: タスク
 description: タスクを追加する場合はこちらから
-assignees: IkumaTadookoro
+assignees: IkumaTadokoro
 body:
   - type: markdown
     attributes:
