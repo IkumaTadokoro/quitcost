@@ -1,6 +1,6 @@
 name: バグレポート
 description: バグを見つけたらレポートお願いします。
-assignees: IkumaTadookoro
+assignees: IkumaTadokoro
 labels: ["バグ"]
 body:
   - type: markdown
