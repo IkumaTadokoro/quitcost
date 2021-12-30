@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/IkumaTadokoro/jp_local_gov.git
+  revision: 7a46d153dd17fd04d28e98e417e6647f58adec41
+  specs:
+    jp_local_gov (0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -278,6 +284,7 @@ DEPENDENCIES
   factory_bot_rails
   html2slim
   jbuilder (~> 2.7)
+  jp_local_gov!
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
@@ -303,4 +310,4 @@ RUBY VERSION
    ruby 3.0.3p157
 
 BUNDLED WITH
-   2.2.31
+   2.2.32
