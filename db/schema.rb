@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_26_135907) do
+ActiveRecord::Schema.define(version: 2022_01_09_115534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 2021_12_26_135907) do
     t.index ["year", "local_gov_code"], name: "index_insurances_on_year_and_local_gov_code", unique: true
   end
 
+  create_table "payment_target_months", force: :cascade do |t|
+    t.date "month", comment: "年月"
+    t.bigint "insurance_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "payment_target_months", "insurances"
 end
