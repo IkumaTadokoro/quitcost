@@ -1,4 +1,4 @@
-FROM ruby:3.0.0
+FROM ruby:3.0.3
 
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
