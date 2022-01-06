@@ -4,10 +4,20 @@ class Insurance < ApplicationRecord
   include JpLocalGov
   jp_local_gov :local_gov_code
 
-  has_many :payment_target_month
+  paginates_per 20
+
+  has_many :payment_target_months, dependent: :destroy do
+    # 責務的にはPaymentTargetMonthにおいた方がいいと思うが、おそらくCollectionProxyに対する`any?`ではなくなるため、
+    # クエリ発行回数が増える。そのため一旦はhas_manyのブロック内で定義する
+    PaymentTargetMonth::CALENDAR.each do |month_name, month_num|
+      define_method "#{month_name}_is_target?" do
+        any? { |row| row.month.month == month_num }
+      end
+    end
+  end
 
   validates :local_gov_code, presence: true, uniqueness: { scope: :year }
-  validate :valid_code?
+  validate :local_gov_code_must_meet_jis_std
 
   with_options numericality: { in: 0.00..100.00 } do
     validates :medical_income_basis
@@ -33,7 +43,7 @@ class Insurance < ApplicationRecord
 
   private
 
-  def valid_code?
+  def local_gov_code_must_meet_jis_std
     errors.add(:local_gov_code, "is not valid code") unless JpLocalGov.valid_code?(local_gov_code)
   end
 end

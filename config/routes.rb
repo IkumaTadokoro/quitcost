@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :insurances, only: [:index]
+  namespace :api do
+    resources :insurances, only: [:index]
+  end
 end

@@ -3,13 +3,20 @@
 class PaymentTargetMonth < ApplicationRecord
   belongs_to :insurance
 
-  validate :valid_code?
-  validates :local_gov_code, presence: true
+  CALENDAR = {
+    january: 1,
+    february: 2,
+    march: 3,
+    april: 4,
+    may: 5,
+    june: 6,
+    july: 7,
+    august: 8,
+    september: 9,
+    october: 10,
+    november: 11,
+    december: 12
+  }
+
   validates :month, presence: true
-
-  private
-
-  def valid_code?
-    errors.add(:local_gov_code, "is not valid code") unless JpLocalGov.valid_code?(local_gov_code)
-  end
 end
