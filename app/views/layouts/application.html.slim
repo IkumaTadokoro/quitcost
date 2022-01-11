@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Quitcost
+      = yield :title
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
@@ -10,4 +10,19 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   body
+    header.flex.justify-between.items-center.px-8.py-4.border-b-2.shadow.sticky.top-0.z-50.bg-white
+      h1.text-3xl
+        | quitcost
+      nav.mr-auto.mx-16
+        ul.flex
+          li.px-4
+            = link_to "保険", insurances_path
+          li.px-4
+            | 年金
+      nav
+        ul.flex
+          li.px-4
+            | ikuma-t
+          li.px-4
+            | ログアウト
     = yield
