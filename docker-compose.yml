@@ -19,7 +19,7 @@ services:
       - "3035:3035"
       # Ports required for debugging
       - "1234:1234"
-      - "26168:26168"
+      - "26162:26162"
     environment:
       BINDING: "0.0.0.0"
     depends_on:
