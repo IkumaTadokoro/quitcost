@@ -7,6 +7,11 @@
     "lint:prettier": "prettier app/javascript/**/*.{js,vue} --check"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fullhuman/postcss-purgecss": "4",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
