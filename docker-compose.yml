@@ -8,6 +8,10 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5433:5432"
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
   web:
     build: .
     command: tail -f /dev/null
@@ -24,5 +28,6 @@ services:
       BINDING: "0.0.0.0"
     depends_on:
       - db
+      - chrome
 volumes:
   node_modules:
