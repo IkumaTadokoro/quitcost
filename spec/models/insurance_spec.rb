@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Insurance, type: :model do
-  describe "#{month_name}_is_target?" do
+  describe "month_name_is_target?" do
     let!(:insurance_pay_only_december) { create(:insurance, :with_payment_target_month, month: 12) }
 
     context 'when insurance has specified month as a payment target' do

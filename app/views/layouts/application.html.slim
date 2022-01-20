@@ -25,4 +25,12 @@ html
             | ikuma-t
           li.px-4
             | ログアウト
+    - if notice
+      .w-full
+        .p-24.bg-green-700.items-center.text-white.leading-none.flex.py-3
+          span.flex.rounded-full.bg-green-600.uppercase.px-2.py-1.text-xs.font-bold.mr-3
+            | INFO
+          span.font-semibold.mr-2.text-left.text-sm.lex-auto
+            = notice
+    .my-4
     = yield

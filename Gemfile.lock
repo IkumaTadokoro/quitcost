@@ -86,9 +86,6 @@ GEM
     childprocess (4.1.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
-    debase (0.2.4.1)
-      debase-ruby_core_source (>= 0.10.2)
-    debase-ruby_core_source (0.10.14)
     diff-lcs (1.5.0)
     erubi (1.10.0)
     factory_bot (6.2.0)
@@ -229,8 +226,6 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rspec (2.6.0)
       rubocop (~> 1.19)
-    ruby-debug-ide (0.7.3)
-      rake (>= 0.8.1)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -301,7 +296,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  debase
   factory_bot_rails
   html2slim
   jbuilder (~> 2.7)
@@ -319,7 +313,6 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
-  ruby-debug-ide
   sass-rails (>= 6)
   selenium-webdriver
   slim-rails
