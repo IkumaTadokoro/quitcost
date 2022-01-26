@@ -8,4 +8,10 @@ class Api::InsurancesController < ApplicationController
                            .all
                            .page(params[:page])
   end
+
+  def destroy
+    insurance = Insurance.find(params[:id])
+    insurance.destroy
+    render status: :ok, json: { id: insurance.id }
+  end
 end
