@@ -76,7 +76,11 @@
           <tbody class="text-xs">
             <tr v-for="insurance in insurances" :key="insurance.id">
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                <i class="fas fa-edit"></i>
+                <a
+                  :href="insurance.edit_insurance_path"
+                  title="国民健康保険料編集"
+                  ><i class="fas fa-edit"></i>
+                </a>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
                 <i class="fas fa-trash"></i>

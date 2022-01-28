@@ -61,7 +61,7 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
   def save # rubocop:disable Metrics/MethodLength
     return false if invalid?
 
-    ActiveRecord::Base.transaction do
+    ActiveRecord::Base.transaction do # rubocop:disable Metrics/BlockLength
       insurance.update!(
         year: year,
         local_gov_code: local_gov_code,
@@ -82,7 +82,15 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
         care_limit: care_limit
       )
       PaymentTargetMonth::CALENDAR.each_value do |n|
-        insurance.payment_target_months.create!(month: Time.zone.parse("#{year}-#{format('%02d', n)}-01")) if send(:"month#{n}")
+        payment_target_month = PaymentTargetMonth.find_or_initialize_by(
+          insurance_id: insurance.id,
+          month: Time.zone.parse("#{year}-#{format('%02d', n)}-01")
+        )
+        if payment_target_month.persisted?
+          payment_target_month.destroy! unless send(:"month#{n}")
+        elsif send(:"month#{n}")
+          payment_target_month.save!
+        end
       end
     rescue ActiveRecord::RecordInvalid
       false
@@ -128,7 +136,9 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
   end
 
   def local_gov_code_and_year_must_be_uniqueness
-    errors.add(:local_gov_code, 'に既に登録済みのコードが指定されています。年度を見直してください') if Insurance.where(local_gov_code: local_gov_code, year: year).exists?
+    return unless !insurance.persisted? && Insurance.where(local_gov_code: local_gov_code, year: year).exists?
+
+    errors.add(:local_gov_code, 'に既に登録済みのコードが指定されています。年度を見直してください')
   end
 
   def local_gov_code_must_meet_jis_std
