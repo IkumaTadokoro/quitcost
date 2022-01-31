@@ -17,7 +17,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
       visit insurances_path
       click_link '新規登録'
 
-      expect(page).to have_content '保険料新規登録'
+      expect(page).to have_content '国民健康保険料登録'
 
       fill_in '年度', with: insurance_form.year
       select JpLocalGov.find(insurance_form.local_gov_code).city, from: '市区町村名'
@@ -49,11 +49,29 @@ RSpec.describe 'Insurance', type: :system, js: true do
       check '11月', allow_label_click: true
       check '12月', allow_label_click: true
 
-      expect { click_button '新規作成' }
+      expect { click_button '登録' }
         .to change { Insurance.count }.from(0).to(1)
                                       .and change { PaymentTargetMonth.count }.from(0).to(12)
       assert_current_path insurances_path
       assert_text '保険料率を保存しました。'
+    end
+  end
+
+  describe 'update' do
+    before { @insurance = create(:insurance, :with_payment_target_month, month: 1) }
+    scenario 'update a existing record' do
+      # FIXME: 更新系のテストの補強
+      visit insurances_path
+      click_link '国民健康保険料編集'
+
+      expect(page).to have_content '国民健康保険料編集'
+
+      check '1月', allow_label_click: false
+      check '2月', allow_label_click: true
+
+      click_button '更新'
+      assert_current_path insurances_path
+      assert_text '保険料率を更新しました。'
     end
   end
 end
