@@ -16,7 +16,7 @@ class PaymentTargetMonth < ApplicationRecord
     october: 10,
     november: 11,
     december: 12
-  }
+  }.freeze
 
   validates :month, presence: true
 end

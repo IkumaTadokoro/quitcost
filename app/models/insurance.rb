@@ -44,6 +44,6 @@ class Insurance < ApplicationRecord
   private
 
   def local_gov_code_must_meet_jis_std
-    errors.add(:local_gov_code, "is not valid code") unless JpLocalGov.valid_code?(local_gov_code)
+    errors.add(:local_gov_code, 'is not valid code') unless JpLocalGov.valid_code?(local_gov_code)
   end
 end
