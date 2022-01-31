@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_22_102525) do
+ActiveRecord::Schema.define(version: 2022_01_09_115534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,37 @@ ActiveRecord::Schema.define(version: 2021_12_22_102525) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "insurances", force: :cascade do |t|
+    t.integer "year", comment: "年度"
+    t.string "local_gov_code", comment: "地方公共団体コード"
+    t.decimal "medical_income_basis", precision: 5, scale: 2, default: "0.0", comment: "医療保険分（所得割）"
+    t.decimal "medical_asset_basis", precision: 5, scale: 2, default: "0.0", comment: "医療保険分（資産割）"
+    t.integer "medical_capita_basis", default: 0, comment: "医療保険分（均等割）"
+    t.integer "medical_household_basis", default: 0, comment: "医療保険分（平等割）"
+    t.integer "medical_limit", default: 0, comment: "医療保険分限度額"
+    t.decimal "elderly_income_basis", precision: 5, scale: 2, default: "0.0", comment: "後期高齢者支援金分(所得割)"
+    t.decimal "elderly_asset_basis", precision: 5, scale: 2, default: "0.0", comment: "後期高齢者支援金分(資産割)"
+    t.integer "elderly_capita_basis", default: 0, comment: "後期高齢者支援金分(均等割)"
+    t.integer "elderly_household_basis", default: 0, comment: "後期高齢者支援金分(平等割)"
+    t.integer "elderly_limit", default: 0, comment: "後期高齢者支援金分限度額"
+    t.decimal "care_income_basis", precision: 5, scale: 2, default: "0.0", comment: "介護保険分(所得割)"
+    t.decimal "care_asset_basis", precision: 5, scale: 2, default: "0.0", comment: "介護保険分(資産割)"
+    t.integer "care_capita_basis", default: 0, comment: "介護保険分(均等割)"
+    t.integer "care_household_basis", default: 0, comment: "介護保険分(平等割)"
+    t.integer "care_limit", default: 0, comment: "介護保険分限度額"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["year", "local_gov_code"], name: "index_insurances_on_year_and_local_gov_code", unique: true
+  end
+
+  create_table "payment_target_months", force: :cascade do |t|
+    t.date "month", comment: "年月"
+    t.bigint "insurance_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "payment_target_months", "insurances"
 end
