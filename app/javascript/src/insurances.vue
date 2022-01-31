@@ -1,7 +1,18 @@
 <template>
   <div class="container mx-auto">
     <div class="mx-auto">
-      <h1 class="text-3xl py-4 font-sans font-bold">国民健康保険料一覧</h1>
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl py-4 font-sans font-bold">国民健康保険料一覧</h1>
+        </div>
+        <div>
+          <a
+            href="/insurances/new"
+            class="inline-block text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm"
+            >新規登録</a
+          >
+        </div>
+      </div>
       <div v-if="!insurances.length" class="flex justify-center my-64">
         <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
         <div class="animate-ping h-2 w-2 bg-green-800 rounded-full mx-8"></div>

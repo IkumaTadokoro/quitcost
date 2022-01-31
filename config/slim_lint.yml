@@ -3,7 +3,7 @@ exclude:
 
 linters:
   LineLength:
-    max: 250
+    max: 350
   RuboCop:
     enabled: true
     ignored_cops:

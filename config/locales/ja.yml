@@ -1,0 +1,53 @@
+ja:
+  activerecord:
+    attributes:
+      insurance:
+        year: 年度
+        local_gov_code: 市区町村名
+        medical_income_basis: 所得割（医療分）
+        medical_asset_basis: 資産割（医療分）
+        medical_capita_basis: 均等割（医療分）
+        medical_household_basis: 平等割（医療分）
+        medical_limit: 限度額（医療分）
+        elderly_income_basis: 所得割（後期高齢者支援分）
+        elderly_asset_basis: 資産割（後期高齢者支援分）
+        elderly_capita_basis: 均等割（後期高齢者支援分）
+        elderly_household_basis: 平等割（後期高齢者支援分）
+        elderly_limit: 限度額（後期高齢者支援分）
+        care_income_basis: 所得割（介護分）
+        care_asset_basis: 資産割（介護分）
+        care_capita_basis: 均等割（介護分）
+        care_household_basis: 平等割（介護分）
+        care_limit: 限度額（介護分）
+        month1: 1月
+        month2: 2月
+        month3: 3月
+        month4: 4月
+        month5: 5月
+        month6: 6月
+        month7: 7月
+        month8: 8月
+        month9: 9月
+        month10: 10月
+        month11: 11月
+        month12: 12月
+  activemodel:
+    attributes:
+      insurance_form:
+        year: 年度
+        local_gov_code: 市区町村名
+        medical_income_basis: 所得割（医療分）
+        medical_asset_basis: 資産割（医療分）
+        medical_capita_basis: 均等割（医療分）
+        medical_household_basis: 平等割（医療分）
+        medical_limit: 限度額（医療分）
+        elderly_income_basis: 所得割（後期高齢者支援分）
+        elderly_asset_basis: 資産割（後期高齢者支援分）
+        elderly_capita_basis: 均等割（後期高齢者支援分）
+        elderly_household_basis: 平等割（後期高齢者支援分）
+        elderly_limit: 限度額（後期高齢者支援分）
+        care_income_basis: 所得割（介護分）
+        care_asset_basis: 資産割（介護分）
+        care_capita_basis: 均等割（介護分）
+        care_household_basis: 平等割（介護分）
+        care_limit: 限度額（介護分）
