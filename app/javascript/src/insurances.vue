@@ -83,7 +83,9 @@
                 </a>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                <i class="fas fa-trash"></i>
+                <button @click="deleteInsurance(insurance.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
                 {{ insurance.year }}
@@ -201,6 +203,7 @@
 import { computed, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
+import Swal from 'sweetalert2'
 
 export default {
   components: {
@@ -242,6 +245,41 @@ export default {
       totalPages.value = parseInt(json.totalPages)
     }
 
+    const token = () => {
+      const meta = document.querySelector('meta[name="csrf-token"]')
+      return meta ? meta.getAttribute('content') : ''
+    }
+
+    // FIXME: toastにデザインを適用する
+    const toast = (title) => {
+      Swal.fire({
+        title: title,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      })
+    }
+
+    const deleteInsurance = async (insuranceId) => {
+      const insuranceAPI = `/api/insurances/${insuranceId}`
+      const result = confirm('本当にこのレコードを削除しますか')
+      if (result) {
+        await fetch(insuranceAPI, {
+          method: 'DELETE',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': token()
+          },
+          credentials: 'same-origin',
+          redirect: 'manual'
+        })
+        toast('保険料率を削除しました。')
+        await getInsurances()
+      }
+    }
+
     const switchPage = (pageNum) => {
       currentPage.value = pageNum
       history.pushState(null, null, newUrl.value)
@@ -276,7 +314,8 @@ export default {
       currentPage,
       formatNumber,
       formatPercent,
-      switchPage
+      switchPage,
+      deleteInsurance
     }
   }
 }

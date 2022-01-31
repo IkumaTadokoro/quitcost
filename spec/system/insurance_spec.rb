@@ -74,4 +74,20 @@ RSpec.describe 'Insurance', type: :system, js: true do
       assert_text '保険料率を更新しました。'
     end
   end
+
+  describe 'destroy' do
+    before { @insurance = create(:insurance, :with_payment_target_month, month: 1) }
+    scenario 'destroy a existing record' do
+      visit insurances_path
+
+      expect do
+        all('tbody td')[1].click
+        accept_confirm
+        assert_text '保険料率を削除しました。'
+        sleep(1)
+      end
+        .to change { Insurance.count }.from(1).to(0)
+                                      .and change { PaymentTargetMonth.count }.from(1).to(0)
+    end
+  end
 end
