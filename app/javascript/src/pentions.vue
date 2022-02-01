@@ -1,0 +1,139 @@
+<template>
+  <div class="container mx-auto">
+    <div class="mx-auto">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl py-4 font-sans font-bold">国民年金保険料一覧</h1>
+        </div>
+        <div>
+          <a>新規登録</a>
+        </div>
+      </div>
+      <div v-if="!pentions.length" class="flex justify-center my-64">
+        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
+        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full mx-8"></div>
+        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
+      </div>
+      <div
+        v-else
+        class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mb-4"
+      >
+        <table
+          class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative"
+        >
+          <thead class="bg-gray-200 text-xs sticky top-0">
+            <tr>
+              <th class="px-4 py-4 whitespace-nowrap">編集</th>
+              <th class="px-2 py-4 whitespace-nowrap">削除</th>
+              <th class="px-2 py-4 whitespace-nowrap">年度</th>
+              <th class="px-2 py-4 whitespace-nowrap">保険料</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-xs">
+            <tr v-for="pention in pentions" :key="pention.id">
+              <td class="border-t border-gray-200 px-2 py-2 text-center">
+                <a title="国民年金保険料編集"><i class="fas fa-edit"></i> </a>
+              </td>
+              <td class="border-t border-gray-200 px-2 py-2 text-center">
+                <i class="fas fa-trash"></i>
+              </td>
+              <td class="border-t border-gray-200 px-2 py-2 text-center">
+                {{ pention.year }}
+              </td>
+              <td class="border-t border-gray-200 px-2 py-2 text-center">
+                {{ formatNumber(pention.contribution) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-center py-4">
+        <v-pagination
+          v-model="currentPage"
+          :pages="totalPages"
+          :range-size="1"
+          active-color="#117766"
+          @update:modelValue="switchPage"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { computed, ref } from 'vue'
+import VPagination from '@hennge/vue3-pagination'
+import '@hennge/vue3-pagination/dist/vue3-pagination.css'
+
+export default {
+  components: {
+    VPagination
+  },
+  setup() {
+    const pageParam = () => {
+      const url = new URL(location.href)
+      const page = url.searchParams.get('page')
+      return parseInt(page || 1)
+    }
+
+    const pentions = ref([])
+    const totalPages = ref(0)
+    const currentPage = ref(pageParam())
+
+    const newParams = computed(() => {
+      const params = new URL(location.href).searchParams
+      params.set('page', currentPage.value)
+      return params
+    })
+
+    const newUrl = computed(() => {
+      return `${location.pathname}?${newParams.value}`
+    })
+
+    const getPentions = async () => {
+      const pentionsAPI = `/api/pentions.json?${newParams.value}`
+      const response = await fetch(pentionsAPI, {
+        method: 'GET',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        credentials: 'same-origin',
+        redirect: 'manual'
+      })
+      const json = await response
+        .json()
+        .catch((e) => console.warn('Failed to parsing', e))
+      pentions.value = json.pentions
+      totalPages.value = parseInt(json.totalPages)
+    }
+
+    const switchPage = (pageNum) => {
+      currentPage.value = pageNum
+      history.pushState(null, null, newUrl.value)
+      getPentions()
+    }
+
+    // e.g. 30000 → ¥30,000
+    const formatNumber = (number) => {
+      return new Intl.NumberFormat('ja', {
+        style: 'currency',
+        currency: 'JPY',
+        currencyDisplay: 'symbol'
+      }).format(number)
+    }
+
+    getPentions()
+
+    window.addEventListener('popstate', () => {
+      location.href = window.location.href
+    })
+
+    return {
+      pentions,
+      totalPages,
+      currentPage,
+      switchPage,
+      formatNumber
+    }
+  }
+}
+</script>
