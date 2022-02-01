@@ -37,7 +37,9 @@
           <tbody class="text-xs">
             <tr v-for="pention in pentions" :key="pention.id">
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                <a title="国民年金保険料編集"><i class="fas fa-edit"></i> </a>
+                <a :href="pention.edit_pention_path" title="国民年金保険料編集"
+                  ><i class="fas fa-edit"></i>
+                </a>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
                 <i class="fas fa-trash"></i>
