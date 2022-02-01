@@ -3,6 +3,6 @@
     h3.font-bold.mb-2
       | 入力内容にエラーがありました
     ul.ml-4.text-sm
-      - @insurance_form.errors.full_messages.each do |msg|
+      - object.errors.full_messages.each do |msg|
         li.leading-relaxed.list-disc
           = msg

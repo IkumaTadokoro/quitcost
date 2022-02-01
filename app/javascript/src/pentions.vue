@@ -6,7 +6,11 @@
           <h1 class="text-3xl py-4 font-sans font-bold">国民年金保険料一覧</h1>
         </div>
         <div>
-          <a>新規登録</a>
+          <a
+            href="/pentions/new"
+            class="inline-block text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm"
+            >新規登録</a
+          >
         </div>
       </div>
       <div v-if="!pentions.length" class="flex justify-center my-64">
