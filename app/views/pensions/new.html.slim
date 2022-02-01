@@ -1,0 +1,8 @@
+- content_for(:title, '国民年金保険料 | 登録')
+
+.container.mx-auto.mb-8
+  .mx-auto.px-2.max-w-2xl
+    h1.text-3xl.py-4.font-sans.font-bold
+      | 国民年金保険料登録
+    .px-2
+      = render 'form', pension: @pension

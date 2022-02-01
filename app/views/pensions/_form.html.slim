@@ -1,0 +1,13 @@
+= render 'errors', object: pension
+= form_with model: pension do |f|
+  .flex.flex-col.mb-4
+    = f.label :year, class: 'leading-7 text-sm font-semi-bold'
+    = f.number_field :year, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
+  .flex.flex-col.mb-4
+    = f.label :contribution, class: 'leading-7 text-sm font-semi-bold'
+    = f.number_field :contribution, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
+  .flex.justify-end
+    - if pension.new_record?
+      = f.submit '登録', class: 'text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm'
+    - else
+      = f.submit '更新', class: 'text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm'
