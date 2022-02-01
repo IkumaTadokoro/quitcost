@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Pention, type: :model do
+RSpec.describe Pension, type: :model do
   describe '#validate' do
     describe ':year' do
-      subject { pention.errors[:year] }
-      before { pention.valid? }
-      let(:pention) { build(:pention, year: year) }
+      subject { pension.errors[:year] }
+      before { pension.valid? }
+      let(:pension) { build(:pension, year: year) }
 
       context 'when year is nil' do
         let(:year) { nil }
@@ -41,9 +41,9 @@ RSpec.describe Pention, type: :model do
     end
 
     describe ':contribution' do
-      subject { pention.errors[:contribution] }
-      before { pention.valid? }
-      let(:pention) { build(:pention, contribution: contribution) }
+      subject { pension.errors[:contribution] }
+      before { pension.valid? }
+      let(:pension) { build(:pension, contribution: contribution) }
 
       context 'when contribution is nil' do
         let(:contribution) { nil }

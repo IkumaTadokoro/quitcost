@@ -7,13 +7,13 @@
         </div>
         <div>
           <a
-            href="/pentions/new"
+            href="/pensions/new"
             class="inline-block text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm"
             >新規登録</a
           >
         </div>
       </div>
-      <div v-if="!pentions.length" class="flex justify-center my-64">
+      <div v-if="!pensions.length" class="flex justify-center my-64">
         <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
         <div class="animate-ping h-2 w-2 bg-green-800 rounded-full mx-8"></div>
         <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
@@ -35,22 +35,22 @@
           </thead>
 
           <tbody class="text-xs">
-            <tr v-for="pention in pentions" :key="pention.id">
+            <tr v-for="pension in pensions" :key="pension.id">
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                <a :href="pention.edit_pention_path" title="国民年金保険料編集"
+                <a :href="pension.edit_pension_path" title="国民年金保険料編集"
                   ><i class="fas fa-edit"></i>
                 </a>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                <button @click="deletePention(pention.id)">
+                <button @click="deletePension(pension.id)">
                   <i class="fas fa-trash"></i>
                 </button>
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                {{ pention.year }}
+                {{ pension.year }}
               </td>
               <td class="border-t border-gray-200 px-2 py-2 text-center">
-                {{ formatNumber(pention.contribution) }}
+                {{ formatNumber(pension.contribution) }}
               </td>
             </tr>
           </tbody>
@@ -86,7 +86,7 @@ export default {
       return parseInt(page || 1)
     }
 
-    const pentions = ref([])
+    const pensions = ref([])
     const totalPages = ref(0)
     const currentPage = ref(pageParam())
 
@@ -100,9 +100,9 @@ export default {
       return `${location.pathname}?${newParams.value}`
     })
 
-    const getPentions = async () => {
-      const pentionsAPI = `/api/pentions.json?${newParams.value}`
-      const response = await fetch(pentionsAPI, {
+    const getPensions = async () => {
+      const pensionsAPI = `/api/pensions.json?${newParams.value}`
+      const response = await fetch(pensionsAPI, {
         method: 'GET',
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
         credentials: 'same-origin',
@@ -111,7 +111,7 @@ export default {
       const json = await response
         .json()
         .catch((e) => console.warn('Failed to parsing', e))
-      pentions.value = json.pentions
+      pensions.value = json.pensions
       totalPages.value = parseInt(json.totalPages)
     }
 
@@ -132,11 +132,11 @@ export default {
       })
     }
 
-    const deletePention = async (pentionId) => {
-      const pentionAPI = `/api/pentions/${pentionId}`
+    const deletePension = async (pensionId) => {
+      const pensionAPI = `/api/pensions/${pensionId}`
       const result = confirm('本当にこのレコードを削除しますか')
       if (result) {
-        await fetch(pentionAPI, {
+        await fetch(pensionAPI, {
           method: 'DELETE',
           headers: {
             'X-Requested-With': 'XMLHttpRequest',
@@ -146,14 +146,14 @@ export default {
           redirect: 'manual'
         })
         toast('保険料率を削除しました。')
-        await getPentions()
+        await getPensions()
       }
     }
 
     const switchPage = (pageNum) => {
       currentPage.value = pageNum
       history.pushState(null, null, newUrl.value)
-      getPentions()
+      getPensions()
     }
 
     // e.g. 30000 → ¥30,000
@@ -165,19 +165,19 @@ export default {
       }).format(number)
     }
 
-    getPentions()
+    getPensions()
 
     window.addEventListener('popstate', () => {
       location.href = window.location.href
     })
 
     return {
-      pentions,
+      pensions,
       totalPages,
       currentPage,
       switchPage,
       formatNumber,
-      deletePention
+      deletePension
     }
   }
 }

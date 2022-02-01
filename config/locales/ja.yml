@@ -31,7 +31,7 @@ ja:
         month10: 10月
         month11: 11月
         month12: 12月
-      pention:
+      pension:
         year: 年度
         contribution: 保険料
   activemodel:
