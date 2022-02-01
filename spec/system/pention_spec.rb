@@ -44,4 +44,19 @@ RSpec.describe 'Insurance', type: :system, js: true do
       assert_text '保険料率を更新しました。'
     end
   end
+
+  describe 'destroy' do
+    before { @pention = create(:pention) }
+    scenario 'destroy a existing record' do
+      visit pentions_path
+
+      expect do
+        all('tbody td')[1].click
+        accept_confirm
+        assert_text '保険料率を削除しました。'
+        sleep(1)
+      end
+        .to change { Pention.count }.from(1).to(0)
+    end
+  end
 end
