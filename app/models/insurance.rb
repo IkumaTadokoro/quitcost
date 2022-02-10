@@ -15,4 +15,20 @@ class Insurance < ApplicationRecord
       end
     end
   end
+
+  def self.rate(year:, local_gov_code:)
+    prefecture_capital_code = JpLocalGov.where(prefecture: JpLocalGov.find(local_gov_code).prefecture, prefecture_capital: true).first.code
+
+    if exists?(year: year, local_gov_code: local_gov_code)
+      find_by(year: year, local_gov_code: local_gov_code)
+    elsif exists?(local_gov_code: local_gov_code)
+      maximum_year = where(local_gov_code: local_gov_code).maximum(:year)
+      find_by(year: maximum_year, local_gov_code: local_gov_code)
+    elsif exists?(year: year, local_gov_code: prefecture_capital_code)
+      find_by(year: year, local_gov_code: prefecture_capital_code)
+    else
+      maximum_year = where(local_gov_code: prefecture_capital_code).maximum(:year)
+      find_by(year: maximum_year, local_gov_code: prefecture_capital_code)
+    end
+  end
 end
