@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_053103) do
+ActiveRecord::Schema.define(version: 2022_02_11_122122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_053103) do
   end
 
   create_table "payment_target_months", force: :cascade do |t|
-    t.date "month", comment: "年月"
+    t.datetime "month", comment: "年月"
     t.bigint "insurance_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
