@@ -84,7 +84,7 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
       PaymentTargetMonth::CALENDAR.each_value do |n|
         payment_target_month = PaymentTargetMonth.find_or_initialize_by(
           insurance_id: insurance.id,
-          month: Time.zone.parse("#{year}-#{format('%02d', n)}-01")
+          month: Time.zone.parse("#{n >= PaymentTargetMonth::CALENDAR[:april] ? year : year.next}-#{format('%02d', n)}-01")
         )
         if payment_target_month.persisted?
           payment_target_month.destroy! unless send(:"month#{n}")

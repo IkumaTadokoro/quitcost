@@ -209,6 +209,51 @@ RSpec.describe InsuranceForm, type: :model do
         let!(:insurance_form) { build(:insurance_form, :all_months_are_target) }
         it { expect { subject }.to change { Insurance.count }.from(0).to(1) }
         it { expect { subject }.to change { PaymentTargetMonth.count }.from(0).to(12) }
+        it 'saves January to March as the following year' do
+          insurance_form.save
+          payment_target_months = Insurance.find_by(year: insurance_form.year, local_gov_code: insurance_form.local_gov_code).payment_target_months
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:january]
+                 end.month.year).to eq insurance_form.year.next
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:february]
+                 end.month.year).to eq insurance_form.year.next
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:march]
+                 end.month.year).to eq insurance_form.year.next
+        end
+
+        it 'saves April to December as the this year' do
+          insurance_form.save
+          payment_target_months = Insurance.find_by(year: insurance_form.year, local_gov_code: insurance_form.local_gov_code).payment_target_months
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:april]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:may]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:june]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:july]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:august]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:september]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:october]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:november]
+                 end.month.year).to eq insurance_form.year
+          expect(payment_target_months.find do |target_month|
+                   target_month.month.month == PaymentTargetMonth::CALENDAR[:december]
+                 end.month.year).to eq insurance_form.year
+        end
       end
 
       context 'when failed to save' do
