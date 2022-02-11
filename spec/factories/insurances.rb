@@ -26,7 +26,7 @@ FactoryBot.define do
       end
 
       after(:create) do |insurance, evaluator|
-        insurance.payment_target_months = [build(:payment_target_month, month: Date.new(insurance.year, evaluator.month, 1))]
+        insurance.payment_target_months = [build(:payment_target_month, month: Time.zone.parse("#{insurance.year}-#{format('%02d', evaluator.month)}-01"))]
       end
     end
   end
