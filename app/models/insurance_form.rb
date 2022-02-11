@@ -58,40 +58,12 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
   attribute :care_limit, :integer, default: 0
   PaymentTargetMonth::CALENDAR.each_value { |n| attribute :"month#{n}", :boolean }
 
-  def save # rubocop:disable Metrics/MethodLength
+  def save
     return false if invalid?
 
-    ActiveRecord::Base.transaction do # rubocop:disable Metrics/BlockLength
-      insurance.update!(
-        year: year,
-        local_gov_code: local_gov_code,
-        medical_income_basis: medical_income_basis,
-        medical_asset_basis: medical_asset_basis,
-        medical_capita_basis: medical_capita_basis,
-        medical_household_basis: medical_household_basis,
-        medical_limit: medical_limit,
-        elderly_income_basis: elderly_income_basis,
-        elderly_asset_basis: elderly_asset_basis,
-        elderly_capita_basis: elderly_capita_basis,
-        elderly_household_basis: elderly_household_basis,
-        elderly_limit: elderly_limit,
-        care_income_basis: care_income_basis,
-        care_asset_basis: care_asset_basis,
-        care_capita_basis: care_capita_basis,
-        care_household_basis: care_household_basis,
-        care_limit: care_limit
-      )
-      PaymentTargetMonth::CALENDAR.each_value do |n|
-        payment_target_month = PaymentTargetMonth.find_or_initialize_by(
-          insurance_id: insurance.id,
-          month: Time.zone.parse("#{n >= PaymentTargetMonth::CALENDAR[:april] ? year : year.next}-#{format('%02d', n)}-01")
-        )
-        if payment_target_month.persisted?
-          payment_target_month.destroy! unless send(:"month#{n}")
-        elsif send(:"month#{n}")
-          payment_target_month.save!
-        end
-      end
+    ActiveRecord::Base.transaction do
+      update_insurance!
+      update_payment_target_months!
     rescue ActiveRecord::RecordInvalid
       false
     end
@@ -106,6 +78,42 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
   end
 
   private
+
+  def update_payment_target_months!
+    PaymentTargetMonth::CALENDAR.each_value do |n|
+      payment_target_month = PaymentTargetMonth.find_or_initialize_by(
+        insurance_id: insurance.id,
+        month: Time.zone.parse("#{n >= PaymentTargetMonth::CALENDAR[:april] ? year : year.next}-#{format('%02d', n)}-01")
+      )
+      if payment_target_month.persisted?
+        payment_target_month.destroy! unless send(:"month#{n}")
+      elsif send(:"month#{n}")
+        payment_target_month.save!
+      end
+    end
+  end
+
+  def update_insurance!
+    insurance.update!(
+      year: year,
+      local_gov_code: local_gov_code,
+      medical_income_basis: medical_income_basis,
+      medical_asset_basis: medical_asset_basis,
+      medical_capita_basis: medical_capita_basis,
+      medical_household_basis: medical_household_basis,
+      medical_limit: medical_limit,
+      elderly_income_basis: elderly_income_basis,
+      elderly_asset_basis: elderly_asset_basis,
+      elderly_capita_basis: elderly_capita_basis,
+      elderly_household_basis: elderly_household_basis,
+      elderly_limit: elderly_limit,
+      care_income_basis: care_income_basis,
+      care_asset_basis: care_asset_basis,
+      care_capita_basis: care_capita_basis,
+      care_household_basis: care_household_basis,
+      care_limit: care_limit
+    )
+  end
 
   def default_attributes
     {
