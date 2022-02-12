@@ -20,13 +20,16 @@ FactoryBot.define do
     care_household_basis { rand(0..100_000) }
     care_limit { rand(0..100_000) }
 
-    trait(:with_payment_target_month) do
+    trait(:with_payment_target_months) do
       transient do
-        month { rand(1..12) }
+        months { PaymentTargetMonth::CALENDAR.values }
       end
 
       after(:create) do |insurance, evaluator|
-        insurance.payment_target_months = [build(:payment_target_month, month: Time.zone.parse("#{insurance.year}-#{format('%02d', evaluator.month)}-01"))]
+        insurance.payment_target_months = evaluator.months.map do |month|
+          year = month >= PaymentTargetMonth::CALENDAR[:april] ? insurance.year : insurance.year.next
+          build(:payment_target_month, month: Time.zone.parse("#{year}-#{format('%02d', month)}-01"))
+        end
       end
     end
   end
