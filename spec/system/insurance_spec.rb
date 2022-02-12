@@ -58,7 +58,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
   end
 
   describe 'update' do
-    before { @insurance = create(:insurance, :with_payment_target_month, month: 1) }
+    before { @insurance = create(:insurance, :with_payment_target_months, months: [1]) }
     scenario 'update a existing record' do
       # FIXME: 更新系のテストの補強
       visit insurances_path
@@ -76,7 +76,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
   end
 
   describe 'destroy' do
-    before { @insurance = create(:insurance, :with_payment_target_month, month: 1) }
+    before { @insurance = create(:insurance, :with_payment_target_months, months: [1]) }
     scenario 'destroy a existing record' do
       visit insurances_path
 
