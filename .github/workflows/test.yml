@@ -1,0 +1,29 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup docker
+        shell: bash
+        run: |
+          docker-compose build
+          docker-compose run web rails db:create
+        env:
+          RAILS_ENV: test
+      - name: webpacker
+        run: |
+          docker-compose run web yarn install
+          docker-compose run web bundle exec rails webpacker:compile
+      - name: Rspec
+        run:  |
+          docker-compose run web bundle exec rspec
+        env:
+          RAILS_ENV: test
