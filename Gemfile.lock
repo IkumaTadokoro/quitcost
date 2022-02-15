@@ -94,6 +94,8 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.4)
+    fiscali (2.4.4)
+      activesupport
     globalid (1.0.0)
       activesupport (>= 5.0)
     hpricot (0.8.6)
@@ -297,6 +299,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   factory_bot_rails
+  fiscali
   html2slim
   jbuilder (~> 2.7)
   jp_local_gov!
