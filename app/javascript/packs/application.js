@@ -6,6 +6,7 @@
 import Rails from '@rails/ujs'
 import * as ActiveStorage from '@rails/activestorage'
 import 'stylesheets/application.css'
+import 'src/simulation.js'
 import 'src/insurances.js'
 import 'src/pensions.js'
 import '@fortawesome/fontawesome-free/js/fontawesome'
