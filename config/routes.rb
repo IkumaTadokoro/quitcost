@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :simulations, only: %i(new)
   resources :insurances, only: %i(index new create edit update)
   resources :pensions, only: %i(index new create edit update)
   namespace :api do
