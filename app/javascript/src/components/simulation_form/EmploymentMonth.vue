@@ -5,7 +5,7 @@
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '####/##' }"
-      :value="employmentMonth"
+      :value="employmentMonthValue"
       @blur="handleChange"
       placeholder="2022/02"
     />
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import { useField } from 'vee-validate'
 import { getYear, subMonths, addYears, format } from 'date-fns'
 
@@ -28,10 +28,23 @@ const to = format(
   new Date(getYear(addYears(subMonths(base, 3), 2)), 3, 1),
   'yyyy/MM'
 )
-useField('retirementMonth')
-const {
+const formData = inject('FORM_DATA')
+const employmentMonthValue = computed({
+  get: () => employmentMonth.value || formData.value.employmentMonth,
+  set: (value) => {
+    employmentMonth.value = value
+  }
+})
+let { value: retirementMonth } = useField('retirementMonth')
+let {
   value: employmentMonth,
   errorMessage: error,
   handleChange
 } = useField('employmentMonth')
+
+const setDefaultValue = () => {
+  retirementMonth.value = formData.value.retirementMonth
+  employmentMonth.value = formData.value.employmentMonth
+}
+setDefaultValue()
 </script>

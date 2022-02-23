@@ -7,7 +7,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="scheduledSalary"
+      :value="scheduledSalaryValue"
       @blur="handleChange"
       v-maska="{ mask: '#*' }"
       placeholder="500000"
@@ -21,17 +21,27 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import { useField } from 'vee-validate'
 import { getYear, subMonths, format } from 'date-fns'
 
+const formData = inject('FORM_DATA')
+const scheduledSalaryValue = computed({
+  get: () => scheduledSalary.value || formData.value.scheduledSalary,
+  set: (value) => {
+    scheduledSalary.value = value
+  }
+})
 const base = inject('SIMULATION_DATE')
 const thisYear = getYear(subMonths(base, 3))
 const from = format(new Date(thisYear, 0, 1), 'yyyy年M月d日')
 const to = format(new Date(thisYear, 11, 31), 'yyyy年M月d日')
-const {
+let {
   value: scheduledSalary,
   errorMessage: error,
   handleChange
 } = useField('scheduledSalary')
+const setDefaultValue = () =>
+  (scheduledSalary.value = formData.value.scheduledSalary)
+setDefaultValue()
 </script>
