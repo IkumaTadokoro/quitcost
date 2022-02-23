@@ -1,21 +1,23 @@
 <template>
-  <h2 class="form-label">
-    <span class="inline-block">{{ `昨年度（${from} ~ ${to}）の` }}</span
-    ><span class="inline-block">「社会保険料」を教えてください</span>
-  </h2>
-  <input
-    class="form-field text-right"
-    type="text"
-    :value="socialInsurance"
-    @blur="handleChange"
-    v-maska="{ mask: '#*' }"
-    placeholder="500000"
-  />
-  <p class="form-tips">
-    <i class="fas fa-info-circle mr-2"></i
-    >住民税の総額は、住民税決定通知書の「社会保険料」の値です
-  </p>
-  <p class="form-error">{{ error }}</p>
+  <div class="text-center">
+    <h2 class="form-label">
+      <span class="inline-block">{{ `昨年度（${from} ~ ${to}）の` }}</span
+      ><span class="inline-block">「社会保険料」を教えてください</span>
+    </h2>
+    <input
+      class="form-field text-right"
+      type="text"
+      :value="socialInsurance"
+      @blur="handleChange"
+      v-maska="{ mask: '#*' }"
+      placeholder="500000"
+    />
+    <p class="form-tips">
+      <i class="fas fa-info-circle mr-2"></i
+      >住民税の総額は、住民税決定通知書の「社会保険料」の値です
+    </p>
+    <p class="form-error">{{ error }}</p>
+  </div>
 </template>
 
 <script setup>

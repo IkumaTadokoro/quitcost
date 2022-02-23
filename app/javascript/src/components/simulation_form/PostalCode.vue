@@ -1,19 +1,21 @@
 <template>
-  <h2 class="form-label whitespace-nowrap">
-    お住まいの地域の郵便番号を教えてください
-  </h2>
-  <input
-    class="form-field text-center"
-    type="text"
-    v-maska="{ mask: '###-####' }"
-    v-model="postalCode"
-    @keyup="searchAddress"
-    placeholder="100-0004"
-  />
-  <p class="form-tips">
-    <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ result }}
-  </p>
-  <p class="form-error">{{ error }}</p>
+  <div class="text-center">
+    <h2 class="form-label whitespace-nowrap">
+      お住まいの地域の郵便番号を教えてください
+    </h2>
+    <input
+      class="form-field text-center"
+      type="text"
+      v-maska="{ mask: '###-####' }"
+      v-model="postalCode"
+      @keyup="searchAddress"
+      placeholder="100-0004"
+    />
+    <p class="form-tips">
+      <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ result }}
+    </p>
+    <p class="form-error">{{ error }}</p>
+  </div>
 </template>
 
 <script setup>

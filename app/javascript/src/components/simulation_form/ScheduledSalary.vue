@@ -1,21 +1,23 @@
 <template>
-  <h2 class="form-label">
-    <span class="inline-block">{{ `今年度（${from} ~ ${to}）` }}の</span
-    ><span class="inline-block">「予定所得額」を教えてください</span>
-  </h2>
-  <input
-    class="form-field text-right"
-    type="text"
-    :value="scheduledSalary"
-    @blur="handleChange"
-    v-maska="{ mask: '#*' }"
-    placeholder="500000"
-  />
-  <p class="form-tips">
-    <i class="fas fa-info-circle mr-2"></i
-    >予定所得額は「退職するまでの毎月の給与（満額）」と「賞与（満額）」の合計です
-  </p>
-  <p class="form-error">{{ error }}</p>
+  <div class="text-center">
+    <h2 class="form-label">
+      <span class="inline-block">{{ `今年度（${from} ~ ${to}）` }}の</span
+      ><span class="inline-block">「予定所得額」を教えてください</span>
+    </h2>
+    <input
+      class="form-field text-right"
+      type="text"
+      :value="scheduledSalary"
+      @blur="handleChange"
+      v-maska="{ mask: '#*' }"
+      placeholder="500000"
+    />
+    <p class="form-tips">
+      <i class="fas fa-info-circle mr-2"></i
+      >予定所得額は「退職するまでの毎月の給与（満額）」と「賞与（満額）」の合計です
+    </p>
+    <p class="form-error">{{ error }}</p>
+  </div>
 </template>
 
 <script setup>
