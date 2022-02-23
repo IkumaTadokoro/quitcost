@@ -7,7 +7,7 @@
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '###-####' }"
-      v-model="postalCode"
+      v-model="postalCodeValue"
       @keyup="searchAddress"
       placeholder="100-0004"
     />
@@ -19,12 +19,19 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { inject, computed } from 'vue'
 import { useField } from 'vee-validate'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
 
-const { value: postalCode, errorMessage: error } = useField('postalCode')
+let { value: postalCode, errorMessage: error } = useField('postalCode')
+const formData = inject('FORM_DATA')
+const postalCodeValue = computed({
+  get: () => postalCode.value || formData.value.postalCode,
+  set: (value) => {
+    postalCode.value = value
+  }
+})
 const result = computed(() => {
   if (!postalCode.value) return `該当する市区町村がありません`
   const zipCode = postalCode.value.replace(/[^\d]+/g, '')
@@ -46,4 +53,6 @@ const searchAddress = async () => {
   prefecture = response.data.pref
   city = response.data.city
 }
+const setDefaultValue = () => (postalCode.value = formData.value.postalCode)
+setDefaultValue()
 </script>

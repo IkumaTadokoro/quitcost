@@ -4,7 +4,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="age"
+      :value="ageValue"
       @blur="handleChange"
       placeholder="30"
     /><span class="form-supplement">歳</span>
@@ -13,6 +13,17 @@
 </template>
 
 <script setup>
+import { inject, computed } from 'vue'
 import { useField } from 'vee-validate'
-const { value: age, errorMessage: error, handleChange } = useField('age')
+
+const formData = inject('FORM_DATA')
+const ageValue = computed({
+  get: () => age.value || formData.value.age,
+  set: (value) => {
+    age.value = value
+  }
+})
+let { value: age, errorMessage: error, handleChange } = useField('age')
+const setDefaultValue = () => (age.value = formData.value.age)
+setDefaultValue()
 </script>
