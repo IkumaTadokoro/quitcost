@@ -38,7 +38,10 @@
 import { useForm } from 'vee-validate'
 import { computed, provide } from 'vue'
 import ProgressBar from './ProgressBar'
+import { useRouter } from 'vue-router'
+import { useStorage } from '@vueuse/core'
 
+const router = useRouter()
 const emit = defineEmits(['next', 'submit'])
 const props = defineProps({
   validationSchema: {
@@ -46,21 +49,24 @@ const props = defineProps({
     required: true
   }
 })
-let formData = $ref({})
-let currentStepIdx = $ref(0)
-const stepCounter = $ref(0)
+let formData = useStorage('formData', {})
+let currentStepIdx = useStorage('currentStepIdx', 0)
+const stepCounter = 8
 provide('STEP_COUNTER', $$(stepCounter))
-provide('CURRENT_STEP_INDEX', $$(currentStepIdx))
-const isLastStep = computed(() => currentStepIdx === stepCounter - 1)
+provide('CURRENT_STEP_INDEX', currentStepIdx)
+provide('FORM_DATA', formData)
+const isLastStep = computed(() => currentStepIdx.value === stepCounter - 1)
 const nextStep = computed(() =>
   isLastStep.value ? '計算結果へ' : 'つぎの質問へ'
 )
-const hasPrevious = computed(() => currentStepIdx > 0)
+const hasPrevious = computed(() => currentStepIdx.value > 0)
 const zeroPadCurrentIdx = computed(() =>
-  ('00' + (currentStepIdx + 1)).slice(-2)
+  ('00' + (currentStepIdx.value + 1)).slice(-2)
 )
 const zeroPadStepCounter = computed(() => ('00' + stepCounter).slice(-2))
-const currentSchema = computed(() => props.validationSchema[currentStepIdx])
+const currentSchema = computed(
+  () => props.validationSchema[currentStepIdx.value]
+)
 
 // useFormでバリデーションスキーマを定義する
 const { resetForm, handleSubmit } = useForm({
@@ -69,32 +75,34 @@ const { resetForm, handleSubmit } = useForm({
 
 // handleSubmitでバリデーションチェックが終わってから処理を行う。
 const onSubmit = handleSubmit((values) => {
-  formData = {
-    ...formData,
+  formData.value = {
+    ...formData.value,
     ...values
   }
   // すでに入力された値を引数として初期値設定を行うことで、
   // 「まえの質問へ」を選択しても、値がセットされた状態になる。
   resetForm({
     values: {
-      ...formData
+      ...formData.value
     }
   })
   if (!isLastStep.value) {
-    currentStepIdx++
+    currentStepIdx.value++
+    router.push(`${currentStepIdx.value + 1}`)
     return
   }
-  emit('submit', formData)
+  emit('submit', formData.value)
 })
 
 const goToPrev = () => {
-  if (currentStepIdx === 0) return
-  currentStepIdx--
+  if (currentStepIdx.value === 0) return
+  currentStepIdx.value--
   resetForm({
     values: {
-      ...formData
+      ...formData.value
     }
   })
+  router.push(`${currentStepIdx.value + 1}`)
 }
 </script>
 
