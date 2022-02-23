@@ -1,14 +1,7 @@
 <template>
   <div class="container mx-auto">
     <FormWizard :validation-schema="validationSchema" @submit="onSubmit">
-      <FormStep><RetirementMonth /></FormStep>
-      <FormStep><EmploymentMonth /></FormStep>
-      <FormStep><Age /></FormStep>
-      <FormStep><PostalCode /></FormStep>
-      <FormStep><Salary /></FormStep>
-      <FormStep><SocialInsurance /></FormStep>
-      <FormStep><ScheduledSalary /></FormStep>
-      <FormStep><ScheduledSocialInsurance /></FormStep>
+      <router-view></router-view>
     </FormWizard>
   </div>
 </template>
@@ -16,15 +9,6 @@
 <script setup>
 import { provide } from 'vue'
 import FormWizard from './components/FormWizard'
-import FormStep from './components/FormStep'
-import RetirementMonth from './components/simulation_form/RetirementMonth'
-import EmploymentMonth from './components/simulation_form/EmploymentMonth'
-import Age from './components/simulation_form/Age'
-import PostalCode from './components/simulation_form/PostalCode'
-import Salary from './components/simulation_form/Salary'
-import SocialInsurance from './components/simulation_form/SocialInsurance'
-import ScheduledSalary from './components/simulation_form/ScheduledSalary'
-import ScheduledSocialInsurance from './components/simulation_form/ScheduledSocialInsurance'
 import { useValidationSchema } from './validation-schema'
 
 const simulationDate = new Date()

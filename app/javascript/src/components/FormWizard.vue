@@ -38,7 +38,9 @@
 import { useForm } from 'vee-validate'
 import { computed, provide } from 'vue'
 import ProgressBar from './ProgressBar'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const emit = defineEmits(['next', 'submit'])
 const props = defineProps({
   validationSchema: {
@@ -48,7 +50,7 @@ const props = defineProps({
 })
 let formData = $ref({})
 let currentStepIdx = $ref(0)
-const stepCounter = $ref(0)
+const stepCounter = 8
 provide('STEP_COUNTER', $$(stepCounter))
 provide('CURRENT_STEP_INDEX', $$(currentStepIdx))
 const isLastStep = computed(() => currentStepIdx === stepCounter - 1)
@@ -82,6 +84,7 @@ const onSubmit = handleSubmit((values) => {
   })
   if (!isLastStep.value) {
     currentStepIdx++
+    router.push(`${currentStepIdx + 1}`)
     return
   }
   emit('submit', formData)
@@ -95,6 +98,7 @@ const goToPrev = () => {
       ...formData
     }
   })
+  router.push(`${currentStepIdx + 1}`)
 }
 </script>
 
