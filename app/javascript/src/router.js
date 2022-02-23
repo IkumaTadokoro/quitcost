@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import SimulationForm from './SimulationForm'
 import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
 import EmploymentMonth from './components//simulation_form/EmploymentMonth.vue'
 import Age from './components/simulation_form/Age'
@@ -11,46 +12,20 @@ import ScheduledSocialInsurance from './components/simulation_form/ScheduledSoci
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/simulations/new', redirect: '/simulations/new/1' },
     {
-      name: 'retirementMonth',
-      path: '/simulations/new/1',
-      component: RetirementMonth
-    },
-    {
-      name: 'employmentMonth',
-      path: '/simulations/new/2',
-      component: EmploymentMonth
-    },
-    {
-      name: 'age',
-      path: '/simulations/new/3',
-      component: Age
-    },
-    {
-      name: 'postalCode',
-      path: '/simulations/new/4',
-      component: PostalCode
-    },
-    {
-      name: 'salary',
-      path: '/simulations/new/5',
-      component: Salary
-    },
-    {
-      name: 'SocialInsurance',
-      path: '/simulations/new/6',
-      component: SocialInsurance
-    },
-    {
-      name: 'scheduledSalary',
-      path: '/simulations/new/7',
-      component: ScheduledSalary
-    },
-    {
-      name: 'scheduledSocialInsurance',
-      path: '/simulations/new/8',
-      component: ScheduledSocialInsurance
+      path: '/simulations/new',
+      component: SimulationForm,
+      redirect: '/simulations/new/1',
+      children: [
+        { path: '1', component: RetirementMonth },
+        { path: '2', component: EmploymentMonth },
+        { path: '3', component: Age },
+        { path: '4', component: PostalCode },
+        { path: '5', component: Salary },
+        { path: '6', component: SocialInsurance },
+        { path: '7', component: ScheduledSalary },
+        { path: '8', component: ScheduledSocialInsurance }
+      ]
     }
   ]
 })
