@@ -11,7 +11,8 @@ class Simulation
   def initialize(params)
     @retirement_month = Time.zone.parse(params[:retirement_month])
     @employment_month = Time.zone.parse(params[:employment_month])
-    @local_gov_code = params[:local_gov_code]
+    @prefecture = params[:prefecture]
+    @city = params[:city]
     @age = params[:age].to_i
     @simulation_date = Time.zone.parse(params[:simulation_date])
     @salary = params[:salary].to_i
@@ -37,7 +38,7 @@ class Simulation
 
   private
 
-  attr_reader :local_gov_code, :age, :simulation_date, :salary, :scheduled_salary, :social_insurance, :scheduled_social_insurance
+  attr_reader :age, :simulation_date, :salary, :scheduled_salary, :social_insurance, :scheduled_social_insurance
 
   def insurance
     Simulation::Insurance.call(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
@@ -49,5 +50,9 @@ class Simulation
 
   def residence
     Simulation::Residence.call(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
+  end
+
+  def local_gov_code
+    JpLocalGov.where(prefecture: @prefecture, city: @city).first.code
   end
 end

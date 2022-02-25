@@ -11,7 +11,8 @@ class Api::SimulationsController < ApplicationController
     params.permit(
       :retirement_month,
       :employment_month,
-      :local_gov_code,
+      :prefecture,
+      :city,
       :age,
       :simulation_date,
       :salary,

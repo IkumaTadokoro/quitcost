@@ -13,7 +13,8 @@ RSpec.describe Simulation, type: :model do
         {
           retirement_month: '2022-03-01',
           employment_month: '2022-06-01',
-          local_gov_code: '131016',
+          prefecture: '東京都',
+          city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
           salary: '2_000_000',
@@ -39,7 +40,8 @@ RSpec.describe Simulation, type: :model do
         {
           retirement_month: '2022-03-01',
           employment_month: '2022-06-01',
-          local_gov_code: '131016',
+          prefecture: '東京都',
+          city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
           salary: '2_000_000',
@@ -70,7 +72,8 @@ RSpec.describe Simulation, type: :model do
         {
           retirement_month: '2022-03-01',
           employment_month: '2022-06-01',
-          local_gov_code: '131016',
+          prefecture: '東京都',
+          city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
           salary: '2_000_000',
