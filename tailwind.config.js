@@ -6,7 +6,11 @@ module.exports = {
     './app/javascript/**/*.vue'
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        notojp: ['Noto Sans JP']
+      }
+    }
   },
   plugins: []
 }
