@@ -19,19 +19,22 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
+import { useGlobalStore } from '../../store/global'
+
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
 
 let { value: postalCode, errorMessage: error } = useField('postalCode')
-const formData = inject('FORM_DATA')
+
 const postalCodeValue = computed({
-  get: () => postalCode.value || formData.value.postalCode,
-  set: (value) => {
-    postalCode.value = value
-  }
+  get: () => postalCode.value || params.postalCode,
+  set: (value) => (postalCode.value = value)
 })
+
 const result = computed(() => {
   if (!postalCode.value) return `該当する市区町村がありません`
   const zipCode = postalCode.value.replace(/[^\d]+/g, '')
@@ -41,8 +44,10 @@ const result = computed(() => {
     return `該当する市区町村がありません`
   }
 })
+
 let prefecture = $ref('')
 let city = $ref('')
+
 const searchAddress = async () => {
   const zipCode = postalCode.value.replace(/[^\d]+/g, '')
   if (!/^\d{7}$/.test(zipCode)) return
@@ -53,6 +58,6 @@ const searchAddress = async () => {
   prefecture = response.data.pref
   city = response.data.city
 }
-const setDefaultValue = () => (postalCode.value = formData.value.postalCode)
-setDefaultValue()
+
+onMounted(() => (postalCode.value = params.postalCode))
 </script>

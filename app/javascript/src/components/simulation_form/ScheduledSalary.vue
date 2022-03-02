@@ -21,27 +21,29 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
-import { getYear, subMonths, format } from 'date-fns'
+import { format } from 'date-fns'
+import { useGlobalStore } from '../../store/global'
+import { useFinancialYear } from '../../composables/use-financial-year'
 
-const formData = inject('FORM_DATA')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
 const scheduledSalaryValue = computed({
-  get: () => scheduledSalary.value || formData.value.scheduledSalary,
-  set: (value) => {
-    scheduledSalary.value = value
-  }
+  get: () => scheduledSalary.value || params.scheduledSalary,
+  set: (value) => (scheduledSalary.value = value)
 })
-const base = inject('SIMULATION_DATE')
-const thisYear = getYear(subMonths(base, 3))
-const from = format(new Date(thisYear, 0, 1), 'yyyy年M月d日')
-const to = format(new Date(thisYear, 11, 31), 'yyyy年M月d日')
+
+const base = new Date(params.simulationDate)
+const { beginningOfYear, endOfYear } = useFinancialYear(base, 1, 4)
+const from = format(beginningOfYear, 'yyyy年M月d日')
+const to = format(endOfYear, 'yyyy年M月d日')
 let {
   value: scheduledSalary,
   errorMessage: error,
   handleChange
 } = useField('scheduledSalary')
-const setDefaultValue = () =>
-  (scheduledSalary.value = formData.value.scheduledSalary)
-setDefaultValue()
+
+onMounted(() => (scheduledSalary.value = params.scheduledSalary))
 </script>
