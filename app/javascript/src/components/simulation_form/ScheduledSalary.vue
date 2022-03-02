@@ -23,22 +23,22 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
-import { getYear, subMonths, format } from 'date-fns'
+import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
+import { useFinancialYear } from '../../composables/use-financial-year'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
-
-const base = new Date(params.simulationDate)
-const thisYear = getYear(subMonths(base, 3))
-const from = format(new Date(thisYear, 0, 1), 'yyyy年M月d日')
-const to = format(new Date(thisYear, 11, 31), 'yyyy年M月d日')
 
 const scheduledSalaryValue = computed({
   get: () => scheduledSalary.value || params.scheduledSalary,
   set: (value) => (scheduledSalary.value = value)
 })
 
+const base = new Date(params.simulationDate)
+const { beginningOfYear, endOfYear } = useFinancialYear(base, 1, 4)
+const from = format(beginningOfYear, 'yyyy年M月d日')
+const to = format(endOfYear, 'yyyy年M月d日')
 let {
   value: scheduledSalary,
   errorMessage: error,

@@ -20,18 +20,18 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
-import { addYears, format } from 'date-fns'
+import { addMonths, addYears, format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
+import { useFinancialYear } from '../../composables/use-financial-year'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
 const base = new Date(params.simulationDate)
+const { endOfYear } = useFinancialYear(addYears(base, 1), 4)
 const from = format(base, 'yyyy/MM')
-const to = format(
-  new Date(getYear(addYears(subMonths(base, 3), 2)), 3, 1),
-  'yyyy/MM'
-)
+const to = format(addMonths(endOfYear, 1), 'yyyy/MM')
+
 const employmentMonthValue = computed({
   get: () => employmentMonth.value || params.employmentMonth,
   set: (value) => (employmentMonth.value = value)

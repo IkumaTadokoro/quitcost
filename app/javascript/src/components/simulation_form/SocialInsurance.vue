@@ -23,17 +23,18 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
-import { getYear, subMonths, subYears, format } from 'date-fns'
+import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
+import { useFinancialYear } from '../../composables/use-financial-year'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
 const base = new Date(params.simulationDate)
-const lastYear = getYear(subYears(subMonths(base, 3), 1))
-const from = format(new Date(lastYear, 0, 1), 'yyyy年M月d日')
-const to = format(new Date(lastYear, 11, 31), 'yyyy年M月d日')
-const formData = inject('FORM_DATA')
+const { lastBeginningOfYear, lastEndOfYear } = useFinancialYear(base, 1, 4)
+const from = format(lastBeginningOfYear, 'yyyy年M月d日')
+const to = format(lastEndOfYear, 'yyyy年M月d日')
+
 const socialInsuranceValue = computed({
   get: () => socialInsurance.value || params.socialInsurance,
   set: (value) => (socialInsurance.value = value)
