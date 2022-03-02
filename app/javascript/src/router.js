@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SimulationForm from './SimulationForm'
+import SimulationResult from './SimulationResult'
 import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
 import EmploymentMonth from './components//simulation_form/EmploymentMonth.vue'
 import Age from './components/simulation_form/Age'
@@ -26,7 +27,8 @@ const router = createRouter({
         { path: '7', component: ScheduledSalary },
         { path: '8', component: ScheduledSocialInsurance }
       ]
-    }
+    },
+    { path: '/simulations', component: SimulationResult }
   ]
 })
 
