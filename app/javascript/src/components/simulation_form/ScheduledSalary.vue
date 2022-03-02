@@ -21,27 +21,29 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { getYear, subMonths, format } from 'date-fns'
+import { useGlobalStore } from '../../store/global'
 
-const formData = inject('FORM_DATA')
-const scheduledSalaryValue = computed({
-  get: () => scheduledSalary.value || formData.value.scheduledSalary,
-  set: (value) => {
-    scheduledSalary.value = value
-  }
-})
-const base = inject('SIMULATION_DATE')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
+const base = new Date(params.simulationDate)
 const thisYear = getYear(subMonths(base, 3))
 const from = format(new Date(thisYear, 0, 1), 'yyyy年M月d日')
 const to = format(new Date(thisYear, 11, 31), 'yyyy年M月d日')
+
+const scheduledSalaryValue = computed({
+  get: () => scheduledSalary.value || params.scheduledSalary,
+  set: (value) => (scheduledSalary.value = value)
+})
+
 let {
   value: scheduledSalary,
   errorMessage: error,
   handleChange
 } = useField('scheduledSalary')
-const setDefaultValue = () =>
-  (scheduledSalary.value = formData.value.scheduledSalary)
-setDefaultValue()
+
+onMounted(() => (scheduledSalary.value = params.scheduledSalary))
 </script>

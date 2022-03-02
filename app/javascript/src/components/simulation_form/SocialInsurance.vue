@@ -21,27 +21,29 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { getYear, subMonths, subYears, format } from 'date-fns'
+import { useGlobalStore } from '../../store/global'
 
-const base = inject('SIMULATION_DATE')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
+const base = new Date(params.simulationDate)
 const lastYear = getYear(subYears(subMonths(base, 3), 1))
 const from = format(new Date(lastYear, 0, 1), 'yyyy年M月d日')
 const to = format(new Date(lastYear, 11, 31), 'yyyy年M月d日')
 const formData = inject('FORM_DATA')
 const socialInsuranceValue = computed({
-  get: () => socialInsurance.value || formData.value.socialInsurance,
-  set: (value) => {
-    socialInsurance.value = value
-  }
+  get: () => socialInsurance.value || params.socialInsurance,
+  set: (value) => (socialInsurance.value = value)
 })
+
 let {
   value: socialInsurance,
   errorMessage: error,
   handleChange
 } = useField('socialInsurance')
-const setDefaultValue = () =>
-  (socialInsurance.value = formData.value.socialInsurance)
-setDefaultValue()
+
+onMounted(() => (socialInsurance.value = params.socialInsurance))
 </script>

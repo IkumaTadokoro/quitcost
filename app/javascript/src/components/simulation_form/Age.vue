@@ -13,17 +13,18 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
 import { useField } from 'vee-validate'
+import { useGlobalStore } from '../../store/global'
 
-const formData = inject('FORM_DATA')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
 const ageValue = computed({
-  get: () => age.value || formData.value.age,
-  set: (value) => {
-    age.value = value
-  }
+  get: () => age.value || params.age,
+  set: (value) => (age.value = value)
 })
 let { value: age, errorMessage: error, handleChange } = useField('age')
-const setDefaultValue = () => (age.value = formData.value.age)
+const setDefaultValue = () => (age.value = params.age)
 setDefaultValue()
 </script>

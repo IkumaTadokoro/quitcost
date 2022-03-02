@@ -33,28 +33,32 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
+import { useGlobalStore } from '../../store/global'
 import { getYear, subMonths, format } from 'date-fns'
 
-const base = inject('SIMULATION_DATE')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
+const base = new Date(params.simulationDate)
 const thisYear = getYear(subMonths(base, 3))
 const from = format(new Date(thisYear, 0, 1), 'yyyy年M月d日')
 const to = format(new Date(thisYear, 11, 31), 'yyyy年M月d日')
 const formData = inject('FORM_DATA')
+
 const scheduledSocialInsuranceValue = computed({
-  get: () =>
-    scheduledSocialInsurance.value || formData.value.scheduledSocialInsurance,
-  set: (value) => {
-    scheduledSocialInsurance.value = value
-  }
+  get: () => scheduledSocialInsurance.value || params.scheduledSocialInsurance,
+  set: (value) => (scheduledSocialInsurance.value = value)
 })
+
 let {
   value: scheduledSocialInsurance,
   errorMessage: error,
   handleChange
 } = useField('scheduledSocialInsurance')
-const setDefaultValue = () =>
-  (scheduledSocialInsurance.value = formData.value.scheduledSocialInsurance)
-setDefaultValue()
+
+onMounted(
+  () => (scheduledSocialInsurance.value = params.scheduledSocialInsurance)
+)
 </script>

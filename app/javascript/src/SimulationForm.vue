@@ -7,17 +7,18 @@
 </template>
 
 <script setup>
-import { provide } from 'vue'
 import FormWizard from './components/FormWizard'
 import { useValidationSchema } from './validation-schema'
+import { useRouter } from 'vue-router'
+import { useGlobalStore } from './store/global'
 
-const simulationDate = new Date()
-provide('SIMULATION_DATE', simulationDate)
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+const router = useRouter()
 
-const validationSchema = useValidationSchema(simulationDate)
+const validationSchema = useValidationSchema(new Date(params.simulationDate))
 
-const onSubmit = (formData) =>
-  alert(`入力結果をAPIに送信：\n${JSON.stringify(formData, null, 2)}`)
+const onSubmit = () => router.push('/simulations')
 </script>
 
 <style scope>

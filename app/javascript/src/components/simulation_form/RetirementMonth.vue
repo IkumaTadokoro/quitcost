@@ -18,23 +18,25 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { getYear, subMonths, addYears, format } from 'date-fns'
+import { useGlobalStore } from '../../store/global'
 
-const formData = inject('FORM_DATA')
-const retirementMonthValue = computed({
-  get: () => retirementMonth.value || formData.value.retirementMonth,
-  set: (value) => {
-    retirementMonth.value = value || formData.value.retirementMonth
-  }
-})
-const base = inject('SIMULATION_DATE')
+const { simulation } = useGlobalStore()
+const params = $computed(() => simulation.params)
+
+const base = new Date(params.simulationDate)
 const from = format(base, 'yyyy/MM')
 const to = format(
   new Date(getYear(addYears(subMonths(base, 3), 2)), 3, 1),
   'yyyy/MM'
 )
+
+const retirementMonthValue = computed({
+  get: () => retirementMonth.value || params.retirementMonth,
+  set: (value) => (retirementMonth.value = value)
+})
 
 let {
   value: retirementMonth,
@@ -42,7 +44,5 @@ let {
   handleChange
 } = useField('retirementMonth')
 
-const setDefaultValue = () =>
-  (retirementMonth.value = formData.value.retirementMonth)
-setDefaultValue()
+onMounted(() => (retirementMonth.value = params.retirementMonth))
 </script>
