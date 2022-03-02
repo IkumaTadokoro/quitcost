@@ -2,7 +2,7 @@ const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
 const vue = require('./loaders/vue')
 
-function hotfixPostcssLoaderConfig (subloader) {
+function hotfixPostcssLoaderConfig(subloader) {
   const subloaderName = subloader.loader
   if (subloaderName === 'postcss-loader') {
     if (subloader.options.postcssOptions) {
@@ -11,16 +11,28 @@ function hotfixPostcssLoaderConfig (subloader) {
         'Remove postcssOptions workaround in config/webpack/environment.js'
       )
     } else {
-      subloader.options.postcssOptions = subloader.options.config;
-      delete subloader.options.config;
+      subloader.options.postcssOptions = subloader.options.config
+      delete subloader.options.config
     }
   }
 }
 
-environment.loaders.keys().forEach(loaderName => {
-  const loader = environment.loaders.get(loaderName);
-  loader.use.forEach(hotfixPostcssLoaderConfig);
-});
+environment.loaders.keys().forEach((loaderName) => {
+  const loader = environment.loaders.get(loaderName)
+  loader.use.forEach(hotfixPostcssLoaderConfig)
+})
+
+environment.config.merge({
+  module: {
+    rules: [
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto'
+      }
+    ]
+  }
+})
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)

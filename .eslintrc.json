@@ -17,5 +17,14 @@
     ],
     "rules": {
         "vue/multi-word-component-names": 0
+    },
+    "globals": {
+        "$ref": "readonly",
+        "$$": "readonly",
+        "$computed": "readonly",
+        "defineProps": "readonly",
+        "defineEmits": "readonly",
+        "defineExpose": "readonly",
+        "withDefaults": "readonly"
     }
 }
