@@ -1,20 +1,16 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ParameterLists
-
 class Simulation::Insurance
-  def self.call(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
-    new(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary).call
+  def self.call(param_parser)
+    new(param_parser).call
   end
 
-  def initialize(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
-    @from = retirement_month
-    @to = employment_month
-    @local_gov_code = local_gov_code
-    @age = age
-    @simulation_date = simulation_date
-    @salary = salary
-    @scheduled_salary = scheduled_salary
+  def initialize(param_parser)
+    @from = param_parser.retirement_month
+    @to = param_parser.employment_month
+    @local_gov_code = param_parser.local_gov_code
+    @age = param_parser.age
+    @salary_table = param_parser.salary_table
   end
 
   def call
@@ -23,7 +19,7 @@ class Simulation::Insurance
 
   private
 
-  attr_reader :from, :to, :local_gov_code, :age, :simulation_date, :salary, :scheduled_salary
+  attr_reader :from, :to, :local_gov_code, :age, :salary_table
 
   def monthly_insurance
     yearly_insurance.flat_map do |year, fee|
@@ -53,16 +49,6 @@ class Simulation::Insurance
       result[year] = calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary)
     end
     result
-  end
-
-  # NOTE: 前提：フォームで入力可能な「就職月」は`現在日付の会計年度 + 1 の 末月`まで
-  # NOTE: 計算可能な範囲を拡張する場合には、このテーブルに前提に記載の月以降の給与をセットする必要がある
-  def salary_table
-    base_fiscal_year = simulation_date.financial_year
-    {
-      base_fiscal_year => salary,
-      base_fiscal_year + 1 => scheduled_salary
-    }
   end
 
   def fiscal_years
@@ -96,5 +82,3 @@ class Simulation::Insurance
     [fee_of_first_month, Array.new(repeat_number) { fee_of_not_first_month }].flatten
   end
 end
-
-# rubocop:enable Metrics/ParameterLists

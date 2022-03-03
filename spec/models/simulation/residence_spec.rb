@@ -4,11 +4,16 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Residence, type: :model do
   describe '.call' do
-    subject do
-      Simulation::Residence.call(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
+    subject { Simulation::Residence.call(param_parser) }
+    let(:param_parser) do
+      double(
+        'ParamParser',
+        retirement_month: retirement_month,
+        employment_month: employment_month,
+        salary_table: { 2021 => salary, 2022 => scheduled_salary },
+        social_insurance_table: { 2021 => social_insurance, 2022 => scheduled_social_insurance }
+      )
     end
-
-    let!(:simulation_date) { Time.zone.parse('2021-04-11') }
 
     context '給与収入が1,000,000より大きい場合' do
       let!(:salary) { 4_988_682 }

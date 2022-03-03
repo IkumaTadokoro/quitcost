@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Pension, type: :model do
   describe '.call' do
-    subject { Simulation::Pension.call(from, to) }
+    subject { Simulation::Pension.call(param_parser) }
+    let(:param_parser) { double('ParamParser', retirement_month: from, employment_month: to) }
 
     context 'when Pension record for the specified year is exist' do
       before do

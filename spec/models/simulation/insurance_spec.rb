@@ -4,11 +4,17 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Insurance, type: :model do
   describe '.call' do
-    subject { Simulation::Insurance.call(retirement_month, employment_month, '131016', 40, simulation_date, salary, scheduled_salary) }
-    # FIXME: 変更する必要がなければ、固定値で呼び出す。
-    let!(:simulation_date) { Time.zone.parse('2021-04-11') }
-    let!(:salary) { 5_000_000 }
-    let!(:scheduled_salary) { 5_000_000 }
+    subject { Simulation::Insurance.call(param_parser) }
+    let(:param_parser) do
+      double(
+        'ParamParser',
+        retirement_month: retirement_month,
+        employment_month: employment_month,
+        local_gov_code: '131016',
+        age: 40,
+        salary_table: { 2021 => 5_000_000, 2022 => 5_000_000 }
+      )
+    end
 
     context 'when cross the year before employment' do
       let!(:retirement_month) { Time.zone.parse('2021-04-01') }

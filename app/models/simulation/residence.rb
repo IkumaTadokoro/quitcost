@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
-# rubocop:disable Metrics/ParameterLists
-
 class Simulation::Residence
   BASIC_DEDUCTION = 430_000
   PREFECTURE_CAPITA_BASIS = 1_500
@@ -14,18 +11,15 @@ class Simulation::Residence
   DUES = [6, 8, 10, 1].freeze
   NON_TAXABLE_SALARY_LIMIT = 1_000_000
 
-  def self.call(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
-    new(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date).call
+  def self.call(param_parser)
+    new(param_parser).call
   end
 
-  def initialize(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
-    @from = retirement_month
-    @to = employment_month
-    @salary = salary
-    @social_insurance = social_insurance
-    @scheduled_salary = scheduled_salary
-    @scheduled_social_insurance = scheduled_social_insurance
-    @simulation_date = simulation_date
+  def initialize(param_parser)
+    @from = param_parser.retirement_month
+    @to = param_parser.employment_month
+    @salary_table = param_parser.salary_table
+    @social_insurance_table = param_parser.social_insurance_table
   end
 
   def call
@@ -34,7 +28,7 @@ class Simulation::Residence
 
   private
 
-  attr_reader :from, :to, :salary, :social_insurance, :scheduled_salary, :scheduled_social_insurance, :simulation_date
+  attr_reader :from, :to, :salary_table, :social_insurance_table, :scheduled_salary, :scheduled_social_insurance
 
   def monthly_residence
     fiscal_years.flat_map do |year|
@@ -117,25 +111,4 @@ class Simulation::Residence
   def income_deduction(year)
     social_insurance_table[year] + BASIC_DEDUCTION
   end
-
-  def salary_table
-    {
-      base_fiscal_year => salary,
-      base_fiscal_year.next => scheduled_salary
-    }
-  end
-
-  def social_insurance_table
-    {
-      base_fiscal_year => social_insurance,
-      base_fiscal_year.next => scheduled_social_insurance
-    }
-  end
-
-  def base_fiscal_year
-    simulation_date.financial_year
-  end
 end
-
-# rubocop:enable Metrics/ClassLength
-# rubocop:enable Metrics/ParameterLists
