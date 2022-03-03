@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
-
 class Simulation::Residence
   BASIC_DEDUCTION = 430_000
   PREFECTURE_CAPITA_BASIS = 1_500
@@ -20,11 +18,8 @@ class Simulation::Residence
   def initialize(param_parser)
     @from = param_parser.retirement_month
     @to = param_parser.employment_month
-    @salary = param_parser.salary
-    @social_insurance = param_parser.social_insurance
-    @scheduled_salary = param_parser.scheduled_salary
-    @scheduled_social_insurance = param_parser.scheduled_social_insurance
-    @simulation_date = param_parser.simulation_date
+    @salary_table = param_parser.salary_table
+    @social_insurance_table = param_parser.social_insurance_table
   end
 
   def call
@@ -33,7 +28,7 @@ class Simulation::Residence
 
   private
 
-  attr_reader :from, :to, :salary, :social_insurance, :scheduled_salary, :scheduled_social_insurance, :simulation_date
+  attr_reader :from, :to, :salary_table, :social_insurance_table, :scheduled_salary, :scheduled_social_insurance
 
   def monthly_residence
     fiscal_years.flat_map do |year|
@@ -116,24 +111,4 @@ class Simulation::Residence
   def income_deduction(year)
     social_insurance_table[year] + BASIC_DEDUCTION
   end
-
-  def salary_table
-    {
-      base_fiscal_year => salary,
-      base_fiscal_year.next => scheduled_salary
-    }
-  end
-
-  def social_insurance_table
-    {
-      base_fiscal_year => social_insurance,
-      base_fiscal_year.next => scheduled_social_insurance
-    }
-  end
-
-  def base_fiscal_year
-    simulation_date.financial_year
-  end
 end
-
-# rubocop:enable Metrics/ClassLength

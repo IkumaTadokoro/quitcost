@@ -10,9 +10,7 @@ class Simulation::Insurance
     @to = param_parser.employment_month
     @local_gov_code = param_parser.local_gov_code
     @age = param_parser.age
-    @simulation_date = param_parser.simulation_date
-    @salary = param_parser.salary
-    @scheduled_salary = param_parser.scheduled_salary
+    @salary_table = param_parser.salary_table
   end
 
   def call
@@ -21,7 +19,7 @@ class Simulation::Insurance
 
   private
 
-  attr_reader :from, :to, :local_gov_code, :age, :simulation_date, :salary, :scheduled_salary
+  attr_reader :from, :to, :local_gov_code, :age, :salary_table
 
   def monthly_insurance
     yearly_insurance.flat_map do |year, fee|
@@ -51,16 +49,6 @@ class Simulation::Insurance
       result[year] = calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary)
     end
     result
-  end
-
-  # NOTE: 前提：フォームで入力可能な「就職月」は`現在日付の会計年度 + 1 の 末月`まで
-  # NOTE: 計算可能な範囲を拡張する場合には、このテーブルに前提に記載の月以降の給与をセットする必要がある
-  def salary_table
-    base_fiscal_year = simulation_date.financial_year
-    {
-      base_fiscal_year => salary,
-      base_fiscal_year + 1 => scheduled_salary
-    }
   end
 
   def fiscal_years
