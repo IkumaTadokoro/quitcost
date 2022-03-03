@@ -1,5 +1,5 @@
 = render 'errors', object: insurance_form
-= form_with model: insurance_form do |f|
+= form_with model: insurance_form, html: { name: 'insurance' } do |f|
   h3.leading-7.text-lg.font-bold
     | 基本情報
   .flex.flex-col.mb-4
@@ -8,7 +8,7 @@
   .flex.flex-col.mb-4
     = f.label :local_gov_code, class: 'leading-7 text-sm font-semi-bold'
     .w-full.rounded-md.border-2.border-gray-200.focus:ring-1.focus:ring-green-300.text-base.outline-none.text-gray-900.py-1.px-3.leading-8.transition-colors.duration-200.ease-in-out
-      = f.collection_select :local_gov_code, JpLocalGov.all, :code, :city, include_blank: true
+      = f.collection_select :local_gov_code, JpLocalGov.all, :code, ->(lg) { "#{lg.prefecture} #{lg.city}" }, include_blank: true
     h3.leading-7.text-lg.font-bold.mt-8
       | 医療分
     .flex.flex-col.mb-4

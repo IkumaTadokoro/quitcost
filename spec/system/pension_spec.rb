@@ -19,8 +19,10 @@ RSpec.describe 'Pension', type: :system, js: true do
 
       expect(page).to have_content '国民年金保険料登録'
 
-      fill_in '年度', with: pension.year
-      fill_in '保険料', with: pension.contribution
+      within 'form[name=pension]' do
+        fill_in '年度', with: pension.year
+        fill_in '保険料', with: pension.contribution
+      end
 
       expect { click_button '登録' }.to change { Pension.count }.from(0).to(1)
       assert_current_path pensions_path
