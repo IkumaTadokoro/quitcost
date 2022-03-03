@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Simulation::Pension
-  def self.call(retirement_month, employment_month)
-    new(retirement_month, employment_month).call
+  def self.call(param_parser)
+    new(param_parser).call
   end
 
-  def initialize(retirement_month, employment_month)
-    @from = retirement_month
-    @to = employment_month
+  def initialize(param_parser)
+    @from = param_parser.retirement_month
+    @to = param_parser.employment_month
   end
 
   def call

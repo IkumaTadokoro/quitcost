@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/ClassLength
-# rubocop:disable Metrics/ParameterLists
 
 class Simulation::Residence
   BASIC_DEDUCTION = 430_000
@@ -14,18 +13,18 @@ class Simulation::Residence
   DUES = [6, 8, 10, 1].freeze
   NON_TAXABLE_SALARY_LIMIT = 1_000_000
 
-  def self.call(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
-    new(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date).call
+  def self.call(param_parser)
+    new(param_parser).call
   end
 
-  def initialize(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
-    @from = retirement_month
-    @to = employment_month
-    @salary = salary
-    @social_insurance = social_insurance
-    @scheduled_salary = scheduled_salary
-    @scheduled_social_insurance = scheduled_social_insurance
-    @simulation_date = simulation_date
+  def initialize(param_parser)
+    @from = param_parser.retirement_month
+    @to = param_parser.employment_month
+    @salary = param_parser.salary
+    @social_insurance = param_parser.social_insurance
+    @scheduled_salary = param_parser.scheduled_salary
+    @scheduled_social_insurance = param_parser.scheduled_social_insurance
+    @simulation_date = param_parser.simulation_date
   end
 
   def call
@@ -138,4 +137,3 @@ class Simulation::Residence
 end
 
 # rubocop:enable Metrics/ClassLength
-# rubocop:enable Metrics/ParameterLists

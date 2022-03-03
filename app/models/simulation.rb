@@ -6,19 +6,8 @@ class Simulation
 
   CATEGORY = %i[insurance pension residence].freeze
 
-  attr_reader :retirement_month, :employment_month
-
   def initialize(params)
-    @retirement_month = Time.zone.parse(params[:retirement_month])
-    @employment_month = Time.zone.parse(params[:employment_month])
-    @prefecture = params[:prefecture]
-    @city = params[:city]
-    @age = params[:age].to_i
-    @simulation_date = Time.zone.parse(params[:simulation_date])
-    @salary = params[:salary].to_i
-    @scheduled_salary = params[:scheduled_salary].to_i
-    @social_insurance = params[:social_insurance].to_i
-    @scheduled_social_insurance = params[:scheduled_social_insurance].to_i
+    @param_parser = ParamParser.new(params)
   end
 
   def grand_total
@@ -36,23 +25,27 @@ class Simulation
     end
   end
 
+  def retirement_month
+    @param_parser.retirement_month
+  end
+
+  def employment_month
+    @param_parser.employment_month
+  end
+
   private
 
-  attr_reader :age, :simulation_date, :salary, :scheduled_salary, :social_insurance, :scheduled_social_insurance
+  attr_reader :param_parser
 
   def insurance
-    Simulation::Insurance.call(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
+    Simulation::Insurance.call(param_parser)
   end
 
   def pension
-    Simulation::Pension.call(retirement_month, employment_month)
+    Simulation::Pension.call(param_parser)
   end
 
   def residence
-    Simulation::Residence.call(retirement_month, employment_month, salary, social_insurance, scheduled_salary, scheduled_social_insurance, simulation_date)
-  end
-
-  def local_gov_code
-    JpLocalGov.where(prefecture: @prefecture, city: @city).first.code
+    Simulation::Residence.call(param_parser)
   end
 end

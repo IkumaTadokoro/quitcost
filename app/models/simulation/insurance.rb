@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ParameterLists
-
 class Simulation::Insurance
-  def self.call(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
-    new(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary).call
+  def self.call(param_parser)
+    new(param_parser).call
   end
 
-  def initialize(retirement_month, employment_month, local_gov_code, age, simulation_date, salary, scheduled_salary)
-    @from = retirement_month
-    @to = employment_month
-    @local_gov_code = local_gov_code
-    @age = age
-    @simulation_date = simulation_date
-    @salary = salary
-    @scheduled_salary = scheduled_salary
+  def initialize(param_parser)
+    @from = param_parser.retirement_month
+    @to = param_parser.employment_month
+    @local_gov_code = param_parser.local_gov_code
+    @age = param_parser.age
+    @simulation_date = param_parser.simulation_date
+    @salary = param_parser.salary
+    @scheduled_salary = param_parser.scheduled_salary
   end
 
   def call
@@ -96,5 +94,3 @@ class Simulation::Insurance
     [fee_of_first_month, Array.new(repeat_number) { fee_of_not_first_month }].flatten
   end
 end
-
-# rubocop:enable Metrics/ParameterLists
