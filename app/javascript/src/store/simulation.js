@@ -40,9 +40,9 @@ export default function simulationStore() {
       prefecture: address.pref,
       city: address.city,
       salary: params.salary,
-      scheduled_salary: params.scheduled_salary,
-      social_insurance: params.social_insurance,
-      scheduled_social_insurance: params.scheduled_social_insurance
+      scheduled_salary: params.scheduledSalary,
+      social_insurance: params.socialInsurance,
+      scheduled_social_insurance: params.scheduledSocialInsurance
     }).toString()
 
     const simulationApi = `/api/simulations?${parameter}`
