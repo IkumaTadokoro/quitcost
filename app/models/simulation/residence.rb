@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 class Simulation::Residence
+  using(Module.new do
+    refine ActiveSupport::TimeWithZone do
+      def beginning_of_residence_fy
+        beginning_of_financial_year.next_month.next_month
+      end
+
+      def residence_financial_year
+        prev_month.prev_month.financial_year
+      end
+    end
+  end)
+
   BASIC_DEDUCTION = 430_000
   PREFECTURE_CAPITA_BASIS = 1_500
   CITY_CAPITA_BASIS = 3_500
@@ -34,7 +46,7 @@ class Simulation::Residence
     fiscal_years.flat_map do |year|
       payment_terms = payment_terms_by_fiscal_year[year]
       beginning_of_terms = payment_terms.first
-      elapsed_month = months_between(from: beginning_of_terms.beginning_of_financial_year.next_month.next_month, to: beginning_of_terms)
+      elapsed_month = months_between(from: beginning_of_terms.beginning_of_residence_fy, to: beginning_of_terms)
       unpaid_fee = calc_special_collection(yearly_residence(year)).drop(elapsed_month.count).sum
       remain_dues = DUES.map { |month| convert_time(year, month) }.select { |month| month >= beginning_of_terms }
       due_months = remain_dues.empty? ? [beginning_of_terms] : remain_dues
@@ -63,11 +75,11 @@ class Simulation::Residence
   end
 
   def fiscal_years
-    all_payment_terms.map { |payment_term| payment_term.prev_month.prev_month.financial_year }.uniq
+    all_payment_terms.map(&:residence_financial_year).uniq
   end
 
   def payment_terms_by_fiscal_year
-    all_payment_terms.group_by { |payment_term| payment_term.prev_month.prev_month.financial_year }
+    all_payment_terms.group_by(&:residence_financial_year)
   end
 
   def all_payment_terms
