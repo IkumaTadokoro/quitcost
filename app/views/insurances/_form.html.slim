@@ -1,5 +1,5 @@
 = render 'errors', object: insurance_form
-= form_with model: insurance_form do |f|
+= form_with model: insurance_form, html: { name: 'insurance' } do |f|
   h3.leading-7.text-lg.font-bold
     | 基本情報
   .flex.flex-col.mb-4
