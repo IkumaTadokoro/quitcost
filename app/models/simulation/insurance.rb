@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Simulation::Insurance
+  include MonthIterable
+
   def self.call(param_parser)
     new(param_parser).call
   end
@@ -36,10 +38,6 @@ class Simulation::Insurance
         { month: month, insurance: insurance }
       end
     end
-  end
-
-  def months_between(from:, to:)
-    Enumerator.produce(from, &:next_month).take_while { |date| date < to }
   end
 
   def yearly_insurance
