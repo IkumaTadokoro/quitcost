@@ -45,14 +45,14 @@ RSpec.describe Simulation::Residence, type: :model do
 
               it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になること' do
                 expected = [
-                  { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                  { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                   { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-08-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2021-08-01'), residence: 60_000 },
                   { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-10-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2021-10-01'), residence: 60_000 },
                   { month: Time.zone.parse('2021-11-01'), residence: 0 },
                   { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-01-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2022-01-01'), residence: 60_000 },
                   { month: Time.zone.parse('2022-02-01'), residence: 0 },
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
@@ -68,12 +68,12 @@ RSpec.describe Simulation::Residence, type: :model do
               it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になること' do
                 expected = [
                   { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+                  { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
                   { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-10-01'), residence: 73_300 },
+                  { month: Time.zone.parse('2021-10-01'), residence: 73_000 },
                   { month: Time.zone.parse('2021-11-01'), residence: 0 },
                   { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-01-01'), residence: 73_300 },
+                  { month: Time.zone.parse('2022-01-01'), residence: 73_000 },
                   { month: Time.zone.parse('2022-02-01'), residence: 0 },
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
@@ -132,14 +132,14 @@ RSpec.describe Simulation::Residence, type: :model do
                 { month: Time.zone.parse('2022-03-01'), residence: 0 },
                 { month: Time.zone.parse('2022-04-01'), residence: 0 },
                 { month: Time.zone.parse('2022-05-01'), residence: 0 },
-                { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                 { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                 { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                 { month: Time.zone.parse('2022-11-01'), residence: 0 },
                 { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                 { month: Time.zone.parse('2023-02-01'), residence: 0 },
                 { month: Time.zone.parse('2023-03-01'), residence: 0 }
               ]
@@ -155,26 +155,26 @@ RSpec.describe Simulation::Residence, type: :model do
 
               it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になること、翌年度の住民税が普通徴収されること' do
                 expected = [
-                  { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                  { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                   { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-08-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2021-08-01'), residence: 60_000 },
                   { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-10-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2021-10-01'), residence: 60_000 },
                   { month: Time.zone.parse('2021-11-01'), residence: 0 },
                   { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-01-01'), residence: 60_100 },
+                  { month: Time.zone.parse('2022-01-01'), residence: 60_000 },
                   { month: Time.zone.parse('2022-02-01'), residence: 0 },
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
                   { month: Time.zone.parse('2022-05-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                  { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -188,24 +188,24 @@ RSpec.describe Simulation::Residence, type: :model do
               it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になること、翌年度の住民税が普通徴収されること' do
                 expected = [
                   { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+                  { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
                   { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2021-10-01'), residence: 73_300 },
+                  { month: Time.zone.parse('2021-10-01'), residence: 73_000 },
                   { month: Time.zone.parse('2021-11-01'), residence: 0 },
                   { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-01-01'), residence: 73_300 },
+                  { month: Time.zone.parse('2022-01-01'), residence: 73_000 },
                   { month: Time.zone.parse('2022-02-01'), residence: 0 },
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
                   { month: Time.zone.parse('2022-05-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                  { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -227,14 +227,14 @@ RSpec.describe Simulation::Residence, type: :model do
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
                   { month: Time.zone.parse('2022-05-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                  { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -253,14 +253,14 @@ RSpec.describe Simulation::Residence, type: :model do
                   { month: Time.zone.parse('2022-03-01'), residence: 0 },
                   { month: Time.zone.parse('2022-04-01'), residence: 0 },
                   { month: Time.zone.parse('2022-05-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                  { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -278,7 +278,7 @@ RSpec.describe Simulation::Residence, type: :model do
 
             it '該当年度の1月~5月分の特別徴収額が、退職月に一括請求されること' do
               expected = [
-                { month: Time.zone.parse('2023-02-01'), residence: 36_800 },
+                { month: Time.zone.parse('2023-02-01'), residence: 36_000 },
                 { month: Time.zone.parse('2023-03-01'), residence: 0 }
               ]
               expect(subject).to eq expected
@@ -293,14 +293,14 @@ RSpec.describe Simulation::Residence, type: :model do
 
               it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になること' do
                 expected = [
-                  { month: Time.zone.parse('2022-06-01'), residence: 28_100 },
+                  { month: Time.zone.parse('2022-06-01'), residence: 30_500 },
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 27_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 27_800 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 27_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -314,12 +314,12 @@ RSpec.describe Simulation::Residence, type: :model do
               it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になること' do
                 expected = [
                   { month: Time.zone.parse('2022-07-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-08-01'), residence: 33_800 },
+                  { month: Time.zone.parse('2022-08-01'), residence: 33_000 },
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 33_700 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 33_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 33_700 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 33_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -333,10 +333,10 @@ RSpec.describe Simulation::Residence, type: :model do
               it '該当年度の退職~5月分の特別徴収額が、10月と1月で分納になること' do
                 expected = [
                   { month: Time.zone.parse('2022-09-01'), residence: 0 },
-                  { month: Time.zone.parse('2022-10-01'), residence: 41_400 },
+                  { month: Time.zone.parse('2022-10-01'), residence: 41_000 },
                   { month: Time.zone.parse('2022-11-01'), residence: 0 },
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 41_400 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 40_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -350,7 +350,7 @@ RSpec.describe Simulation::Residence, type: :model do
               it '該当年度の退職~5月の特別徴収分が、1月に支払になること' do
                 expected = [
                   { month: Time.zone.parse('2022-12-01'), residence: 0 },
-                  { month: Time.zone.parse('2023-01-01'), residence: 55_200 },
+                  { month: Time.zone.parse('2023-01-01'), residence: 54_000 },
                   { month: Time.zone.parse('2023-02-01'), residence: 0 },
                   { month: Time.zone.parse('2023-03-01'), residence: 0 }
                 ]
@@ -387,7 +387,7 @@ RSpec.describe Simulation::Residence, type: :model do
 
                 it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になり、6月のみ支払対象とすること' do
                   expected = [
-                    { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                    { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                     { month: Time.zone.parse('2021-07-01'), residence: 0 }
                   ]
                   expect(subject).to eq expected
@@ -399,9 +399,9 @@ RSpec.describe Simulation::Residence, type: :model do
 
                 it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になり、6、8月分を支払対象とすること' do
                   expected = [
-                    { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                    { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 60_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 }
                   ]
                   expect(subject).to eq expected
@@ -413,11 +413,11 @@ RSpec.describe Simulation::Residence, type: :model do
 
                 it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になり、6、8、10月分を支払対象とすること' do
                   expected = [
-                    { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                    { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 60_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-10-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2021-10-01'), residence: 60_000 },
                     { month: Time.zone.parse('2021-11-01'), residence: 0 },
                     { month: Time.zone.parse('2021-12-01'), residence: 0 }
                   ]
@@ -430,14 +430,14 @@ RSpec.describe Simulation::Residence, type: :model do
 
                 it '該当年度の退職~5月分の特別徴収額が、6,8,10,1月で分納になり、6、8、10、1月分を支払対象とすること' do
                   expected = [
-                    { month: Time.zone.parse('2021-06-01'), residence: 60_400 },
+                    { month: Time.zone.parse('2021-06-01'), residence: 60_700 },
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 60_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-10-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2021-10-01'), residence: 60_000 },
                     { month: Time.zone.parse('2021-11-01'), residence: 0 },
                     { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                    { month: Time.zone.parse('2022-01-01'), residence: 60_100 },
+                    { month: Time.zone.parse('2022-01-01'), residence: 60_000 },
                     { month: Time.zone.parse('2022-02-01'), residence: 0 },
                     { month: Time.zone.parse('2022-03-01'), residence: 0 },
                     { month: Time.zone.parse('2022-04-01'), residence: 0 }
@@ -468,7 +468,7 @@ RSpec.describe Simulation::Residence, type: :model do
                 it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になり、8月分を支払対象とすること' do
                   expected = [
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 }
                   ]
                   expect(subject).to eq expected
@@ -481,9 +481,9 @@ RSpec.describe Simulation::Residence, type: :model do
                 it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になり、8、10月分を支払対象とすること' do
                   expected = [
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-10-01'), residence: 73_300 },
+                    { month: Time.zone.parse('2021-10-01'), residence: 73_000 },
                     { month: Time.zone.parse('2021-11-01'), residence: 0 },
                     { month: Time.zone.parse('2021-12-01'), residence: 0 }
                   ]
@@ -497,12 +497,12 @@ RSpec.describe Simulation::Residence, type: :model do
                 it '該当年度の退職~5月分の特別徴収額が、8,10,1月で分納になり、8、10、1月分を支払対象とすること' do
                   expected = [
                     { month: Time.zone.parse('2021-07-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+                    { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
                     { month: Time.zone.parse('2021-09-01'), residence: 0 },
-                    { month: Time.zone.parse('2021-10-01'), residence: 73_300 },
+                    { month: Time.zone.parse('2021-10-01'), residence: 73_000 },
                     { month: Time.zone.parse('2021-11-01'), residence: 0 },
                     { month: Time.zone.parse('2021-12-01'), residence: 0 },
-                    { month: Time.zone.parse('2022-01-01'), residence: 73_300 },
+                    { month: Time.zone.parse('2022-01-01'), residence: 73_000 },
                     { month: Time.zone.parse('2022-02-01'), residence: 0 },
                     { month: Time.zone.parse('2022-03-01'), residence: 0 },
                     { month: Time.zone.parse('2022-04-01'), residence: 0 }
@@ -599,17 +599,17 @@ RSpec.describe Simulation::Residence, type: :model do
           it '退職年度の金額が普通徴収として残りの納期に按分され、翌年度の料金は普通徴収として計算した上で就職する前月まで支払義務が発生すること' do
             expected = [
               { month: Time.zone.parse('2021-07-01'), residence: 0 },
-              { month: Time.zone.parse('2021-08-01'), residence: 73_400 },
+              { month: Time.zone.parse('2021-08-01'), residence: 74_000 },
               { month: Time.zone.parse('2021-09-01'), residence: 0 },
-              { month: Time.zone.parse('2021-10-01'), residence: 73_300 },
+              { month: Time.zone.parse('2021-10-01'), residence: 73_000 },
               { month: Time.zone.parse('2021-11-01'), residence: 0 },
               { month: Time.zone.parse('2021-12-01'), residence: 0 },
-              { month: Time.zone.parse('2022-01-01'), residence: 73_300 },
+              { month: Time.zone.parse('2022-01-01'), residence: 73_000 },
               { month: Time.zone.parse('2022-02-01'), residence: 0 },
               { month: Time.zone.parse('2022-03-01'), residence: 0 },
               { month: Time.zone.parse('2022-04-01'), residence: 0 },
               { month: Time.zone.parse('2022-05-01'), residence: 0 },
-              { month: Time.zone.parse('2022-06-01'), residence: 28_100 }
+              { month: Time.zone.parse('2022-06-01'), residence: 30_500 }
             ]
             expect(subject).to eq expected
           end
@@ -622,9 +622,9 @@ RSpec.describe Simulation::Residence, type: :model do
           it '退職年度の金額が普通徴収として残りの納期に按分され、翌年度の料金は普通徴収として計算した上で就職する前月まで支払義務が発生すること' do
             expected = [
               { month: Time.zone.parse('2022-07-01'), residence: 0 },
-              { month: Time.zone.parse('2022-08-01'), residence: 33_800 },
+              { month: Time.zone.parse('2022-08-01'), residence: 33_000 },
               { month: Time.zone.parse('2022-09-01'), residence: 0 },
-              { month: Time.zone.parse('2022-10-01'), residence: 33_700 }
+              { month: Time.zone.parse('2022-10-01'), residence: 33_000 }
             ]
             expect(subject).to eq expected
           end

@@ -21,6 +21,7 @@ class Simulation::Residence
   PREFECTURE_TAX_RATE = 4
   CITY_TAX_RATE = 6
   DUES = [6, 8, 10, 1].freeze
+  SPECIAL_COLLECTION_DUES = (1..12).to_a.freeze
   NON_TAXABLE_SALARY_LIMIT = 1_000_000
 
   def self.call(param_parser)
@@ -50,7 +51,7 @@ class Simulation::Residence
       unpaid_fee = calc_special_collection(yearly_residence(year)).drop(elapsed_month.count).sum
       remain_dues = DUES.map { |month| convert_time(year, month) }.select { |month| month >= beginning_of_terms }
       due_months = remain_dues.empty? ? [beginning_of_terms] : remain_dues
-      fees_by_month = calculate_fees_by_month(unpaid_fee, due_months.count)
+      fees_by_month = LocalTaxLaw.calc_installments(unpaid_fee, due_months)
       payment_terms.map { |month| { month: month, residence: due_months.include?(month) ? fees_by_month.shift : 0 } }
     end
   end
@@ -64,14 +65,7 @@ class Simulation::Residence
   end
 
   def calc_special_collection(yearly_residence)
-    calculate_fees_by_month(yearly_residence, 12)
-  end
-
-  def calculate_fees_by_month(total_fee, number_of_payments)
-    repeat_number = number_of_payments - 1
-    fee_of_not_first_month = (total_fee / number_of_payments).floor(-2)
-    fee_of_first_month = total_fee - fee_of_not_first_month * repeat_number
-    [fee_of_first_month, Array.new(repeat_number) { fee_of_not_first_month }].flatten
+    LocalTaxLaw.calc_installments(yearly_residence, SPECIAL_COLLECTION_DUES)
   end
 
   def fiscal_years
@@ -89,7 +83,7 @@ class Simulation::Residence
   def yearly_residence(year)
     return 0 if salary_table[year] <= NON_TAXABLE_SALARY_LIMIT
 
-    income_basis(year) + capita_basis
+    LocalTaxLaw.calc_determined_amount { income_basis(year) + capita_basis }
   end
 
   def income_basis(year)
@@ -113,7 +107,7 @@ class Simulation::Residence
   end
 
   def taxation_total_income(year)
-    (total_income(year) - income_deduction(year)).floor(-3)
+    LocalTaxLaw.calc_tax_base { total_income(year) - income_deduction(year) }
   end
 
   def total_income(year)

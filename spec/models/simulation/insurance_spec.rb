@@ -62,7 +62,7 @@ RSpec.describe Simulation::Insurance, type: :model do
         expected = [
           { month: Time.zone.parse('2021-04-01'), insurance: 0 },
           { month: Time.zone.parse('2021-05-01'), insurance: 0 },
-          { month: Time.zone.parse('2021-06-01'), insurance: 39_250 },
+          { month: Time.zone.parse('2021-06-01'), insurance: 39_200 },
           { month: Time.zone.parse('2021-07-01'), insurance: 39_100 },
           { month: Time.zone.parse('2021-08-01'), insurance: 39_100 },
           { month: Time.zone.parse('2021-09-01'), insurance: 39_100 },
@@ -74,7 +74,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2022-03-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-04-01'), insurance: 0 },
           { month: Time.zone.parse('2022-05-01'), insurance: 0 },
-          { month: Time.zone.parse('2022-06-01'), insurance: 39_250 },
+          { month: Time.zone.parse('2022-06-01'), insurance: 39_200 },
           { month: Time.zone.parse('2022-07-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-08-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-09-01'), insurance: 39_100 },
@@ -127,7 +127,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           care_limit: 170_000
         )
         expected = [
-          { month: Time.zone.parse('2021-04-01'), insurance: 39_250 },
+          { month: Time.zone.parse('2021-04-01'), insurance: 39_200 },
           { month: Time.zone.parse('2021-05-01'), insurance: 39_100 },
           { month: Time.zone.parse('2021-06-01'), insurance: 39_100 },
           { month: Time.zone.parse('2021-07-01'), insurance: 39_100 },
@@ -139,7 +139,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2022-01-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-02-01'), insurance: 0 },
           { month: Time.zone.parse('2022-03-01'), insurance: 0 },
-          { month: Time.zone.parse('2022-04-01'), insurance: 39_250 },
+          { month: Time.zone.parse('2022-04-01'), insurance: 39_200 },
           { month: Time.zone.parse('2022-05-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-06-01'), insurance: 39_100 },
           { month: Time.zone.parse('2022-07-01'), insurance: 39_100 },
@@ -197,7 +197,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2021-04-01'), insurance: 0 },
           { month: Time.zone.parse('2021-05-01'), insurance: 0 },
           { month: Time.zone.parse('2021-06-01'), insurance: 0 },
-          { month: Time.zone.parse('2021-07-01'), insurance: 98_050 },
+          { month: Time.zone.parse('2021-07-01'), insurance: 98_000 },
           { month: Time.zone.parse('2021-08-01'), insurance: 0 },
           { month: Time.zone.parse('2021-09-01'), insurance: 97_700 },
           { month: Time.zone.parse('2021-10-01'), insurance: 0 },
@@ -209,7 +209,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2022-04-01'), insurance: 0 },
           { month: Time.zone.parse('2022-05-01'), insurance: 0 },
           { month: Time.zone.parse('2022-06-01'), insurance: 0 },
-          { month: Time.zone.parse('2022-07-01'), insurance: 98_050 },
+          { month: Time.zone.parse('2022-07-01'), insurance: 98_000 },
           { month: Time.zone.parse('2022-08-01'), insurance: 0 },
           { month: Time.zone.parse('2022-09-01'), insurance: 97_700 },
           { month: Time.zone.parse('2022-10-01'), insurance: 0 },
@@ -264,7 +264,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2021-04-01'), insurance: 0 },
           { month: Time.zone.parse('2021-05-01'), insurance: 0 },
           { month: Time.zone.parse('2021-06-01'), insurance: 0 },
-          { month: Time.zone.parse('2021-07-01'), insurance: 98_050 },
+          { month: Time.zone.parse('2021-07-01'), insurance: 98_000 },
           { month: Time.zone.parse('2021-08-01'), insurance: 0 },
           { month: Time.zone.parse('2021-09-01'), insurance: 97_700 },
           { month: Time.zone.parse('2021-10-01'), insurance: 97_700 },
@@ -276,7 +276,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           { month: Time.zone.parse('2022-04-01'), insurance: 0 },
           { month: Time.zone.parse('2022-05-01'), insurance: 0 },
           { month: Time.zone.parse('2022-06-01'), insurance: 0 },
-          { month: Time.zone.parse('2022-07-01'), insurance: 98_050 },
+          { month: Time.zone.parse('2022-07-01'), insurance: 98_000 },
           { month: Time.zone.parse('2022-08-01'), insurance: 0 },
           { month: Time.zone.parse('2022-09-01'), insurance: 97_700 },
           { month: Time.zone.parse('2022-10-01'), insurance: 97_700 },
@@ -317,7 +317,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           expected = [
             { month: Time.zone.parse('2021-04-01'), insurance: 0 },
             { month: Time.zone.parse('2021-05-01'), insurance: 0 },
-            { month: Time.zone.parse('2021-06-01'), insurance: 39_250 },
+            { month: Time.zone.parse('2021-06-01'), insurance: 39_200 },
             { month: Time.zone.parse('2021-07-01'), insurance: 39_100 },
             { month: Time.zone.parse('2021-08-01'), insurance: 39_100 },
             { month: Time.zone.parse('2021-09-01'), insurance: 39_100 },
@@ -351,7 +351,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             care_limit: 170_000
           )
           expected = [
-            { month: Time.zone.parse('2021-04-01'), insurance: 39_250 },
+            { month: Time.zone.parse('2021-04-01'), insurance: 39_200 },
             { month: Time.zone.parse('2021-05-01'), insurance: 39_100 },
             { month: Time.zone.parse('2021-06-01'), insurance: 39_100 },
             { month: Time.zone.parse('2021-07-01'), insurance: 39_100 },
@@ -390,7 +390,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             { month: Time.zone.parse('2021-04-01'), insurance: 0 },
             { month: Time.zone.parse('2021-05-01'), insurance: 0 },
             { month: Time.zone.parse('2021-06-01'), insurance: 0 },
-            { month: Time.zone.parse('2021-07-01'), insurance: 98_050 },
+            { month: Time.zone.parse('2021-07-01'), insurance: 98_000 },
             { month: Time.zone.parse('2021-08-01'), insurance: 0 },
             { month: Time.zone.parse('2021-09-01'), insurance: 97_700 },
             { month: Time.zone.parse('2021-10-01'), insurance: 0 },
@@ -426,7 +426,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             { month: Time.zone.parse('2021-04-01'), insurance: 0 },
             { month: Time.zone.parse('2021-05-01'), insurance: 0 },
             { month: Time.zone.parse('2021-06-01'), insurance: 0 },
-            { month: Time.zone.parse('2021-07-01'), insurance: 98_050 },
+            { month: Time.zone.parse('2021-07-01'), insurance: 98_000 },
             { month: Time.zone.parse('2021-08-01'), insurance: 0 },
             { month: Time.zone.parse('2021-09-01'), insurance: 97_700 },
             { month: Time.zone.parse('2021-10-01'), insurance: 97_700 },
@@ -466,7 +466,7 @@ RSpec.describe Simulation::Insurance, type: :model do
           expected = [
             { month: Time.zone.parse('2022-04-01'), insurance: 0 },
             { month: Time.zone.parse('2022-05-01'), insurance: 0 },
-            { month: Time.zone.parse('2022-06-01'), insurance: 39_250 },
+            { month: Time.zone.parse('2022-06-01'), insurance: 39_200 },
             { month: Time.zone.parse('2022-07-01'), insurance: 39_100 },
             { month: Time.zone.parse('2022-08-01'), insurance: 39_100 },
             { month: Time.zone.parse('2022-09-01'), insurance: 39_100 },
@@ -500,7 +500,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             care_limit: 170_000
           )
           expected = [
-            { month: Time.zone.parse('2022-04-01'), insurance: 39_250 },
+            { month: Time.zone.parse('2022-04-01'), insurance: 39_200 },
             { month: Time.zone.parse('2022-05-01'), insurance: 39_100 },
             { month: Time.zone.parse('2022-06-01'), insurance: 39_100 },
             { month: Time.zone.parse('2022-07-01'), insurance: 39_100 },
@@ -539,7 +539,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             { month: Time.zone.parse('2022-04-01'), insurance: 0 },
             { month: Time.zone.parse('2022-05-01'), insurance: 0 },
             { month: Time.zone.parse('2022-06-01'), insurance: 0 },
-            { month: Time.zone.parse('2022-07-01'), insurance: 98_050 },
+            { month: Time.zone.parse('2022-07-01'), insurance: 98_000 },
             { month: Time.zone.parse('2022-08-01'), insurance: 0 },
             { month: Time.zone.parse('2022-09-01'), insurance: 97_700 },
             { month: Time.zone.parse('2022-10-01'), insurance: 0 },
@@ -575,7 +575,7 @@ RSpec.describe Simulation::Insurance, type: :model do
             { month: Time.zone.parse('2022-04-01'), insurance: 0 },
             { month: Time.zone.parse('2022-05-01'), insurance: 0 },
             { month: Time.zone.parse('2022-06-01'), insurance: 0 },
-            { month: Time.zone.parse('2022-07-01'), insurance: 98_050 },
+            { month: Time.zone.parse('2022-07-01'), insurance: 98_000 },
             { month: Time.zone.parse('2022-08-01'), insurance: 0 },
             { month: Time.zone.parse('2022-09-01'), insurance: 97_700 },
             { month: Time.zone.parse('2022-10-01'), insurance: 97_700 },

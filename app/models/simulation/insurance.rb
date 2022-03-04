@@ -29,7 +29,7 @@ class Simulation::Insurance
       total_fee = fee * number_of_payment_duty / PaymentTargetMonth::CALENDAR.count
       target_months_in_range = payment_target_months.map(&:month).intersection(payment_terms.map(&:beginning_of_month))
       remain_dues = payment_target_months.select { |month| month.month >= payment_terms.first }
-      fees_by_month = calculate_fees_by_month(total_fee, remain_dues.count)
+      fees_by_month = LocalTaxLaw.calc_installments(total_fee, remain_dues, municipal_ordinance: true)
 
       payment_terms.map do |month|
         insurance = target_months_in_range.include?(month) ? fees_by_month.shift : 0
@@ -46,7 +46,7 @@ class Simulation::Insurance
     result = {}
     fiscal_years.map do |year|
       salary = salary_table[year]
-      result[year] = calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary)
+      result[year] = LocalTaxLaw.calc_determined_amount { calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary) }
     end
     result
   end
@@ -73,12 +73,5 @@ class Simulation::Insurance
 
   def calculate_care(year, salary)
     Simulation::Insurance::Care.call(year: year, local_gov_code: local_gov_code, income: salary, age: age)
-  end
-
-  def calculate_fees_by_month(total_fee, number_of_payments)
-    repeat_number = number_of_payments - 1
-    fee_of_not_first_month = (total_fee / number_of_payments).floor(-2)
-    fee_of_first_month = total_fee - fee_of_not_first_month * repeat_number
-    [fee_of_first_month, Array.new(repeat_number) { fee_of_not_first_month }].flatten
   end
 end
