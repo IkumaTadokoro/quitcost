@@ -3,104 +3,104 @@
   h3.leading-7.text-lg.font-bold
     | 基本情報
   .flex.flex-col.mb-4
-    = f.label :year, class: 'leading-7 text-sm font-semi-bold'
-    = f.number_field :year, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
+    = f.label :year, class: 'admin-form-label'
+    = f.number_field :year, class: 'admin-form-input'
   .flex.flex-col.mb-4
-    = f.label :local_gov_code, class: 'leading-7 text-sm font-semi-bold'
-    .w-full.rounded-md.border-2.border-gray-200.focus:ring-1.focus:ring-green-300.text-base.outline-none.text-gray-900.py-1.px-3.leading-8.transition-colors.duration-200.ease-in-out
+    = f.label :local_gov_code, class: 'admin-form-label'
+    .w-full.rounded-md.border-2.border-boundaryBlack.focus:ring-1.focus:ring-primary.text-base.outline-none.py-1.px-3.leading-8.transition-colors.duration-200.ease-in-out
       = f.collection_select :local_gov_code, JpLocalGov.all, :code, ->(lg) { "#{lg.prefecture} #{lg.city}" }, include_blank: true
     h3.leading-7.text-lg.font-bold.mt-8
       | 医療分
     .flex.flex-col.mb-4
-      = f.label :medical_income_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :medical_income_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :medical_income_basis, class: 'admin-form-label'
+      = f.number_field :medical_income_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :medical_asset_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :medical_asset_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :medical_asset_basis, class: 'admin-form-label'
+      = f.number_field :medical_asset_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :medical_capita_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :medical_capita_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :medical_capita_basis, class: 'admin-form-label'
+      = f.number_field :medical_capita_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :medical_household_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :medical_household_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :medical_household_basis, class: 'admin-form-label'
+      = f.number_field :medical_household_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :medical_limit, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :medical_limit, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :medical_limit, class: 'admin-form-label'
+      = f.number_field :medical_limit, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     h3.leading-7.text-lg.font-bold.mt-8
       | 後期高齢者支援分
     .flex.flex-col.mb-4
-      = f.label :elderly_income_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :elderly_income_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :elderly_income_basis, class: 'admin-form-label'
+      = f.number_field :elderly_income_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :elderly_asset_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :elderly_asset_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :elderly_asset_basis, class: 'admin-form-label'
+      = f.number_field :elderly_asset_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :elderly_capita_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :elderly_capita_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :elderly_capita_basis, class: 'admin-form-label'
+      = f.number_field :elderly_capita_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :elderly_household_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :elderly_household_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :elderly_household_basis, class: 'admin-form-label'
+      = f.number_field :elderly_household_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :elderly_limit, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :elderly_limit, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :elderly_limit, class: 'admin-form-label'
+      = f.number_field :elderly_limit, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     h3.leading-7.text-lg.font-bold.mt-8
       | 介護分
     .flex.flex-col.mb-4
-      = f.label :care_income_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :care_income_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :care_income_basis, class: 'admin-form-label'
+      = f.number_field :care_income_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :care_asset_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :care_asset_basis, step: 0.01, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :care_asset_basis, class: 'admin-form-label'
+      = f.number_field :care_asset_basis, step: 0.01, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0 ~ 100で入力してください（単位：%、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :care_capita_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :care_capita_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :care_capita_basis, class: 'admin-form-label'
+      = f.number_field :care_capita_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :care_household_basis, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :care_household_basis, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :care_household_basis, class: 'admin-form-label'
+      = f.number_field :care_household_basis, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     .flex.flex-col.mb-4
-      = f.label :care_limit, class: 'leading-7 text-sm font-semi-bold'
-      = f.number_field :care_limit, class: 'w-full rounded-md border-2 border-gray-200 focus:border-green-700 text-base outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-      span.text-xs.text-gray-400.ml-1.mt-1
+      = f.label :care_limit, class: 'admin-form-label'
+      = f.number_field :care_limit, class: 'admin-form-input'
+      span.text-xs.text-gray.ml-1.mt-1
         | 0以上の数値を入力してください（単位：¥、デフォルト：0）
     h3.leading-7.text-lg.font-bold.mt-8
       | 納付対象月
-    span.text-xs.text-gray-400
+    span.text-xs.text-gray
       | 納付対象月をチェックしてください
     .flex.justify-between.mb-8
       - PaymentTargetMonth::CALENDAR.each_value do |n|
         .flex.items-center.mr-2
           = f.label :"month#{n}", class: 'leading-7 text-sm font-semi-bold mr-1'
-          = f.check_box :"month#{n}", class: 'form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:text-white checked:bg-green-600 checked:border-green-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer'
+          = f.check_box :"month#{n}", class: 'form-check-input appearance-none h-4 w-4 border border-boundaryBlack rounded-sm bg-white checked:text-white checked:bg-primary checked:border-primary focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer'
     .flex.justify-end
       - if insurance_form.persisted?
-        = f.submit '更新', class: 'text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm'
+        = f.submit '更新', class: 'admin-form-submit'
       - else
-        = f.submit '登録', class: 'text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm'
+        = f.submit '登録', class: 'admin-form-submit'

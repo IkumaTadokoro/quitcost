@@ -8,7 +8,7 @@
         <div>
           <a
             href="/pensions/new"
-            class="inline-block text-white bg-green-700 border-0 py-2 px-4 focus:outline-none hover:bg-green-800 rounded-full text-sm"
+            class="inline-block text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm"
             >新規登録</a
           >
         </div>
@@ -20,36 +20,36 @@
       </div>
       <div
         v-else
-        class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mb-4"
+        class="overflow-x-auto bg-white rounded-md shadow overflow-y-auto relative mb-4"
       >
         <table
           class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative"
         >
-          <thead class="bg-gray-200 text-xs sticky top-0">
+          <thead class="bg-boundaryBlack text-xs sticky top-0">
             <tr>
-              <th class="px-4 py-4 whitespace-nowrap">編集</th>
-              <th class="px-2 py-4 whitespace-nowrap">削除</th>
-              <th class="px-2 py-4 whitespace-nowrap">年度</th>
-              <th class="px-2 py-4 whitespace-nowrap">保険料</th>
+              <th class="admin-table-header">編集</th>
+              <th class="admin-table-header">削除</th>
+              <th class="admin-table-header">年度</th>
+              <th class="admin-table-header">保険料</th>
             </tr>
           </thead>
 
           <tbody class="text-xs">
             <tr v-for="pension in pensions" :key="pension.id">
-              <td class="border-t border-gray-200 px-2 py-2 text-center">
+              <td class="admin-table-data-center">
                 <a :href="pension.edit_pension_path" title="国民年金保険料編集"
                   ><i class="fas fa-edit"></i>
                 </a>
               </td>
-              <td class="border-t border-gray-200 px-2 py-2 text-center">
+              <td class="admin-table-data-center">
                 <button @click="deletePension(pension.id)">
                   <i class="fas fa-trash"></i>
                 </button>
               </td>
-              <td class="border-t border-gray-200 px-2 py-2 text-center">
+              <td class="admin-table-data-center">
                 {{ pension.year }}
               </td>
-              <td class="border-t border-gray-200 px-2 py-2 text-center">
+              <td class="admin-table-data-center">
                 {{ formatNumber(pension.contribution) }}
               </td>
             </tr>

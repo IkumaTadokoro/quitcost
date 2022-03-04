@@ -27,11 +27,11 @@ const onSubmit = () => router.push('/simulations')
 }
 
 .form-field {
-  @apply px-6 py-2 w-9/12 rounded-md border-4 border-gray-200 focus:border-green-700 tracking-widest text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out;
+  @apply px-6 py-2 w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
 }
 
 .form-tips {
-  @apply mt-4 text-sm text-gray-400;
+  @apply mt-4 text-sm text-gray;
 }
 
 .form-error {
@@ -39,6 +39,6 @@ const onSubmit = () => router.push('/simulations')
 }
 
 .form-supplement {
-  @apply pl-4 text-4xl text-gray-900 font-bold;
+  @apply pl-4 text-4xl text-black font-bold;
 }
 </style>
