@@ -2,9 +2,9 @@
   <form class="mt-24" @submit="onSubmit">
     <div class="flex">
       <h2>
-        <span class="text-6xl font-bold text-green-700">{{ displayStep }}</span>
-        <span class="text-3xl font-semi-bold text-gray-400"> / </span>
-        <span class="text-4xl font-bold text-green-700">{{
+        <span class="text-6xl font-bold text-primary">{{ displayStep }}</span>
+        <span class="text-3xl font-semi-bold text-gray"> / </span>
+        <span class="text-4xl font-bold text-primary">{{
           zeroPadStepCounter
         }}</span>
       </h2>
@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-between">
       <button
-        class="button text-white bg-gray-300 hover:bg-gray-400 rounded-full"
+        class="button text-gray bg-secondary hover:bg-primary hover:text-white rounded-full"
         v-if="step.hasPrevious"
         type="button"
         @click="goToPrev"
@@ -23,7 +23,7 @@
         まえの質問へ
       </button>
       <button
-        class="ml-auto button text-white bg-green-700 hover:bg-green-800"
+        class="ml-auto button text-white bg-primary hover:bg-green-900"
         type="submit"
       >
         {{ nextStep }}

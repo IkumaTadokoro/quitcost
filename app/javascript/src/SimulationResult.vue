@@ -154,7 +154,7 @@ const moveForm = () => {
 
 <style scoped>
 .separator {
-  @apply flex items-center after:content-[''] after:border-t-2 after:border-gray-200 after:border-solid after:flex-1 after:ml-2;
+  @apply flex items-center after:content-[''] after:border-t-2 after:border-gray after:border-solid after:flex-1 after:ml-2;
 }
 
 .type-icon {

@@ -2,3 +2,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.admin-form-label {
+  @apply leading-7 text-sm
+}
+
+.admin-form-input {
+  @apply w-full rounded-md border-2 border-boundaryBlack focus:border-primary text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out
+}
+
+.admin-form-submit {
+  @apply text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm
+}
+
+.admin-table-header {
+  @apply px-4 py-4 whitespace-nowrap;
+}
+
+.admin-table-data-center {
+  @apply border-t border-boundaryBlack px-2 py-2 text-center;
+}
+
+.admin-table-data-right {
+  @apply border-t border-boundaryBlack px-2 py-2 text-right;
+}

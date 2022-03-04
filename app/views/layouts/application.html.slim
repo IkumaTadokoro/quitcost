@@ -9,8 +9,8 @@ html
     = stylesheet_pack_tag 'application'
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
-  body.font-notojp
-    header.flex.justify-between.items-center.px-8.py-4.border-b-2.shadow.sticky.top-0.z-50.bg-white
+  body.font-notojp.text-black
+    header.flex.justify-between.items-center.px-8.py-4.border-b-2.border-boundaryBlack.shadow-sm.sticky.top-0.z-50.bg-white
       h1.text-3xl
         | quitcost
       nav.mr-auto.mx-16
@@ -27,8 +27,8 @@ html
             | ログアウト
     - if notice
       .w-full
-        .p-24.bg-green-700.items-center.text-white.leading-none.flex.py-3
-          span.flex.rounded-full.bg-green-600.uppercase.px-2.py-1.text-xs.font-bold.mr-3
+        .p-24.bg-secondary.items-center.text-white.leading-none.flex.py-3
+          span.flex.rounded-full.bg-primary.uppercase.px-2.py-1.text-xs.font-bold.mr-3
             | INFO
           span.font-semibold.mr-2.text-left.text-sm.lex-auto
             = notice
