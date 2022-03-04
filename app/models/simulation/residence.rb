@@ -41,7 +41,7 @@ class Simulation::Residence
 
   private
 
-  attr_reader :from, :to, :salary_table, :social_insurance_table, :scheduled_salary, :scheduled_social_insurance
+  attr_reader :from, :to, :salary_table, :social_insurance_table
 
   def monthly_residence
     fiscal_years.flat_map do |year|
