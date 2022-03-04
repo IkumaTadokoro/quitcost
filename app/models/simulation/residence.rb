@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Simulation::Residence
+  include MonthIterable
+
   using(Module.new do
     refine ActiveSupport::TimeWithZone do
       def beginning_of_residence_fy
@@ -58,10 +60,6 @@ class Simulation::Residence
 
   def convert_time(year, month)
     Time.zone.parse("#{month >= 4 ? year : year.next}-#{format('%02d', month)}-01")
-  end
-
-  def months_between(from:, to:)
-    Enumerator.produce(from, &:next_month).take_while { |date| date < to }
   end
 
   def calc_special_collection(yearly_residence)

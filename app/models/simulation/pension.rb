@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Simulation::Pension
+  include MonthIterable
+
   def self.call(param_parser)
     new(param_parser).call
   end
@@ -19,7 +21,7 @@ class Simulation::Pension
   attr_reader :from, :to
 
   def calculate_pension
-    months = Enumerator.produce(from, &:next_month).take_while { |date| date < to }
+    months = months_between(from: from, to: to)
     fiscal_years = months.map(&:financial_year).uniq
     contribution_table = fiscal_years.index_with do |year|
       query = Pension.exists?(year: year) ? year : Pension.maximum(:year)
