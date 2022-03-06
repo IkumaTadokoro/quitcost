@@ -38,14 +38,14 @@ class Simulation
   attr_reader :param_parser
 
   def insurance
-    Simulation::Insurance.call(param_parser)
+    Simulation::Insurance.calc(param_parser)
   end
 
   def pension
-    Simulation::Pension.call(param_parser)
+    Simulation::Pension.calc(param_parser)
   end
 
   def residence
-    Simulation::Residence.call(param_parser)
+    Simulation::Residence.calc(param_parser)
   end
 end

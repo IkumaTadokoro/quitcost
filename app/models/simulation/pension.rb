@@ -3,7 +3,7 @@
 class Simulation::Pension
   include MonthIterable
 
-  def self.call(param_parser)
+  def self.calc(param_parser)
     new(param_parser).call
   end
 

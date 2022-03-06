@@ -26,8 +26,8 @@ class Simulation::Residence
   SPECIAL_COLLECTION_DUES = (1..12).to_a.freeze
   NON_TAXABLE_SALARY_LIMIT = 1_000_000
 
-  def self.call(param_parser)
-    new(param_parser).call
+  def self.calc(param_parser)
+    new(param_parser).calc
   end
 
   def initialize(param_parser)
@@ -37,7 +37,7 @@ class Simulation::Residence
     @social_insurance_table = param_parser.social_insurance_table
   end
 
-  def call
+  def calc
     monthly_residence
   end
 
@@ -109,7 +109,7 @@ class Simulation::Residence
   end
 
   def total_income(year)
-    Simulation::Salary.call(salary_table[year])
+    Simulation::Salary.calc(salary_table[year])
   end
 
   def income_deduction(year)
