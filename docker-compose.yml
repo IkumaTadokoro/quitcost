@@ -17,7 +17,9 @@ services:
     command: tail -f /dev/null
     volumes:
       - .:/quitcost
+      - bundle:/quitcost/vendor/bundle
       - node_modules:/quitcost/node_modules
+      - tmp:/quitcost/tmp
     ports:
       - "3000:3000"
       - "3035:3035"
@@ -31,3 +33,5 @@ services:
       - chrome
 volumes:
   node_modules:
+  bundle:
+  tmp:
