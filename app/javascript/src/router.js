@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Home from './components/Home'
 import SimulationForm from './SimulationForm'
 import SimulationResult from './SimulationResult'
 import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
@@ -13,6 +14,7 @@ import ScheduledSocialInsurance from './components/simulation_form/ScheduledSoci
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/', component: Home },
     {
       path: '/simulations/new',
       component: SimulationForm,

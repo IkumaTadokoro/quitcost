@@ -10,9 +10,10 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   body.font-notojp.text-black.flex.flex-col.min-h-screen
-    header.flex.justify-between.items-center.px-8.py-4.border-b-2.border-boundaryBlack.shadow-sm.sticky.top-0.z-50.bg-white
+    header.flex.justify-between.items-center.md:px-8.px-4.py-4.border-b-2.border-boundaryBlack.shadow-sm.sticky.top-0.z-50.bg-white
       h1.text-3xl
-        | quitcost
+        = link_to root_path do
+          = image_tag('logo.svg', alt: 'quitcost', class: 'h-6 md:h-10 hover:opacity-70')
       nav.mr-auto.mx-16
         ul.flex
           li.px-4
