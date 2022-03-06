@@ -3,8 +3,8 @@
 class Simulation::Insurance::Base
   BASIC_DEDUCTION = 430_000
 
-  def self.call(year:, local_gov_code:, income:, age:)
-    new(year, local_gov_code, income, age).call
+  def self.calc(year:, local_gov_code:, income:, age:)
+    new(year, local_gov_code, income, age).calc
   end
 
   def initialize(year, local_gov_code, income, age)
@@ -13,7 +13,7 @@ class Simulation::Insurance::Base
     @age = age
   end
 
-  def call
+  def calc
     calculate
   end
 
@@ -49,7 +49,7 @@ class Simulation::Insurance::Base
   end
 
   def salary
-    candidate = Simulation::Salary.call(@income) - BASIC_DEDUCTION
+    candidate = Simulation::Salary.calc(@income) - BASIC_DEDUCTION
     candidate.positive? ? candidate : 0
   end
 end

@@ -3,8 +3,8 @@
 class Simulation::Insurance
   include MonthIterable
 
-  def self.call(param_parser)
-    new(param_parser).call
+  def self.calc(param_parser)
+    new(param_parser).calc
   end
 
   def initialize(param_parser)
@@ -15,7 +15,7 @@ class Simulation::Insurance
     @salary_table = param_parser.salary_table
   end
 
-  def call
+  def calc
     monthly_insurance
   end
 
@@ -62,14 +62,14 @@ class Simulation::Insurance
   end
 
   def calculate_medical(year, salary)
-    Simulation::Insurance::Medical.call(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Medical.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
   def calculate_elderly(year, salary)
-    Simulation::Insurance::Elderly.call(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Elderly.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
   def calculate_care(year, salary)
-    Simulation::Insurance::Care.call(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Care.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 end

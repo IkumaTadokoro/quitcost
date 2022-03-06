@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Residence, type: :model do
   describe '.call' do
-    subject { Simulation::Residence.call(param_parser) }
+    subject { Simulation::Residence.calc(param_parser) }
     let(:param_parser) do
       double(
         'ParamParser',

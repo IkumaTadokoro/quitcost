@@ -15,15 +15,15 @@ class Simulation::Salary
     8_500_000.. => { plus: -1_950_000, multiply: 1, divide: 1 }
   }.freeze
 
-  def self.call(income)
-    new(income).call
+  def self.calc(income)
+    new(income).calc
   end
 
   def initialize(income)
     @income = income
   end
 
-  def call
+  def calc
     calculate_salary
   end
 
