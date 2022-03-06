@@ -9,7 +9,7 @@ html
     = stylesheet_pack_tag 'application'
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
-  body.font-notojp.text-black
+  body.font-notojp.text-black.flex.flex-col.min-h-screen
     header.flex.justify-between.items-center.px-8.py-4.border-b-2.border-boundaryBlack.shadow-sm.sticky.top-0.z-50.bg-white
       h1.text-3xl
         | quitcost
@@ -32,5 +32,6 @@ html
             | INFO
           span.font-semibold.mr-2.text-left.text-sm.lex-auto
             = notice
-    .my-4
-    = yield
+    main.flex-1
+      = yield
+    = render 'footer'
