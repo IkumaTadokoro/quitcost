@@ -20,18 +20,63 @@ const router = createRouter({
       component: SimulationForm,
       redirect: '/simulations/new/1',
       children: [
-        { path: '1', component: RetirementMonth },
-        { path: '2', component: EmploymentMonth },
-        { path: '3', component: Age },
-        { path: '4', component: PostalCode },
-        { path: '5', component: Salary },
-        { path: '6', component: SocialInsurance },
-        { path: '7', component: ScheduledSalary },
-        { path: '8', component: ScheduledSocialInsurance }
+        {
+          path: '1',
+          component: RetirementMonth,
+          meta: { title: '退職予定月' }
+        },
+        {
+          path: '2',
+          component: EmploymentMonth,
+          meta: { title: '転職予定月' }
+        },
+        { path: '3', component: Age, meta: { title: '年齢' } },
+        { path: '4', component: PostalCode, meta: { title: '郵便番号' } },
+        { path: '5', component: Salary, meta: { title: '昨年度の所得' } },
+        {
+          path: '6',
+          component: SocialInsurance,
+          meta: { title: '昨年度の社会保険料' }
+        },
+        {
+          path: '7',
+          component: ScheduledSalary,
+          meta: { title: '今年度の所得' }
+        },
+        {
+          path: '8',
+          component: ScheduledSocialInsurance,
+          meta: { title: '今年度の社会保険料' }
+        }
       ]
     },
-    { path: '/simulations', component: SimulationResult }
+    {
+      path: '/simulations',
+      component: SimulationResult,
+      meta: { title: 'シミュレーション結果' }
+    }
   ]
+})
+
+const DEFAULT_TITLE = 'quitcost'
+const DEFAULT_DESCRIPTION = '「無職になったらいくらかかる？」を解決'
+
+router.afterEach((to) => {
+  const title = to.meta.title
+    ? `${to.meta.title} | ${DEFAULT_TITLE}`
+    : DEFAULT_TITLE
+  const content = to.meta.description || DEFAULT_DESCRIPTION
+
+  document.title = title
+  document
+    .querySelector("meta[property='og:title']")
+    .setAttribute('content', title)
+  document
+    .querySelector("meta[name='description']")
+    .setAttribute('content', content)
+  document
+    .querySelector("meta[property='og:description']")
+    .setAttribute('content', content)
 })
 
 export default router
