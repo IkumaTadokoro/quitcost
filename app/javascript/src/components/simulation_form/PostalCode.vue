@@ -7,19 +7,21 @@
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '###-####' }"
-      v-model="postalCode"
-      @keyup="searchAddress"
+      :value="postalCode"
+      @change="handleChange"
+      @blur="setAddress"
       placeholder="100-0004"
     />
     <p class="form-tips">
-      <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ result }}
+      <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ address }}
     </p>
     <p class="form-error">{{ error }}</p>
+    <p v-if="!error" class="form-error">{{ addressError }}</p>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
@@ -28,31 +30,39 @@ import { useGlobalStore } from '../../store/global'
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
-let { value: postalCode, errorMessage: error } = useField('postalCode')
+let {
+  value: postalCode,
+  errorMessage: error,
+  handleChange
+} = useField('postalCode')
+let { value: address, errorMessage: addressError } = useField('address')
 
-const result = computed(() => {
-  if (!postalCode.value) return `該当する市区町村がありません`
+const setAddress = async () => {
+  address.value = ''
+
+  if (!postalCode.value) return
   const zipCode = postalCode.value.replace(/[^\d]+/g, '')
-  if (prefecture && city && /^\d{7}$/.test(zipCode)) {
-    return `${prefecture} ${city}`
-  } else {
-    return `該当する市区町村がありません`
-  }
-})
 
-let prefecture = $ref('')
-let city = $ref('')
-
-const searchAddress = async () => {
-  const zipCode = postalCode.value.replace(/[^\d]+/g, '')
   if (!/^\d{7}$/.test(zipCode)) return
-  const response = await axios.get(
-    `https://api.zipaddress.net/?zipcode=${zipCode}`,
-    { adapter: axiosJsonpAdapter }
-  )
-  prefecture = response.data.pref
-  city = response.data.city
+
+  const url = `https://api.zipaddress.net/?zipcode=${zipCode}`
+  const config = { adapter: axiosJsonpAdapter }
+
+  try {
+    const response = await axios.get(url, config)
+    const { code, pref, city } = response.data
+    if (!code) {
+      address.value = `${pref} ${city}`
+    } else {
+      return
+    }
+  } catch (err) {
+    console.warn(err)
+  }
 }
 
-onMounted(() => (postalCode.value = params.postalCode))
+onMounted(async () => {
+  postalCode.value = params.postalCode
+  if (postalCode.value) await setAddress()
+})
 </script>

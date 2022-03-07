@@ -53,7 +53,8 @@ export const useValidationSchema = (baseDate) => {
           message: '7桁の郵便番号を入力してください',
           excludeEmptyString: true
         })
-        .required('郵便番号は必須です')
+        .required('郵便番号は必須です'),
+      address: yup.string().required('該当する市区町村がありません')
     }),
     yup.object({
       salary: yup
