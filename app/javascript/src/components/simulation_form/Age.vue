@@ -4,7 +4,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="ageValue"
+      :value="age"
       @blur="handleChange"
       placeholder="30"
     /><span class="form-supplement">歳</span>
@@ -13,18 +13,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { useGlobalStore } from '../../store/global'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
-const ageValue = computed({
-  get: () => age.value || params.age,
-  set: (value) => (age.value = value)
-})
 let { value: age, errorMessage: error, handleChange } = useField('age')
-const setDefaultValue = () => (age.value = params.age)
-setDefaultValue()
+
+onMounted(() => (age.value = params.age))
 </script>

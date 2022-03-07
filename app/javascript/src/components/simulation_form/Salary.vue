@@ -7,7 +7,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="salaryValue"
+      :value="salary"
       @blur="handleChange"
       v-maska="{ mask: '#*' }"
       placeholder="500000"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -29,11 +29,6 @@ import { useFinancialYear } from '../../composables/use-financial-year'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
-
-const salaryValue = computed({
-  get: () => salary.value || params.salary,
-  set: (value) => (salary.value = value)
-})
 
 const base = new Date(params.simulationDate)
 const { lastBeginningOfYear, lastEndOfYear } = useFinancialYear(base, 1, 4)

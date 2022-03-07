@@ -7,7 +7,7 @@
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '###-####' }"
-      v-model="postalCodeValue"
+      v-model="postalCode"
       @keyup="searchAddress"
       placeholder="100-0004"
     />
@@ -29,11 +29,6 @@ const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
 let { value: postalCode, errorMessage: error } = useField('postalCode')
-
-const postalCodeValue = computed({
-  get: () => postalCode.value || params.postalCode,
-  set: (value) => (postalCode.value = value)
-})
 
 const result = computed(() => {
   if (!postalCode.value) return `該当する市区町村がありません`
