@@ -3,7 +3,7 @@
     <div class="mx-auto">
       <div class="flex justify-between items-center">
         <div>
-          <h1 class="text-3xl py-4 font-sans font-bold">国民健康保険料一覧</h1>
+          <h1 class="text-3xl py-4">国民健康保険料一覧</h1>
         </div>
         <div>
           <a

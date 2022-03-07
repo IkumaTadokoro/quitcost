@@ -7,7 +7,7 @@
   <div v-else>
     <div class="max-w-screen-lg mx-auto pt-32 text-center">
       <div class="mb-6 mx-32">
-        <p class="text-3xl font-bold">
+        <p class="text-3xl">
           {{ formatDate(result.retirement_month) }}に退職して、{{
             formatDate(result.employment_month)
           }}に就職すると...
@@ -17,10 +17,10 @@
         <p>
           <span class="font-bold">約</span>
           <span class="mx-6">
-            <span class="text-8xl text-green-700 font-bold">{{
+            <span class="text-8xl text-green-700">{{
               formatAmount(result.grand_total)
             }}</span>
-            <span class="text-3xl text-green-700 font-bold ml-2">円</span>
+            <span class="text-3xl text-green-700 ml-2">円</span>
           </span>
           <span class="font-bold">かかります</span>
         </p>
@@ -47,13 +47,13 @@
       </div>
       <div class="flex flex-wrap justify-around mb-52 mx-64">
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg font-bold bg-green-700 text-white hover:bg-green-800 shadow-xl"
+          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-green-700 text-white hover:bg-green-800 shadow-xl"
           @click="moveForm"
         >
           もういちど計算する
         </button>
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg font-bold bg-amber-400 text-white hover:bg-amber-500 shadow-xl"
+          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-amber-400 text-white hover:bg-amber-500 shadow-xl"
           @click="scrollDetail"
         >
           詳細をみる
@@ -64,7 +64,7 @@
       <div
         class="max-w-screen-lg mx-auto px-12 py-16 bg-white rounded-3xl mb-16"
       >
-        <h2 class="text-center font-bold text-4xl mb-6">個人負担額の詳細</h2>
+        <h2 class="text-center text-4xl mb-6">個人負担額の詳細</h2>
         <div
           v-for="monthly_payment in result.monthly_payment"
           :key="monthly_payment.month"
@@ -98,7 +98,7 @@
       </div>
       <div class="flex justify-center">
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg font-bold bg-green-100 text-gray-500 hover:bg-green-200 shadow-xl"
+          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-green-100 text-gray-500 hover:bg-green-200 shadow-xl"
           @click="scrollTop"
         >
           ページ上部へ

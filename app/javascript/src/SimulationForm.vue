@@ -23,7 +23,7 @@ const onSubmit = () => router.push('/simulations')
 
 <style scope>
 .form-label {
-  @apply font-bold text-4xl h-32;
+  @apply text-4xl h-32;
 }
 
 .form-field {
@@ -35,10 +35,10 @@ const onSubmit = () => router.push('/simulations')
 }
 
 .form-error {
-  @apply flex justify-center text-red-500 font-bold mt-2;
+  @apply flex justify-center text-red-500 mt-2;
 }
 
 .form-supplement {
-  @apply pl-4 text-4xl text-black font-bold;
+  @apply pl-4 text-4xl text-black;
 }
 </style>
