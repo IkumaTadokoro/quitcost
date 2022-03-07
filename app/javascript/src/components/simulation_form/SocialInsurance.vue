@@ -7,7 +7,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="socialInsuranceValue"
+      :value="socialInsurance"
       @blur="handleChange"
       v-maska="{ mask: '#*' }"
       placeholder="500000"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -34,11 +34,6 @@ const base = new Date(params.simulationDate)
 const { lastBeginningOfYear, lastEndOfYear } = useFinancialYear(base, 1, 4)
 const from = format(lastBeginningOfYear, 'yyyy年M月d日')
 const to = format(lastEndOfYear, 'yyyy年M月d日')
-
-const socialInsuranceValue = computed({
-  get: () => socialInsurance.value || params.socialInsurance,
-  set: (value) => (socialInsurance.value = value)
-})
 
 let {
   value: socialInsurance,

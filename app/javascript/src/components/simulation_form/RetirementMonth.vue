@@ -5,7 +5,7 @@
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '####/##' }"
-      :value="retirementMonthValue"
+      :value="retirementMonth"
       @blur="handleChange"
       placeholder="2022/02"
     />
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { addMonths, addYears, format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -31,11 +31,6 @@ const base = new Date(params.simulationDate)
 const { endOfYear } = useFinancialYear(addYears(base, 1), 4)
 const from = format(base, 'yyyy/MM')
 const to = format(addMonths(endOfYear, 1), 'yyyy/MM')
-
-const retirementMonthValue = computed({
-  get: () => retirementMonth.value || params.retirementMonth,
-  set: (value) => (retirementMonth.value = value)
-})
 
 let {
   value: retirementMonth,
