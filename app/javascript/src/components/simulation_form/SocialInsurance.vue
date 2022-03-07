@@ -8,7 +8,7 @@
       class="form-field text-right"
       type="text"
       :value="socialInsurance"
-      @blur="handleChange"
+      @change="handleChange"
       v-maska="{ mask: '#*' }"
       placeholder="500000"
     />

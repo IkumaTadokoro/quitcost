@@ -6,7 +6,7 @@
       type="text"
       v-maska="{ mask: '####/##' }"
       :value="employmentMonth"
-      @blur="handleChange"
+      @change="handleChange"
       placeholder="2022/02"
     />
     <p class="form-tips">

@@ -5,7 +5,7 @@
       class="form-field text-right"
       type="text"
       :value="age"
-      @blur="handleChange"
+      @change="handleChange"
       placeholder="30"
     /><span class="form-supplement">歳</span>
     <p class="form-error">{{ error }}</p>
