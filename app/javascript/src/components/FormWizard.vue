@@ -2,11 +2,9 @@
   <form class="mt-24" @submit="onSubmit">
     <div class="flex">
       <h2>
-        <span class="text-6xl font-bold text-primary">{{ displayStep }}</span>
+        <span class="text-6xl text-primary">{{ displayStep }}</span>
         <span class="text-3xl font-semi-bold text-gray"> / </span>
-        <span class="text-4xl font-bold text-primary">{{
-          zeroPadStepCounter
-        }}</span>
+        <span class="text-4xl text-primary">{{ zeroPadStepCounter }}</span>
       </h2>
       <ProgressBar :top="raw" :bottom="stepCounter" />
     </div>

@@ -1,6 +1,6 @@
 - if object.errors.any?
   .bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.mb-2
-    h3.font-bold.mb-2
+    h3.mb-2
       | 入力内容にエラーがありました
     ul.ml-4.text-sm
       - object.errors.full_messages.each do |msg|
