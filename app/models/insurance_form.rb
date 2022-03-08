@@ -17,6 +17,7 @@ class InsuranceForm # rubocop:disable Metrics/ClassLength
   validates :local_gov_code, presence: true
   validate :local_gov_code_must_meet_jis_std
   validate :local_gov_code_and_year_must_be_uniqueness
+  validates_with MonthAnyoneValidator
 
   with_options numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: true } do
     validates :medical_income_basis

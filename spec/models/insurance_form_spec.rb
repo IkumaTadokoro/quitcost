@@ -199,6 +199,21 @@ RSpec.describe InsuranceForm, type: :model do
         it { is_expected.to be_empty }
       end
     end
+
+    describe 'payment_target_months' do
+      subject { insurance_form.errors[:payment_target_months] }
+      before { insurance_form.valid? }
+
+      context 'when payment_target_months are checked' do
+        let(:insurance_form) { build(:insurance_form, month1: true) }
+        it { is_expected.to be_empty }
+      end
+
+      context 'when payment_target_months are NOT checked' do
+        let(:insurance_form) { build(:insurance_form) }
+        it { is_expected.to include '納付対象月は最低1つチェックしてください' }
+      end
+    end
   end
 
   describe '#save' do
