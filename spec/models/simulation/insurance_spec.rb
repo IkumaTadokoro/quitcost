@@ -588,5 +588,58 @@ RSpec.describe Simulation::Insurance, type: :model do
         end
       end
     end
+
+    context 'when Insurance record DOES NOT exist for the target year' do
+      let!(:retirement_month) { Time.zone.parse('2021-04-01') }
+      let!(:employment_month) { Time.zone.parse('2023-03-01') }
+
+      it 'calculate with fallback record' do
+        create(
+          :insurance,
+          :with_payment_target_months,
+          months: [6, 7, 8, 9, 10, 11, 12, 1, 2, 3],
+          year: 2021,
+          local_gov_code: '131016',
+          medical_income_basis: 7.25,
+          medical_capita_basis: 0,
+          medical_household_basis: 37_300,
+          medical_limit: 630_000,
+          elderly_income_basis: 2.04,
+          elderly_capita_basis: 0,
+          elderly_household_basis: 11_000,
+          elderly_limit: 190_000,
+          care_income_basis: 1.21,
+          care_capita_basis: 0,
+          care_household_basis: 14_200,
+          care_limit: 170_000
+        )
+        expected = [
+          { month: Time.zone.parse('2021-04-01'), insurance: 0 },
+          { month: Time.zone.parse('2021-05-01'), insurance: 0 },
+          { month: Time.zone.parse('2021-06-01'), insurance: 39_200 },
+          { month: Time.zone.parse('2021-07-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2021-08-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2021-09-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2021-10-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2021-11-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2021-12-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-01-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-02-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-03-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-04-01'), insurance: 0 },
+          { month: Time.zone.parse('2022-05-01'), insurance: 0 },
+          { month: Time.zone.parse('2022-06-01'), insurance: 39_200 },
+          { month: Time.zone.parse('2022-07-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-08-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-09-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-10-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-11-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2022-12-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2023-01-01'), insurance: 39_100 },
+          { month: Time.zone.parse('2023-02-01'), insurance: 39_100 }
+        ]
+        expect(subject).to eq expected
+      end
+    end
   end
 end
