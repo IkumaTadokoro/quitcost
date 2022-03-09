@@ -6,7 +6,7 @@ class Simulation::Residence
   using(Module.new do
     refine ActiveSupport::TimeWithZone do
       def beginning_of_residence_fy
-        beginning_of_financial_year.next_month.next_month
+        prev_month.prev_month.beginning_of_financial_year.next_month.next_month
       end
 
       def residence_financial_year
