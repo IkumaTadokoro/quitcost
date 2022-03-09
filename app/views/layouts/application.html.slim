@@ -34,6 +34,13 @@ html
             | INFO
           span.font-semibold.mr-2.text-left.text-sm.lex-auto
             = notice
+    - if alert
+      .w-full
+        .p-24.bg-secondary.items-center.text-white.leading-none.flex.py-3
+          span.flex.rounded-full.bg-primary.uppercase.px-2.py-1.text-xs.mr-3
+            | ALERT
+          span.font-semibold.mr-2.text-left.text-sm.lex-auto
+            = alert
     main.flex-1
       = yield
     = render 'footer'
