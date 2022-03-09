@@ -22,7 +22,7 @@ RSpec.describe Simulation::Residence, type: :model do
       let!(:scheduled_social_insurance) { 500_000 }
       context '年度の途中で退職し、年度のおわりまで無職でいる場合' do
         context '現在日付の年度で退職し、その年度のおわりまで無職でいる場合' do
-          context '1-5月に退職する場合' do
+          context '1-3月に退職する場合' do
             let!(:retirement_month) { Time.zone.parse('2022-02-01') }
             let!(:employment_month) { Time.zone.parse('2022-06-01') }
 
@@ -31,6 +31,19 @@ RSpec.describe Simulation::Residence, type: :model do
                 { month: Time.zone.parse('2022-02-01'), residence: 80_000 },
                 { month: Time.zone.parse('2022-03-01'), residence: 0 },
                 { month: Time.zone.parse('2022-04-01'), residence: 0 },
+                { month: Time.zone.parse('2022-05-01'), residence: 0 }
+              ]
+              expect(subject).to eq expected
+            end
+          end
+
+          context '4-5月に退職する場合' do
+            let!(:retirement_month) { Time.zone.parse('2022-04-01') }
+            let!(:employment_month) { Time.zone.parse('2022-06-01') }
+
+            it '該当年度の退職月~5月分の特別徴収額が、退職月に一括請求されること' do
+              expected = [
+                { month: Time.zone.parse('2022-04-01'), residence: 40_000 },
                 { month: Time.zone.parse('2022-05-01'), residence: 0 }
               ]
               expect(subject).to eq expected

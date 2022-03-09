@@ -2,18 +2,7 @@
 
 class Simulation::Residence
   include MonthIterable
-
-  using(Module.new do
-    refine ActiveSupport::TimeWithZone do
-      def beginning_of_residence_fy
-        beginning_of_financial_year.next_month.next_month
-      end
-
-      def residence_financial_year
-        prev_month.prev_month.financial_year
-      end
-    end
-  end)
+  using Simulation::Residence::FinancialYearStartWithJune
 
   BASIC_DEDUCTION = 430_000
   PREFECTURE_CAPITA_BASIS = 1_500
