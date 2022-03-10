@@ -31,7 +31,7 @@ json.insurance @insurances do |insurance|
   json.october insurance.payment_target_months.october_is_target?
   json.november insurance.payment_target_months.november_is_target?
   json.december insurance.payment_target_months.december_is_target?
-  json.edit_insurance_path edit_insurance_path(insurance)
+  json.edit_insurance_path edit_admin_insurance_path(insurance)
 end
 
 json.totalPages @insurances.total_pages

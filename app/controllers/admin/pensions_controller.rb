@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class PensionsController < ApplicationController
+class Admin::PensionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_pension, only: %i[edit update]
 
   def index; end
@@ -12,7 +13,7 @@ class PensionsController < ApplicationController
   def create
     @pension = Pension.new(pension_params)
     if @pension.save
-      redirect_to :pensions, notice: '保険料率を保存しました。'
+      redirect_to %i[admin pensions], notice: '保険料率を保存しました。'
     else
       render :new
     end
@@ -22,7 +23,7 @@ class PensionsController < ApplicationController
 
   def update
     if @pension.update(pension_params)
-      redirect_to :pensions, notice: '保険料率を更新しました。'
+      redirect_to %i[admin pensions], notice: '保険料率を更新しました。'
     else
       render :edit
     end

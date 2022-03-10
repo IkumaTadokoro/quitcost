@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class InsurancesController < ApplicationController
+class Admin::InsurancesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_insurance, only: %i[edit update]
 
   def index; end
@@ -12,7 +13,7 @@ class InsurancesController < ApplicationController
   def create
     @insurance_form = InsuranceForm.new(**insurance_form_params)
     if @insurance_form.save
-      redirect_to :insurances, notice: '保険料率を保存しました。'
+      redirect_to %i[admin insurances], notice: '保険料率を保存しました。'
     else
       render :new
     end
@@ -25,7 +26,7 @@ class InsurancesController < ApplicationController
   def update
     @insurance_form = InsuranceForm.new(@insurance, **insurance_form_params)
     if @insurance_form.save
-      redirect_to :insurances, notice: '保険料率を更新しました。'
+      redirect_to %i[admin insurances], notice: '保険料率を更新しました。'
     else
       render :edit
     end

@@ -7,7 +7,7 @@
         </div>
         <div>
           <a
-            href="/pensions/new"
+            href="/admin/pensions/new"
             class="inline-block text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm"
             >新規登録</a
           >

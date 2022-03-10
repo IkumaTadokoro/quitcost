@@ -1,0 +1,31 @@
+- content_for(:title, '管理者情報編集')
+
+.container.mx-auto.my-40
+  .mx-auto.p-4.max-w-sm.bg-white.rounded-lg.border.border-boundaryBlack.shadow-md.sm:p-6.lg:p-8
+    h2.text-xl
+      | 管理者情報編集
+    = form_with model: @user, url: user_registration_path, html: { method: :put }, class: 'space-y-2' do |f|
+      = render 'devise/shared/error_messages', model: f.object
+      .field
+        = f.label :email, class: 'admin-form-label'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'admin-form-input'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          div
+            | Currently waiting confirmation for:
+            = resource.unconfirmed_email
+      .field
+        = f.label :password, class: 'admin-form-label'
+        i.text-sm
+          | (変更しない場合は空欄にしてください)
+        - if @minimum_password_length
+          em
+            | (
+            = @minimum_password_length
+            |  characters minimum)
+        = f.password_field :password, autocomplete: 'new-password', class: 'admin-form-input'
+        = f.label :password_confirmation, class: 'admin-form-label'
+        = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'admin-form-input'
+        = f.label :current_password, class: 'admin-form-label'
+        = f.password_field :current_password, autocomplete: 'current-password', class: 'admin-form-input'
+      .actions.flex.justify-end
+        = f.submit '更新', class: 'admin-form-submit'

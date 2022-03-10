@@ -1,0 +1,14 @@
+- content_for(:title, 'パスワードのリセット')
+
+.container.mx-auto.my-40
+  .mx-auto.p-4.max-w-sm.bg-white.rounded-lg.border.border-boundaryBlack.shadow-md.sm:p-6.lg:p-8
+    h2.text-xl
+      | パスワード変更
+    = form_with model: @user, url: user_password_path, html: { method: :post }, class: 'space-y-2' do |f|
+      = render 'devise/shared/error_messages', model: f.object
+      .field
+        = f.label :email, class: 'admin-form-label'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'admin-form-input'
+      .actions.flex.justify-end
+        = f.submit '再設定用リンクを送信する', class: 'admin-form-submit'
+    = render 'devise/shared/links'
