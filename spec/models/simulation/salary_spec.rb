@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Salary, type: :model do
   # https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2021/b/03/order2/3-2_06.htm
-  describe '.call' do
+  describe '.calc' do
     subject { Simulation::Salary.calc(income) }
 
     context 'whole_income less than 551_000' do # 0
