@@ -14,8 +14,10 @@ RSpec.describe Simulation::Residence, type: :model do
           city: '千代田区',
           age: 40,
           simulation_date: simulation_date,
+          previous_salary: previous_salary,
           salary: salary,
           scheduled_salary: scheduled_salary,
+          previous_social_insurance: '736489',
           social_insurance: '736489',
           scheduled_social_insurance: '500_000'
         }
@@ -23,6 +25,7 @@ RSpec.describe Simulation::Residence, type: :model do
     end
 
     context '給与収入が1,000,000より大きい場合' do
+      let!(:previous_salary) { 4_988_682 }
       let!(:salary) { 4_988_682 }
       let!(:scheduled_salary) { 3_000_000 }
       context '年度の途中で退職し、年度のおわりまで無職でいる場合' do
@@ -660,6 +663,7 @@ RSpec.describe Simulation::Residence, type: :model do
     end
 
     context '給与収入が1,000,000以下の場合' do
+      let!(:previous_salary) { 0 }
       let!(:salary) { 0 }
       let!(:social_insurance) { 0 }
       let!(:scheduled_salary) { 0 }

@@ -15,8 +15,10 @@ class API::SimulationsController < ApplicationController
       :city,
       :age,
       :simulation_date,
+      :previous_salary,
       :salary,
       :scheduled_salary,
+      :previous_social_insurance,
       :social_insurance,
       :scheduled_social_insurance
     )

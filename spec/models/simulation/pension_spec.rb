@@ -14,8 +14,10 @@ RSpec.describe Simulation::Pension, type: :model do
           city: '千代田区',
           age: 40,
           simulation_date: simulation_date,
+          previous_salary: '5000000',
           salary: '5000000',
           scheduled_salary: '5000000',
+          previous_social_insurance: '750000',
           social_insurance: '750000',
           scheduled_social_insurance: '750000'
         }

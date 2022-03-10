@@ -54,8 +54,10 @@ RSpec.describe Simulation, type: :model do
           city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
+          previous_salary: '2_000_000',
           salary: '2_000_000',
           scheduled_salary: '2_000_000',
+          previous_social_insurance: '100_000',
           social_insurance: '100_000',
           scheduled_social_insurance: '100_000'
         }
@@ -116,8 +118,10 @@ RSpec.describe Simulation, type: :model do
           city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
+          previous_salary: '2_000_000',
           salary: '2_000_000',
           scheduled_salary: '2_000_000',
+          previous_social_insurance: '100_000',
           social_insurance: '100_000',
           scheduled_social_insurance: '100_000'
         }
@@ -182,8 +186,10 @@ RSpec.describe Simulation, type: :model do
           city: '千代田区',
           age: '40',
           simulation_date: '2022-02-11',
+          previous_salary: '2_000_000',
           salary: '2_000_000',
           scheduled_salary: '2_000_000',
+          previous_social_insurance: '100_000',
           social_insurance: '100_000',
           scheduled_social_insurance: '100_000'
         }
