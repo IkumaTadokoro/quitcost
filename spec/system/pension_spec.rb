@@ -3,9 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Pension', type: :system, js: true do
+  let!(:user) { create(:user) }
+
   describe 'index' do
+    scenario 'visiting the index before sign in' do
+      visit admin_pensions_path
+      assert_current_path new_user_session_path
+      assert_text 'ログインもしくはアカウント登録してください。'
+    end
+
     scenario 'visiting the index' do
-      visit pensions_path
+      sign_in user
+      visit admin_pensions_path
 
       expect(page).to have_content '国民年金保険料一覧'
     end
@@ -14,7 +23,8 @@ RSpec.describe 'Pension', type: :system, js: true do
   describe 'create' do
     let(:pension) { build(:pension) }
     scenario 'create a new record' do
-      visit pensions_path
+      sign_in user
+      visit admin_pensions_path
       click_link '新規登録'
 
       expect(page).to have_content '国民年金保険料登録'
@@ -25,7 +35,7 @@ RSpec.describe 'Pension', type: :system, js: true do
       end
 
       expect { click_button '登録' }.to change { Pension.count }.from(0).to(1)
-      assert_current_path pensions_path
+      assert_current_path admin_pensions_path
       assert_text '保険料率を保存しました。'
     end
   end
@@ -33,7 +43,8 @@ RSpec.describe 'Pension', type: :system, js: true do
   describe 'update' do
     before { @pension = create(:pension, year: 2022, contribution: 16_540) }
     scenario 'update a existing record' do
-      visit pensions_path
+      sign_in user
+      visit admin_pensions_path
       click_link '国民年金保険料編集'
 
       expect(page).to have_content '国民年金保険料編集'
@@ -42,7 +53,7 @@ RSpec.describe 'Pension', type: :system, js: true do
       fill_in '保険料', with: 16_600
 
       click_button '更新'
-      assert_current_path pensions_path
+      assert_current_path admin_pensions_path
       assert_text '保険料率を更新しました。'
     end
   end
@@ -50,7 +61,8 @@ RSpec.describe 'Pension', type: :system, js: true do
   describe 'destroy' do
     before { @pension = create(:pension) }
     scenario 'destroy a existing record' do
-      visit pensions_path
+      sign_in user
+      visit admin_pensions_path
 
       expect do
         all('tbody td')[1].click

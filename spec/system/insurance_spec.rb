@@ -3,9 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Insurance', type: :system, js: true do
+  let!(:user) { create(:user) }
+
   describe 'index' do
+    scenario 'visiting the index before sign in' do
+      visit admin_pensions_path
+      assert_current_path new_user_session_path
+      assert_text 'ログインもしくはアカウント登録してください。'
+    end
+
     scenario 'visiting the index' do
-      visit insurances_path
+      sign_in user
+      visit admin_insurances_path
 
       expect(page).to have_content '国民健康保険料一覧'
     end
@@ -14,7 +23,8 @@ RSpec.describe 'Insurance', type: :system, js: true do
   describe 'create' do
     let(:insurance_form) { build(:insurance_form, :all_months_are_target) }
     scenario 'create a new record' do
-      visit insurances_path
+      sign_in user
+      visit admin_insurances_path
       click_link '新規登録'
 
       expect(page).to have_content '国民健康保険料登録'
@@ -54,7 +64,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
       expect { click_button '登録' }
         .to change { Insurance.count }.from(0).to(1)
                                       .and change { PaymentTargetMonth.count }.from(0).to(12)
-      assert_current_path insurances_path
+      assert_current_path admin_insurances_path
       assert_text '保険料率を保存しました。'
     end
   end
@@ -63,7 +73,8 @@ RSpec.describe 'Insurance', type: :system, js: true do
     before { @insurance = create(:insurance, :with_payment_target_months, months: [1]) }
     scenario 'update a existing record' do
       # FIXME: 更新系のテストの補強
-      visit insurances_path
+      sign_in user
+      visit admin_insurances_path
       click_link '国民健康保険料編集'
 
       expect(page).to have_content '国民健康保険料編集'
@@ -72,7 +83,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
       check '2月', allow_label_click: true
 
       click_button '更新'
-      assert_current_path insurances_path
+      assert_current_path admin_insurances_path
       assert_text '保険料率を更新しました。'
     end
   end
@@ -80,7 +91,8 @@ RSpec.describe 'Insurance', type: :system, js: true do
   describe 'destroy' do
     before { @insurance = create(:insurance, :with_payment_target_months, months: [1]) }
     scenario 'destroy a existing record' do
-      visit insurances_path
+      sign_in user
+      visit admin_insurances_path
 
       expect do
         all('tbody td')[1].click

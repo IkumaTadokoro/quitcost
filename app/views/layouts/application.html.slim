@@ -15,18 +15,20 @@ html
       h1.text-3xl
         = link_to root_path do
           = image_tag('logo.svg', alt: 'quitcost', class: 'h-6 md:h-10 hover:opacity-70')
-      nav.mr-auto.mx-16
-        ul.flex
-          li.px-4
-            = link_to '保険', insurances_path
-          li.px-4
-            = link_to '年金', pensions_path
-      nav
-        ul.flex
-          li.px-4
-            | ikuma-t
-          li.px-4
-            | ログアウト
+      - if user_signed_in?
+        nav.mr-auto.mx-16
+          ul.flex
+            li.px-4
+              = link_to '保険', admin_insurances_path
+            li.px-4
+              = link_to '年金', admin_pensions_path
+        nav
+          ul.flex.items-center
+            li.px-4
+              = link_to current_user.email, edit_user_registration_path
+            li.px-4
+              button.text-white.bg-primary.border-0.py-2.px-4.focus:outline-none.hover:opacity-70.rounded-full.text-sm
+                = link_to 'ログアウト', destroy_user_session_path, method: :delete
     - if notice
       .w-full
         .p-24.bg-secondary.items-center.text-white.leading-none.flex.py-3
@@ -36,8 +38,8 @@ html
             = notice
     - if alert
       .w-full
-        .p-24.bg-secondary.items-center.text-white.leading-none.flex.py-3
-          span.flex.rounded-full.bg-primary.uppercase.px-2.py-1.text-xs.mr-3
+        .p-24.bg-red-400.items-center.text-white.leading-none.flex.py-3
+          span.flex.rounded-full.bg-red-700.uppercase.px-2.py-1.text-xs.mr-3
             | ALERT
           span.font-semibold.mr-2.text-left.text-sm.lex-auto
             = alert

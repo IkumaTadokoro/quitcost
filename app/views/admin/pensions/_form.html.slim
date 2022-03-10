@@ -1,5 +1,5 @@
 = render 'errors', object: pension
-= form_with model: pension, html: { name: 'pension' } do |f|
+= form_with model: [:admin, pension], html: { name: 'pension' } do |f|
   .flex.flex-col.mb-4
     = f.label :year, class: 'admin-form-label'
     = f.number_field :year, class: 'admin-form-input'
