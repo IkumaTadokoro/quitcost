@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Simulation::Residence::FinancialYearStartWithJune', type: :model do
-  using Simulation::Residence::FinancialYearStartWithJune
+RSpec.describe 'Simulation::Residence::JuneStartFinancialYear', type: :model do
+  using Simulation::Residence::JuneStartFinancialYear
 
   describe '#beginning_of_residence_fy' do
     subject { time.beginning_of_residence_fy }

@@ -2,7 +2,7 @@
 
 class Simulation::Residence
   include MonthIterable
-  using Simulation::Residence::FinancialYearStartWithJune
+  using Simulation::Residence::JuneStartFinancialYear
 
   BASIC_DEDUCTION = 430_000
   PREFECTURE_CAPITA_BASIS = 1_500

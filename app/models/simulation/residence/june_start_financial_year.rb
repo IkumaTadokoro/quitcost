@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Simulation::Residence::FinancialYearStartWithJune
+module Simulation::Residence::JuneStartFinancialYear
   # Refs: config/initializers/fiscali.rb
   refine ActiveSupport::TimeWithZone do
     def beginning_of_residence_fy
