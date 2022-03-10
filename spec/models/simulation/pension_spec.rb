@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Simulation::Pension, type: :model do
-  describe '.call' do
+  describe '.calc' do
     subject { Simulation::Pension.calc(param_parser) }
     let(:param_parser) { double('ParamParser', retirement_month: from, employment_month: to) }
 

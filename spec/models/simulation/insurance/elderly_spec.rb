@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Simulation::Insurance::Elderly, type: :model do
-  describe '.call' do
+  describe '.calc' do
     subject { Simulation::Insurance::Elderly.calc(year: year, local_gov_code: local_gov_code, income: income, age: age) }
     let!(:year) { 2021 }
     let!(:local_gov_code) { '131016' }

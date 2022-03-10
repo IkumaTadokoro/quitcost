@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Simulation::Insurance, type: :model do
-  describe '.call' do
+  describe '.calc' do
     subject { Simulation::Insurance.calc(param_parser) }
     let(:param_parser) do
       double(
