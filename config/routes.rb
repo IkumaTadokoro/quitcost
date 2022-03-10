@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root to: 'home#index'
 
   resources :insurances, only: %i(index new create edit update)
@@ -11,4 +12,5 @@ Rails.application.routes.draw do
   end
   get 'home/index'
   get '*path', to: 'home#index'
+
 end
