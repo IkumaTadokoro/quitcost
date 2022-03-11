@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::InsurancesController < ApplicationController
+class API::InsurancesController < ApplicationController
   def index
     @insurances = Insurance.preload(:payment_target_months)
                            .order(:year)

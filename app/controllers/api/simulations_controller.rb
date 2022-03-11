@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::SimulationsController < ApplicationController
+class API::SimulationsController < ApplicationController
   def show
     @simulation = Simulation.new(simulation_params)
   end
