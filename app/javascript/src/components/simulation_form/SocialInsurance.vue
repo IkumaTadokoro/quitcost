@@ -22,6 +22,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -41,5 +42,8 @@ let {
   handleChange
 } = useField('socialInsurance')
 
-onMounted(() => (socialInsurance.value = params.socialInsurance))
+onMounted(() => {
+  socialInsurance.value = params.socialInsurance
+  simulation.setCurrentStep(useRoute().name)
+})
 </script>

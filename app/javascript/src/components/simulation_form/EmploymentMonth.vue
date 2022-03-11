@@ -19,6 +19,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { addMonths, addYears, format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -42,5 +43,6 @@ let {
 onMounted(() => {
   retirementMonth.value = params.retirementMonth
   employmentMonth.value = params.employmentMonth
+  simulation.setCurrentStep(useRoute().name)
 })
 </script>

@@ -22,6 +22,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
@@ -36,5 +37,8 @@ const from = format(lastBeginningOfYear, 'yyyy年M月d日')
 const to = format(lastEndOfYear, 'yyyy年M月d日')
 let { value: salary, errorMessage: error, handleChange } = useField('salary')
 
-onMounted(() => (salary.value = params.salary))
+onMounted(() => {
+  salary.value = params.salary
+  simulation.setCurrentStep(useRoute().name)
+})
 </script>

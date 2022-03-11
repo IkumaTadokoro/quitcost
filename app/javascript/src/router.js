@@ -18,33 +18,48 @@ const router = createRouter({
     {
       path: '/simulations/new',
       component: SimulationForm,
-      redirect: '/simulations/new/1',
+      redirect: '/simulations/new/retirement-month',
       children: [
         {
-          path: '1',
+          path: 'retirement-month',
+          name: 'RetirementMonth',
           component: RetirementMonth,
           meta: { title: '退職予定月' }
         },
         {
-          path: '2',
+          path: 'employment-month',
+          name: 'EmploymentMonth',
           component: EmploymentMonth,
           meta: { title: '転職予定月' }
         },
-        { path: '3', component: Age, meta: { title: '年齢' } },
-        { path: '4', component: PostalCode, meta: { title: '郵便番号' } },
-        { path: '5', component: Salary, meta: { title: '昨年度の所得' } },
+        { path: 'age', name: 'Age', component: Age, meta: { title: '年齢' } },
         {
-          path: '6',
+          path: 'postal-code',
+          name: 'PostalCode',
+          component: PostalCode,
+          meta: { title: '郵便番号' }
+        },
+        {
+          path: 'salary',
+          name: 'Salary',
+          component: Salary,
+          meta: { title: '昨年度の所得' }
+        },
+        {
+          path: 'social-insurance',
+          name: 'SocialInsurance',
           component: SocialInsurance,
           meta: { title: '昨年度の社会保険料' }
         },
         {
-          path: '7',
+          path: 'scheduled-salary',
+          name: 'ScheduledSalary',
           component: ScheduledSalary,
           meta: { title: '今年度の所得' }
         },
         {
-          path: '8',
+          path: 'scheduled-social-insurance',
+          name: 'ScheduledSocialInsurance',
           component: ScheduledSocialInsurance,
           meta: { title: '今年度の社会保険料' }
         }

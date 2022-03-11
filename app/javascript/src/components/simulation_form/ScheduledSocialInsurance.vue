@@ -34,6 +34,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { useGlobalStore } from '../../store/global'
 import { useFinancialYear } from '../../composables/use-financial-year'
@@ -53,7 +54,8 @@ let {
   handleChange
 } = useField('scheduledSocialInsurance')
 
-onMounted(
-  () => (scheduledSocialInsurance.value = params.scheduledSocialInsurance)
-)
+onMounted(() => {
+  scheduledSocialInsurance.value = params.scheduledSocialInsurance
+  simulation.setCurrentStep(useRoute().name)
+})
 </script>
