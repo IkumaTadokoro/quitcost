@@ -11,6 +11,7 @@ export default function simulationStore() {
     'Age',
     'PostalCode'
   ]
+  const previousRoute = ['PreviousSalary']
 
   const currentRoute = ['Salary', 'SocialInsurance']
 
@@ -18,6 +19,7 @@ export default function simulationStore() {
 
   const defaultRoute = [
     ...essentialRoute,
+    ...previousRoute,
     ...currentRoute,
     ...scheduledRoute
   ]
@@ -59,6 +61,7 @@ export default function simulationStore() {
       age: params.age,
       prefecture: address.pref,
       city: address.city,
+      previous_salary: params.previousSalary,
       salary: params.salary,
       scheduled_salary: params.scheduledSalary,
       social_insurance: params.socialInsurance,

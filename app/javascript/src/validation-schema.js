@@ -57,6 +57,14 @@ export const useValidationSchema = (baseDate) => {
       address: yup.string().required('該当する市区町村がありません')
     }),
     yup.object({
+      previousSalary: yup
+        .number()
+        .required('昨昨年度の所得は必須です')
+        .typeError('無効な数値です。')
+        .min(0, '0以上の整数を入力してください')
+        .integer('整数で入力してください')
+    }),
+    yup.object({
       salary: yup
         .number()
         .required('昨年度の所得は必須です')

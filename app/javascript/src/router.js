@@ -6,6 +6,7 @@ import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
 import EmploymentMonth from './components//simulation_form/EmploymentMonth.vue'
 import Age from './components/simulation_form/Age'
 import PostalCode from './components/simulation_form/PostalCode'
+import PreviousSalary from './components/simulation_form/PreviousSalary'
 import Salary from './components/simulation_form/Salary'
 import SocialInsurance from './components/simulation_form/SocialInsurance'
 import ScheduledSalary from './components/simulation_form/ScheduledSalary'
@@ -38,6 +39,12 @@ const router = createRouter({
           name: 'PostalCode',
           component: PostalCode,
           meta: { title: '郵便番号' }
+        },
+        {
+          path: 'previous-salary',
+          name: 'PreviousSalary',
+          component: PreviousSalary,
+          meta: { title: '昨昨年度の所得' }
         },
         {
           path: 'salary',
