@@ -11,7 +11,8 @@ export default function simulationStore() {
     'Age',
     'PostalCode'
   ]
-  const previousRoute = ['PreviousSalary']
+
+  const previousRoute = ['PreviousSalary', 'PreviousSocialInsurance']
 
   const currentRoute = ['Salary', 'SocialInsurance']
 
@@ -64,6 +65,7 @@ export default function simulationStore() {
       previous_salary: params.previousSalary,
       salary: params.salary,
       scheduled_salary: params.scheduledSalary,
+      previous_social_insurance: params.previousSocialInsurance,
       social_insurance: params.socialInsurance,
       scheduled_social_insurance: params.scheduledSocialInsurance
     }).toString()

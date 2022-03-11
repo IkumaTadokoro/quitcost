@@ -8,6 +8,7 @@ import Age from './components/simulation_form/Age'
 import PostalCode from './components/simulation_form/PostalCode'
 import PreviousSalary from './components/simulation_form/PreviousSalary'
 import Salary from './components/simulation_form/Salary'
+import PreviousSocialInsurance from './components/simulation_form/PreviousSocialInsurance'
 import SocialInsurance from './components/simulation_form/SocialInsurance'
 import ScheduledSalary from './components/simulation_form/ScheduledSalary'
 import ScheduledSocialInsurance from './components/simulation_form/ScheduledSocialInsurance'
@@ -45,6 +46,12 @@ const router = createRouter({
           name: 'PreviousSalary',
           component: PreviousSalary,
           meta: { title: '昨昨年度の所得' }
+        },
+        {
+          path: 'previous-social-insurance',
+          name: 'PreviousSocialInsurance',
+          component: PreviousSocialInsurance,
+          meta: { title: '昨昨年度の社会保険料' }
         },
         {
           path: 'salary',
