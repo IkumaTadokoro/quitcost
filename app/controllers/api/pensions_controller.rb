@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::PensionsController < ApplicationController
+class API::PensionsController < ApplicationController
   def index
     @pensions = Pension.order(:year).all.page(params[:page])
   end

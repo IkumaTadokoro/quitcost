@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::Insurances', type: :request do
+RSpec.describe 'API::Insurances', type: :request do
   describe 'GET /api/insurances/index' do
     it 'returns http success' do
       get api_insurances_path(format: :json)
