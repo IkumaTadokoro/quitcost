@@ -1,8 +1,9 @@
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { useStorage } from '@vueuse/core'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
 import { format } from 'date-fns'
+import { useFinancialYear } from '../composables/use-financial-year'
 
 export default function simulationStore() {
   const essentialRoute = [
@@ -38,6 +39,30 @@ export default function simulationStore() {
     },
     sessionStorage
   )
+
+  watchEffect(() => {
+    const { simulationDate, retirementMonth, employmentMonth } =
+      state.value.params
+
+    if (!retirementMonth || !employmentMonth) return
+
+    const base = new Date(simulationDate)
+    const retirementMonthDate = new Date(retirementMonth)
+    const employmentMonthDate = new Date(employmentMonth)
+
+    const {
+      beginningOfYear: previousBreak,
+      nextBeginningOfYear: currentBreak
+    } = useFinancialYear(base, 6, 4)
+    const { nextBeginningOfYear: scheduledBreak } = useFinancialYear(base, 4, 4)
+
+    const newRoute = [...essentialRoute]
+    if (retirementMonthDate < previousBreak) newRoute.push(...previousRoute)
+    if (retirementMonthDate < currentBreak) newRoute.push(...currentRoute)
+    if (employmentMonthDate >= scheduledBreak) newRoute.push(...scheduledRoute)
+
+    state.value.routes = newRoute
+  })
 
   const searchAddress = async (params) => {
     const zipCode = params.postalCode.replace(/[^\d]+/g, '')
@@ -96,8 +121,12 @@ export default function simulationStore() {
         : 0
     },
 
-    get currentStep() {
+    get currentStepIdx() {
       return state.value.currentStep
+    },
+
+    get currentStep() {
+      return state.value.routes[state.value.currentStep]
     },
 
     get prevStep() {
