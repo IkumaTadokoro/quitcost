@@ -8,8 +8,8 @@ export const useValidationSchema = (baseDate) => {
     'yyyy/MM'
   )
 
-  const validationSchema = [
-    yup.object({
+  const validationSchema = {
+    RetirementMonth: yup.object({
       retirementMonth: yup
         .date()
         .required('退職予定月は必須です')
@@ -23,7 +23,7 @@ export const useValidationSchema = (baseDate) => {
           `退職予定月には ${computableTo} 以前の月を指定してください`
         )
     }),
-    yup.object({
+    EmploymentMonth: yup.object({
       retirementMonth: yup.date(),
       employmentMonth: yup
         .date()
@@ -38,7 +38,7 @@ export const useValidationSchema = (baseDate) => {
           `転職予定月には ${computableTo} 以前の月を指定してください`
         )
     }),
-    yup.object({
+    Age: yup.object({
       age: yup
         .number()
         .required('年齢は必須です')
@@ -46,7 +46,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    PostalCode: yup.object({
       postalCode: yup
         .string()
         .matches(/^[0-9]{3}-[0-9]{4}$/, {
@@ -56,7 +56,7 @@ export const useValidationSchema = (baseDate) => {
         .required('郵便番号は必須です'),
       address: yup.string().required('該当する市区町村がありません')
     }),
-    yup.object({
+    PreviousSalary: yup.object({
       previousSalary: yup
         .number()
         .required('昨昨年度の所得は必須です')
@@ -64,7 +64,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    PreviousSocialInsurance: yup.object({
       previousSocialInsurance: yup
         .number()
         .required('昨昨年度の社会保険料は必須です')
@@ -72,7 +72,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    Salary: yup.object({
       salary: yup
         .number()
         .required('昨年度の所得は必須です')
@@ -80,7 +80,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    SocialInsurance: yup.object({
       socialInsurance: yup
         .number()
         .required('昨年度の社会保険料は必須です')
@@ -88,7 +88,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    ScheduledSalary: yup.object({
       scheduledSalary: yup
         .number()
         .required('今年度の所得は必須です')
@@ -96,7 +96,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     }),
-    yup.object({
+    ScheduledSocialInsurance: yup.object({
       scheduledSocialInsurance: yup
         .number()
         .required('今年度の所得は必須です')
@@ -104,7 +104,7 @@ export const useValidationSchema = (baseDate) => {
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
     })
-  ]
+  }
 
   return validationSchema
 }

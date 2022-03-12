@@ -40,7 +40,7 @@ import { useGlobalStore } from '../store/global'
 const emit = defineEmits(['next', 'submit'])
 const props = defineProps({
   validationSchema: {
-    type: Array,
+    type: Object,
     required: true
   }
 })
@@ -49,7 +49,7 @@ const { simulation } = useGlobalStore()
 const router = useRouter()
 
 const prev = $computed(() => simulation.prevStep.value)
-const current = $computed(() => simulation.currentStep)
+const current = $computed(() => simulation.currentStepIdx)
 const next = $computed(() => simulation.nextStep.value)
 const steps = $computed(() => simulation.steps)
 const params = $computed(() => simulation.params)
@@ -59,7 +59,9 @@ const nextStep = computed(() => (next ? 'つぎの質問へ' : '計算結果へ'
 const zeroPadStepCounter = computed(() => ('00' + steps).slice(-2))
 
 const { resetForm, handleSubmit } = useForm({
-  validationSchema: computed(() => props.validationSchema[current])
+  validationSchema: computed(
+    () => props.validationSchema[simulation.currentStep]
+  )
 })
 
 const onSubmit = handleSubmit((values) => {
