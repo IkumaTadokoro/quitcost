@@ -23,7 +23,7 @@ import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { addMonths, addYears, format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
-import { useFinancialYear } from '../../composables/use-financial-year'
+import { useFinancialYear } from '../../composables/useFinancialYear'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)

@@ -8,7 +8,7 @@
 
 <script setup>
 import FormWizard from './FormWizard'
-import { useValidationSchema } from '../validation-schema'
+import { useValidationSchema } from '../composables/useValidationSchema'
 import { useRouter } from 'vue-router'
 import { useGlobalStore } from '../store/global'
 
