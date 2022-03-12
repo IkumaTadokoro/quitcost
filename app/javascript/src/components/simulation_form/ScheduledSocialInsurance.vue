@@ -42,7 +42,7 @@ import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { useGlobalStore } from '../../store/global'
-import { useFinancialYear } from '../../composables/use-financial-year'
+import { useFinancialYear } from '../../composables/useFinancialYear'
 import { format } from 'date-fns'
 import InsuranceCompleteButton from './InsuranceCompleteButton'
 

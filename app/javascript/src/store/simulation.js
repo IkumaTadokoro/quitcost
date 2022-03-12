@@ -3,7 +3,7 @@ import { useStorage } from '@vueuse/core'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
 import { format } from 'date-fns'
-import { useFinancialYear } from '../composables/use-financial-year'
+import { useFinancialYear } from '../composables/useFinancialYear'
 
 export default function simulationStore() {
   const essentialRoute = [

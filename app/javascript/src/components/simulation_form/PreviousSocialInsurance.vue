@@ -31,7 +31,7 @@ import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
-import { useFinancialYear } from '../../composables/use-financial-year'
+import { useFinancialYear } from '../../composables/useFinancialYear'
 import InsuranceCompleteButton from './InsuranceCompleteButton'
 
 const { simulation } = useGlobalStore()

@@ -5,9 +5,9 @@ import router from './router.js'
 import globalStore, { GlobalStoreKey } from './store/global'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selector = '#js-simulation'
-  const simulation = document.querySelector(selector)
-  if (simulation) {
+  const selector = '#app'
+  const app = document.querySelector(selector)
+  if (app) {
     const app = createApp(App)
     app.use(Maska)
     app.use(router)
