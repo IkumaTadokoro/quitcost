@@ -60,12 +60,10 @@ import { useRouter } from 'vue-router'
 import { useGlobalStore } from '../store/global'
 
 const router = useRouter()
-const { simulation, step } = useGlobalStore()
+const { simulation } = useGlobalStore()
 
 const moveForm = () => {
   router.push('/simulations/new')
-  step.reset()
-  simulation.reset_params()
-  simulation.reset_result()
+  simulation.reset()
 }
 </script>

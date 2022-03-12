@@ -14,6 +14,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { useGlobalStore } from '../../store/global'
 
@@ -22,5 +23,8 @@ const params = $computed(() => simulation.params)
 
 let { value: age, errorMessage: error, handleChange } = useField('age')
 
-onMounted(() => (age.value = params.age))
+onMounted(() => {
+  age.value = params.age
+  simulation.setCurrentStep(useRoute().name)
+})
 </script>

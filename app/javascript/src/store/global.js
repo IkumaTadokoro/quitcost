@@ -1,11 +1,9 @@
 import { inject } from 'vue'
 import simulationStore from './simulation'
-import stepStore from './step'
 
 export default function globalStore() {
   return {
-    simulation: simulationStore(),
-    step: stepStore()
+    simulation: simulationStore()
   }
 }
 

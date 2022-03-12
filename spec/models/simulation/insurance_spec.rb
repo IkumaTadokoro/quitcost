@@ -6,19 +6,28 @@ RSpec.describe Simulation::Insurance, type: :model do
   describe '.calc' do
     subject { Simulation::Insurance.calc(param_parser) }
     let(:param_parser) do
-      double(
-        'ParamParser',
-        retirement_month: retirement_month,
-        employment_month: employment_month,
-        local_gov_code: '131016',
-        age: 40,
-        salary_table: { 2021 => 5_000_000, 2022 => 5_000_000 }
+      Simulation::ParamParser.new(
+        {
+          retirement_month: retirement_month,
+          employment_month: employment_month,
+          prefecture: '東京都',
+          city: '千代田区',
+          age: 40,
+          simulation_date: simulation_date,
+          previous_salary: '5000000',
+          salary: '5000000',
+          scheduled_salary: '5000000',
+          previous_social_insurance: '750000',
+          social_insurance: '750000',
+          scheduled_social_insurance: '750000'
+        }
       )
     end
 
     context 'when cross the year before employment' do
-      let!(:retirement_month) { Time.zone.parse('2021-04-01') }
-      let!(:employment_month) { Time.zone.parse('2023-03-01') }
+      let!(:simulation_date) { '2021-04-01' }
+      let!(:retirement_month) { '2021-04-01' }
+      let!(:employment_month) { '2023-03-01' }
 
       example '10 term payment(6, 7, 8, 9, 10, 11, 12, 1, 2, 3)' do
         create(
@@ -291,8 +300,9 @@ RSpec.describe Simulation::Insurance, type: :model do
 
     context 'when DO NOT cross the year before employment' do
       context 'when get a job in this financial year' do
-        let!(:retirement_month) { Time.zone.parse('2021-04-01') }
-        let!(:employment_month) { Time.zone.parse('2022-03-01') }
+        let!(:simulation_date) { '2021-04-01' }
+        let!(:retirement_month) { '2021-04-01' }
+        let!(:employment_month) { '2022-03-01' }
 
         example '10 term payment(6,7,8,9,10,11,12,1,2,3)' do
           create(
@@ -440,8 +450,9 @@ RSpec.describe Simulation::Insurance, type: :model do
       end
 
       context 'when retire and get a job in the next financial year' do
-        let!(:retirement_month) { Time.zone.parse('2022-04-01') }
-        let!(:employment_month) { Time.zone.parse('2023-03-01') }
+        let!(:simulation_date) { '2021-04-01' }
+        let!(:retirement_month) { '2022-04-01' }
+        let!(:employment_month) { '2023-03-01' }
 
         example '10 term payment(6,7,8,9,10,11,12,1,2,3)' do
           create(
@@ -590,8 +601,9 @@ RSpec.describe Simulation::Insurance, type: :model do
     end
 
     context 'when Insurance record DOES NOT exist for the target year' do
-      let!(:retirement_month) { Time.zone.parse('2021-04-01') }
-      let!(:employment_month) { Time.zone.parse('2023-03-01') }
+      let!(:simulation_date) { '2021-04-01' }
+      let!(:retirement_month) { '2021-04-01' }
+      let!(:employment_month) { '2023-03-01' }
 
       it 'calculate with fallback record' do
         create(

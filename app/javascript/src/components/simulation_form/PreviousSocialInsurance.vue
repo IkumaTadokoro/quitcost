@@ -7,7 +7,7 @@
     <input
       class="form-field text-right"
       type="text"
-      :value="socialInsurance"
+      :value="previousSocialInsurance"
       @change="handleChange"
       v-maska="{ mask: '#*' }"
       placeholder="500000"
@@ -32,18 +32,22 @@ const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
 const base = new Date(params.simulationDate)
-const { lastBeginningOfYear, lastEndOfYear } = useFinancialYear(base, 1, 4)
-const from = format(lastBeginningOfYear, 'yyyy年M月d日')
-const to = format(lastEndOfYear, 'yyyy年M月d日')
+const { beforeLastBeginningOfYear, beforeLastEndOfYear } = useFinancialYear(
+  base,
+  1,
+  4
+)
+const from = format(beforeLastBeginningOfYear, 'yyyy年M月d日')
+const to = format(beforeLastEndOfYear, 'yyyy年M月d日')
 
 let {
-  value: socialInsurance,
+  value: previousSocialInsurance,
   errorMessage: error,
   handleChange
-} = useField('socialInsurance')
+} = useField('previousSocialInsurance')
 
 onMounted(() => {
-  socialInsurance.value = params.socialInsurance
+  previousSocialInsurance.value = params.previousSocialInsurance
   simulation.setCurrentStep(useRoute().name)
 })
 </script>

@@ -6,7 +6,7 @@
         <span class="text-3xl font-semi-bold text-gray"> / </span>
         <span class="text-4xl text-primary">{{ zeroPadStepCounter }}</span>
       </h2>
-      <ProgressBar :top="raw" :bottom="stepCounter" />
+      <ProgressBar :top="current" :bottom="steps" />
     </div>
     <div class="px-24 m-24">
       <slot />
@@ -14,7 +14,7 @@
     <div class="flex justify-between">
       <button
         class="button text-gray bg-secondary hover:bg-primary hover:text-white rounded-full"
-        v-if="step.hasPrevious"
+        v-if="prev"
         type="button"
         @click="goToPrev"
       >
@@ -45,38 +45,37 @@ const props = defineProps({
   }
 })
 
-const { simulation, step } = useGlobalStore()
+const { simulation } = useGlobalStore()
 const router = useRouter()
 
-const raw = $computed(() => step.raw)
-const displayStep = computed(() => ('00' + step.current).slice(-2))
-
+const prev = $computed(() => simulation.prevStep.value)
+const current = $computed(() => simulation.currentStep)
+const next = $computed(() => simulation.nextStep.value)
+const steps = $computed(() => simulation.steps)
 const params = $computed(() => simulation.params)
-const stepCounter = 8
-const lastStep = $computed(() => step.raw === stepCounter - 1)
-const nextStep = computed(() => (lastStep ? '計算結果へ' : 'つぎの質問へ'))
-const zeroPadStepCounter = computed(() => ('00' + stepCounter).slice(-2))
+
+const displayStep = computed(() => ('00' + (current + 1)).slice(-2))
+const nextStep = computed(() => (next ? 'つぎの質問へ' : '計算結果へ'))
+const zeroPadStepCounter = computed(() => ('00' + steps).slice(-2))
 
 const { resetForm, handleSubmit } = useForm({
-  validationSchema: computed(() => props.validationSchema[raw])
+  validationSchema: computed(() => props.validationSchema[current])
 })
 
 const onSubmit = handleSubmit((values) => {
   simulation.add_params(values)
   resetForm({ values: { ...params } })
-  if (!lastStep) {
-    step.increment()
-    router.push(`${step.current}`)
+  if (next) {
+    router.push({ name: `${next}` })
     return
   }
   emit('submit')
 })
 
 const goToPrev = () => {
-  if (raw === 0) return
-  step.decrement()
+  if (current === 0) return
   resetForm({ values: { ...params } })
-  router.push(`${step.current}`)
+  router.push({ name: `${prev}` })
 }
 </script>
 

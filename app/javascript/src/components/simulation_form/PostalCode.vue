@@ -22,6 +22,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import axios from 'axios'
 import axiosJsonpAdapter from 'axios-jsonp'
@@ -63,6 +64,7 @@ const setAddress = async () => {
 
 onMounted(async () => {
   postalCode.value = params.postalCode
+  simulation.setCurrentStep(useRoute().name)
   if (postalCode.value) await setAddress()
 })
 </script>

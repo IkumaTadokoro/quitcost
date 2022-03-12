@@ -6,7 +6,9 @@ import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
 import EmploymentMonth from './components//simulation_form/EmploymentMonth.vue'
 import Age from './components/simulation_form/Age'
 import PostalCode from './components/simulation_form/PostalCode'
+import PreviousSalary from './components/simulation_form/PreviousSalary'
 import Salary from './components/simulation_form/Salary'
+import PreviousSocialInsurance from './components/simulation_form/PreviousSocialInsurance'
 import SocialInsurance from './components/simulation_form/SocialInsurance'
 import ScheduledSalary from './components/simulation_form/ScheduledSalary'
 import ScheduledSocialInsurance from './components/simulation_form/ScheduledSocialInsurance'
@@ -18,33 +20,60 @@ const router = createRouter({
     {
       path: '/simulations/new',
       component: SimulationForm,
-      redirect: '/simulations/new/1',
+      redirect: '/simulations/new/retirement-month',
       children: [
         {
-          path: '1',
+          path: 'retirement-month',
+          name: 'RetirementMonth',
           component: RetirementMonth,
           meta: { title: '退職予定月' }
         },
         {
-          path: '2',
+          path: 'employment-month',
+          name: 'EmploymentMonth',
           component: EmploymentMonth,
           meta: { title: '転職予定月' }
         },
-        { path: '3', component: Age, meta: { title: '年齢' } },
-        { path: '4', component: PostalCode, meta: { title: '郵便番号' } },
-        { path: '5', component: Salary, meta: { title: '昨年度の所得' } },
+        { path: 'age', name: 'Age', component: Age, meta: { title: '年齢' } },
         {
-          path: '6',
+          path: 'postal-code',
+          name: 'PostalCode',
+          component: PostalCode,
+          meta: { title: '郵便番号' }
+        },
+        {
+          path: 'previous-salary',
+          name: 'PreviousSalary',
+          component: PreviousSalary,
+          meta: { title: '昨昨年度の所得' }
+        },
+        {
+          path: 'previous-social-insurance',
+          name: 'PreviousSocialInsurance',
+          component: PreviousSocialInsurance,
+          meta: { title: '昨昨年度の社会保険料' }
+        },
+        {
+          path: 'salary',
+          name: 'Salary',
+          component: Salary,
+          meta: { title: '昨年度の所得' }
+        },
+        {
+          path: 'social-insurance',
+          name: 'SocialInsurance',
           component: SocialInsurance,
           meta: { title: '昨年度の社会保険料' }
         },
         {
-          path: '7',
+          path: 'scheduled-salary',
+          name: 'ScheduledSalary',
           component: ScheduledSalary,
           meta: { title: '今年度の所得' }
         },
         {
-          path: '8',
+          path: 'scheduled-social-insurance',
+          name: 'ScheduledSocialInsurance',
           component: ScheduledSocialInsurance,
           meta: { title: '今年度の社会保険料' }
         }
