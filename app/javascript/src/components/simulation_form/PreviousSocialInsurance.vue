@@ -17,19 +17,26 @@
       >住民税の総額は、住民税決定通知書の「社会保険料」の値です
     </p>
     <p class="form-error">{{ error }}</p>
+    <InsuranceCompleteButton
+      :salary="previousSalary"
+      @completeInsurance="completeInsurance"
+      class="mt-2"
+    />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { format } from 'date-fns'
 import { useGlobalStore } from '../../store/global'
 import { useFinancialYear } from '../../composables/use-financial-year'
+import InsuranceCompleteButton from './InsuranceCompleteButton'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
+const previousSalary = computed(() => Number(params.previousSalary))
 
 const base = new Date(params.simulationDate)
 const { beforeLastBeginningOfYear, beforeLastEndOfYear } = useFinancialYear(
@@ -39,6 +46,10 @@ const { beforeLastBeginningOfYear, beforeLastEndOfYear } = useFinancialYear(
 )
 const from = format(beforeLastBeginningOfYear, 'yyyy年M月d日')
 const to = format(beforeLastEndOfYear, 'yyyy年M月d日')
+
+const completeInsurance = (calculatedInsurance) => {
+  previousSocialInsurance.value = calculatedInsurance
+}
 
 let {
   value: previousSocialInsurance,

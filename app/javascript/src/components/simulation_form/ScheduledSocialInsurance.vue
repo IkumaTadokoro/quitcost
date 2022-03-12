@@ -29,24 +29,35 @@
       </div>
     </div>
     <p class="form-error">{{ error }}</p>
+    <InsuranceCompleteButton
+      :salary="scheduledSalary"
+      @completeInsurance="completeInsurance"
+      class="mt-2"
+    />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import { useGlobalStore } from '../../store/global'
 import { useFinancialYear } from '../../composables/use-financial-year'
 import { format } from 'date-fns'
+import InsuranceCompleteButton from './InsuranceCompleteButton'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
+const scheduledSalary = computed(() => Number(params.scheduledSalary))
 
 const base = new Date(params.simulationDate)
 const { beginningOfYear, endOfYear } = useFinancialYear(base, 1, 4)
 const from = format(beginningOfYear, 'yyyy年M月d日')
 const to = format(endOfYear, 'yyyy年M月d日')
+
+const completeInsurance = (calculatedInsurance) => {
+  scheduledSocialInsurance.value = calculatedInsurance
+}
 
 let {
   value: scheduledSocialInsurance,

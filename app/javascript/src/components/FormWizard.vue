@@ -1,5 +1,5 @@
 <template>
-  <form class="mt-24" @submit="onSubmit">
+  <form class="mt-20" @submit="onSubmit">
     <div class="flex">
       <h2>
         <span class="text-6xl text-primary">{{ displayStep }}</span>
@@ -8,7 +8,7 @@
       </h2>
       <ProgressBar :top="current" :bottom="steps" />
     </div>
-    <div class="px-24 m-24">
+    <div class="px-24 m-16">
       <slot />
     </div>
     <div class="flex justify-between">
