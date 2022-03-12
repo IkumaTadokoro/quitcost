@@ -103,7 +103,7 @@
 <script setup>
 import { format } from 'date-fns'
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from './store/global'
+import { useGlobalStore } from '../store/global'
 
 const router = useRouter()
 const { simulation } = useGlobalStore()

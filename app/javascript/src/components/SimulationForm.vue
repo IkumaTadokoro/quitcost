@@ -7,10 +7,10 @@
 </template>
 
 <script setup>
-import FormWizard from './components/FormWizard'
-import { useValidationSchema } from './validation-schema'
+import FormWizard from './FormWizard'
+import { useValidationSchema } from '../validation-schema'
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from './store/global'
+import { useGlobalStore } from '../store/global'
 
 const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)

@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import Pensions from './pensions.vue'
+import Pensions from './components/Pensions.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const selector = '#js-pensions'
