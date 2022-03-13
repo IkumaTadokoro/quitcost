@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "run-p lint:*",
     "lint:eslint": "eslint 'app/javascript/**/*.{js,vue}' --max-warnings=0",
-    "lint:prettier": "prettier app/javascript/**/*.{js,vue} --check"
+    "lint:prettier": "prettier app/javascript/**/*.{js,vue} --check",
+    "test:unit": "jest --passWithNoTests"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",

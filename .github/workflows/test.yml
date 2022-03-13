@@ -30,3 +30,5 @@ jobs:
           docker-compose run web bundle exec rspec
         env:
           RAILS_ENV: test
+      - name: Jest
+        run: docker-compose run web yarn test:unit
