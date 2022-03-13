@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './components/Home'
-import SimulationForm from './components/SimulationForm'
-import SimulationResult from './components/SimulationResult'
-import RetirementMonth from './components//simulation_form/RetirementMonth.vue'
-import EmploymentMonth from './components//simulation_form/EmploymentMonth.vue'
-import Age from './components/simulation_form/Age'
-import PostalCode from './components/simulation_form/PostalCode'
-import PreviousSalary from './components/simulation_form/PreviousSalary'
-import Salary from './components/simulation_form/Salary'
-import PreviousSocialInsurance from './components/simulation_form/PreviousSocialInsurance'
-import SocialInsurance from './components/simulation_form/SocialInsurance'
-import ScheduledSalary from './components/simulation_form/ScheduledSalary'
-import ScheduledSocialInsurance from './components/simulation_form/ScheduledSocialInsurance'
+import Home from '../components/Home'
+import SimulationForm from '../components/SimulationForm'
+import SimulationResult from '../components/SimulationResult'
+import RetirementMonth from '../components/simulation_form/RetirementMonth.vue'
+import EmploymentMonth from '../components/simulation_form/EmploymentMonth.vue'
+import Age from '../components/simulation_form/Age'
+import PostalCode from '../components/simulation_form/PostalCode'
+import PreviousSalary from '../components/simulation_form/PreviousSalary'
+import Salary from '../components/simulation_form/Salary'
+import PreviousSocialInsurance from '../components/simulation_form/PreviousSocialInsurance'
+import SocialInsurance from '../components/simulation_form/SocialInsurance'
+import ScheduledSalary from '../components/simulation_form/ScheduledSalary'
+import ScheduledSocialInsurance from '../components/simulation_form/ScheduledSocialInsurance'
 
-const router = createRouter({
+const index = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home },
@@ -90,7 +90,7 @@ const router = createRouter({
 const DEFAULT_TITLE = 'quitcost'
 const DEFAULT_DESCRIPTION = '「無職になったらいくらかかる？」を解決'
 
-router.afterEach((to) => {
+index.afterEach((to) => {
   const title = to.meta.title
     ? `${to.meta.title} | ${DEFAULT_TITLE}`
     : DEFAULT_TITLE
@@ -108,4 +108,4 @@ router.afterEach((to) => {
     .setAttribute('content', content)
 })
 
-export default router
+export default index
