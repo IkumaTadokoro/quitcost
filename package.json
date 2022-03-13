@@ -49,5 +49,10 @@
     "prettier": "2.5.1",
     "prettier-config-standard": "^4.0.0",
     "webpack-dev-server": "^3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/app/javascript/src"
+    ]
   }
 }
