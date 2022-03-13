@@ -27,18 +27,32 @@
       </div>
       <div class="mb-20 mx-72 flex justify-between">
         <div class="flex-1">
-          <p class="text-sm">国民健康保険料</p>
-          <p class="text-xl">
+          <p
+            class="text-sm underline underline-offset-2 decoration-4 decoration-primary"
+          >
+            国民健康保険
+          </p>
+          <p class="text-xl mt-2">
             {{ formatAmount(result.sub_total.insurance) }}円
           </p>
         </div>
         <div class="flex-1">
-          <p class="text-sm">国民年金</p>
-          <p class="text-xl">{{ formatAmount(result.sub_total.pension) }}円</p>
+          <p
+            class="text-sm underline underline-offset-2 decoration-4 decoration-red-600"
+          >
+            国民年金
+          </p>
+          <p class="text-xl mt-2">
+            {{ formatAmount(result.sub_total.pension) }}円
+          </p>
         </div>
         <div class="flex-1">
-          <p class="text-sm">住民税</p>
-          <p class="text-xl">
+          <p
+            class="text-sm underline underline-offset-2 decoration-4 decoration-yellow-500"
+          >
+            住民税
+          </p>
+          <p class="text-xl mt-2">
             {{ formatAmount(result.sub_total.residence) }}円
           </p>
         </div>
@@ -58,31 +72,39 @@
         </button>
       </div>
     </div>
-    <div class="bg-boundaryBlack py-28" id="detail">
-      <div
-        class="max-w-screen-lg mx-auto px-12 py-16 bg-white rounded-3xl mb-16 shadow-md"
-      >
-        <h2 class="text-center text-4xl mb-6">個人負担額の詳細</h2>
+    <div class="bg-secondary py-12" id="detail">
+      <div class="max-w-screen-lg mx-auto p-12">
+        <h2
+          class="text-center text-3xl mb-12 underline underline-offset-8 decoration-4 decoration-primary"
+        >
+          個人負担額の詳細
+        </h2>
         <div
           v-for="monthly_payment in result.monthly_payment"
           :key="monthly_payment.month"
-          class="px-6 mb-8"
+          class="px-8 py-8 mb-4 last:mb-0 shadow-md bg-white rounded-xl"
         >
           <div class="separator">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ formatDate(monthly_payment.month) }}
             </p>
           </div>
-          <div class="px-8 pt-4">
+          <div class="px-2 pt-4">
             <ul>
-              <li class="type-icon before:content-['保'] text-lg mb-4">
-                当月分：{{ formatAmount(monthly_payment.fee.insurance) }}円
+              <li
+                class="type-icon before:content-['健康保険'] mb-4 before:bg-primary"
+              >
+                {{ formatAmount(monthly_payment.fee.insurance) }}円
               </li>
-              <li class="type-icon before:content-['年'] text-lg mb-4">
-                当月分：{{ formatAmount(monthly_payment.fee.pension) }}円
+              <li
+                class="type-icon before:content-['国民年金'] mb-4 before:bg-red-600"
+              >
+                {{ formatAmount(monthly_payment.fee.pension) }}円
               </li>
-              <li class="type-icon before:content-['税'] text-lg mb-4">
-                当月分：{{ formatAmount(monthly_payment.fee.residence) }}円
+              <li
+                class="type-icon before:content-['住民税'] before:bg-yellow-500"
+              >
+                {{ formatAmount(monthly_payment.fee.residence) }}円
               </li>
             </ul>
           </div>
@@ -90,7 +112,7 @@
       </div>
       <div class="flex justify-center">
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-secondary text-gray hover:opacity-70 shadow-xl"
+          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-primary text-white hover:opacity-70 shadow-xl"
           @click="scrollTop"
         >
           ページ上部へ
@@ -144,10 +166,10 @@ const moveForm = () => {
 
 <style scoped>
 .separator {
-  @apply flex items-center after:content-[''] after:border-t-2 after:border-gray after:border-solid after:flex-1 after:ml-2;
+  @apply flex items-center after:content-[''] after:border-t-2 after:border-boundaryBlack after:border-solid after:flex-1 after:ml-2;
 }
 
 .type-icon {
-  @apply relative before:left-0 before:top-1/2 before:-translate-y-2/4 pl-10 before:inline-block before:bg-primary before:text-white before:rounded-full before:text-base before:h-8 before:w-8 before:leading-8 before:absolute before:text-center;
+  @apply relative before:left-0 before:top-1/2 before:-translate-y-2/4 pl-24 before:inline-block before:text-white before:rounded-md before:text-xs before:h-6 before:w-20 before:leading-6 before:absolute before:text-center;
 }
 </style>
