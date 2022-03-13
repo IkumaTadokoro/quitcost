@@ -1,7 +1,8 @@
 {
     "env": {
         "node": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "eslint:recommended",
@@ -13,7 +14,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "vue"
+        "vue",
+        "jest"
     ],
     "rules": {
         "vue/multi-word-component-names": 0
