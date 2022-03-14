@@ -4,8 +4,8 @@ import { format } from 'date-fns'
 
 export const useValidationSchema = (baseDate) => {
   const { afterNextBeginningOfYear } = useFinancialYear(baseDate, 4)
-  const computableFrom = format(baseDate, 'yyyy/MM')
-  const computableTo = format(afterNextBeginningOfYear, 'yyyy/MM')
+  const from = format(baseDate, 'yyyy/MM')
+  const to = format(afterNextBeginningOfYear, 'yyyy/MM')
 
   const numberPresence = (columnName) => {
     return number()
@@ -17,22 +17,14 @@ export const useValidationSchema = (baseDate) => {
   const datePresence = (columnName) => {
     return date()
       .nullable()
-      .transform((value, originalValue) =>
-        originalValue === '' ? null : value
-      )
+      .transform((value, original) => (original === '' ? null : value))
       .required(`${columnName}は必須です`)
   }
 
   const RetirementMonth = object({
     retirementMonth: datePresence('退職予定月')
-      .min(
-        computableFrom,
-        `退職予定月には ${computableFrom} 以降の月を指定してください`
-      )
-      .max(
-        computableTo,
-        `退職予定月には ${computableTo} 以前の月を指定してください`
-      )
+      .min(from, `退職予定月には ${from} 以降の月を指定してください`)
+      .max(to, `退職予定月には ${to} 以前の月を指定してください`)
   })
 
   const EmploymentMonth = object({
@@ -42,10 +34,7 @@ export const useValidationSchema = (baseDate) => {
         ref('retirementMonth'),
         `転職予定月には、退職予定月以降の月を指定してください`
       )
-      .max(
-        computableTo,
-        `転職予定月には ${computableTo} 以前の月を指定してください`
-      )
+      .max(to, `転職予定月には ${to} 以前の月を指定してください`)
   })
 
   const Age = object({
