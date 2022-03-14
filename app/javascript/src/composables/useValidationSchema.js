@@ -1,12 +1,11 @@
 import { object, string, number, date, ref } from 'yup'
-import { getYear, subMonths, addYears, format } from 'date-fns'
+import { useFinancialYear } from './useFinancialYear'
+import { format } from 'date-fns'
 
 export const useValidationSchema = (baseDate) => {
+  const { afterNextBeginningOfYear } = useFinancialYear(baseDate, 4)
   const computableFrom = format(baseDate, 'yyyy/MM')
-  const computableTo = format(
-    new Date(getYear(addYears(subMonths(baseDate, 3), 2)), 3, 1),
-    'yyyy/MM'
-  )
+  const computableTo = format(afterNextBeginningOfYear, 'yyyy/MM')
 
   const numberPresence = (columnName) => {
     return number()
