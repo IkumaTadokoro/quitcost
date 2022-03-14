@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import { object, string, number, date, ref } from 'yup'
 import { getYear, subMonths, addYears, format } from 'date-fns'
 
 export const useValidationSchema = (baseDate) => {
@@ -9,16 +9,14 @@ export const useValidationSchema = (baseDate) => {
   )
 
   const numberPresence = (columnName) => {
-    return yup
-      .number()
+    return number()
       .transform((value) => (isNaN(value) ? undefined : value))
       .required(`${columnName}は必須です`)
       .typeError('無効な数値です。')
   }
 
   const datePresence = (columnName) => {
-    return yup
-      .date()
+    return date()
       .nullable()
       .transform((value, originalValue) =>
         originalValue === '' ? null : value
@@ -26,7 +24,7 @@ export const useValidationSchema = (baseDate) => {
       .required(`${columnName}は必須です`)
   }
 
-  const RetirementMonth = yup.object({
+  const RetirementMonth = object({
     retirementMonth: datePresence('退職予定月')
       .min(
         computableFrom,
@@ -38,11 +36,11 @@ export const useValidationSchema = (baseDate) => {
       )
   })
 
-  const EmploymentMonth = yup.object({
-    retirementMonth: yup.date(),
+  const EmploymentMonth = object({
+    retirementMonth: date(),
     employmentMonth: datePresence('転職予定月')
       .min(
-        yup.ref('retirementMonth'),
+        ref('retirementMonth'),
         `転職予定月には、退職予定月以降の月を指定してください`
       )
       .max(
@@ -51,54 +49,53 @@ export const useValidationSchema = (baseDate) => {
       )
   })
 
-  const Age = yup.object({
+  const Age = object({
     age: numberPresence('年齢')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const PostalCode = yup.object({
-    postalCode: yup
-      .string()
+  const PostalCode = object({
+    postalCode: string()
       .matches(/^[0-9]{3}-[0-9]{4}$/, {
         message: '7桁の郵便番号を入力してください',
         excludeEmptyString: true
       })
       .required('郵便番号は必須です'),
-    address: yup.string().required('該当する市区町村がありません')
+    address: string().required('該当する市区町村がありません')
   })
 
-  const PreviousSalary = yup.object({
+  const PreviousSalary = object({
     previousSalary: numberPresence('昨昨年度の所得')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const PreviousSocialInsurance = yup.object({
+  const PreviousSocialInsurance = object({
     previousSocialInsurance: numberPresence('昨昨年度の社会保険料')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const Salary = yup.object({
+  const Salary = object({
     salary: numberPresence('昨年度の所得')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const SocialInsurance = yup.object({
+  const SocialInsurance = object({
     socialInsurance: numberPresence('昨年度の社会保険料')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const ScheduledSalary = yup.object({
+  const ScheduledSalary = object({
     scheduledSalary: numberPresence('今年度の所得')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
   })
 
-  const ScheduledSocialInsurance = yup.object({
+  const ScheduledSocialInsurance = object({
     scheduledSocialInsurance: numberPresence('今年度の社会保険料')
       .min(0, '0以上の整数を入力してください')
       .integer('整数で入力してください')
