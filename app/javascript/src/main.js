@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import Maska from 'maska'
-import index from './router'
+import router from './router/router'
 import globalStore, { GlobalStoreKey } from './store/global'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (app) {
     const app = createApp(App)
     app.use(Maska)
-    app.use(index)
+    app.use(router)
     app.provide(GlobalStoreKey, globalStore())
     app.mount(selector)
   }

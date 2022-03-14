@@ -13,7 +13,7 @@ import SocialInsurance from '../components/simulation_form/SocialInsurance'
 import ScheduledSalary from '../components/simulation_form/ScheduledSalary'
 import ScheduledSocialInsurance from '../components/simulation_form/ScheduledSocialInsurance'
 
-const index = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home },
@@ -90,7 +90,7 @@ const index = createRouter({
 const DEFAULT_TITLE = 'quitcost'
 const DEFAULT_DESCRIPTION = '「無職になったらいくらかかる？」を解決'
 
-index.afterEach((to) => {
+router.afterEach((to) => {
   const title = to.meta.title
     ? `${to.meta.title} | ${DEFAULT_TITLE}`
     : DEFAULT_TITLE
@@ -108,4 +108,4 @@ index.afterEach((to) => {
     .setAttribute('content', content)
 })
 
-export default index
+export default router
