@@ -31,7 +31,7 @@ export const useValidationSchema = (baseDate) => {
         .typeError('無効な日付です。YYYY/MMの形式で入力してください。')
         .min(
           yup.ref('retirementMonth'),
-          `転職予定月には、退職月以降の月を指定してください`
+          `転職予定月には、退職予定月以降の月を指定してください`
         )
         .max(
           computableTo,
