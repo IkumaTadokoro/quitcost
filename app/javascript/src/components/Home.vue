@@ -14,7 +14,7 @@
       </div>
       <div class="flex justify-center">
         <button
-          class="border-0 w-40 md:w-56 p-4 md:p-6 focus:outline-none rounded-full text-sm md:text-lg bg-primary text-white hover:bg-accent shadow-xl"
+          class="flex justify-between items-center bg-primary text-white rounded-full text-lg w-60 px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray"
           @click="moveForm"
         >
           いますぐ計算する

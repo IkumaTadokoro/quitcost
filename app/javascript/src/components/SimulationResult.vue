@@ -57,15 +57,15 @@
           </p>
         </div>
       </div>
-      <div class="flex flex-wrap justify-around mb-52 mx-64">
+      <div class="flex flex-wrap justify-around mb-52 mx-52">
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-primary text-white hover:opacity-70 shadow-xl"
+          class="text-lg w-64 flex justify-between items-center bg-primary text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary before:content-[''] before:w-3 before:h-3 before:rotate-45 before:border-solid before:border-white before:border-b-4 before:border-l-4 before:hover:border-gray"
           @click="moveForm"
         >
           もういちど計算する
         </button>
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-accent text-white hover:opacity-70 shadow-xl"
+          class="text-lg w-60 flex justify-evenly items-center bg-accent text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray"
           @click="scrollDetail"
         >
           詳細をみる
@@ -112,7 +112,7 @@
       </div>
       <div class="flex justify-center">
         <button
-          class="border-0 w-56 py-6 px-6 focus:outline-none rounded-full text-lg bg-primary text-white hover:opacity-70 shadow-xl"
+          class="w-52 flex justify-evenly items-center bg-primary text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-l-4 after:border-t-4 after:hover:border-gray"
           @click="scrollTop"
         >
           ページ上部へ

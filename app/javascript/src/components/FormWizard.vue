@@ -11,17 +11,13 @@
     <div class="px-24 m-16">
       <slot />
     </div>
-    <div class="flex justify-between">
-      <button
-        class="button text-gray bg-secondary hover:bg-primary hover:text-white rounded-full"
-        v-if="prev"
-        type="button"
-        @click="goToPrev"
-      >
+    <div class="flex justify-evenly">
+      <button class="prev-button" v-if="prev" type="button" @click="goToPrev">
         まえの質問へ
       </button>
       <button
-        class="ml-auto button text-white bg-primary hover:bg-green-900"
+        class="ml-auto"
+        :class="next ? 'next-button' : 'submit-button'"
         type="submit"
       >
         {{ nextStep }}
@@ -82,7 +78,15 @@ const goToPrev = () => {
 </script>
 
 <style scope>
-.button {
-  @apply border-0 py-4 px-8 focus:outline-none rounded-full text-xl;
+.next-button {
+  @apply flex justify-between items-center bg-primary text-white rounded-full text-lg w-52 px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray;
+}
+
+.submit-button {
+  @apply flex justify-evenly items-center bg-accent text-white rounded-full text-lg w-52 px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray;
+}
+
+.prev-button {
+  @apply flex justify-between items-center bg-secondary text-gray rounded-full text-lg w-52 px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-secondary before:content-[''] before:w-3 before:h-3 before:rotate-45 before:border-solid before:border-gray before:border-b-4 before:border-l-4 before:hover:border-gray;
 }
 </style>
