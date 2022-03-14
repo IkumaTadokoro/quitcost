@@ -99,7 +99,7 @@ export const useValidationSchema = (baseDate) => {
     ScheduledSocialInsurance: yup.object({
       scheduledSocialInsurance: yup
         .number()
-        .required('今年度の所得は必須です')
+        .required('今年度の社会保険料は必須です')
         .typeError('無効な数値です。')
         .min(0, '0以上の整数を入力してください')
         .integer('整数で入力してください')
