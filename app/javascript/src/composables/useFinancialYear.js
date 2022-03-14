@@ -17,6 +17,7 @@ export const useFinancialYear = (
       : subMonths(date, date_beginning_of_fiscal_year - 1).getFullYear()
   const beginningOfYear = new Date(year, beginning_of_fiscal_year - 1, 1)
   const nextBeginningOfYear = addYears(beginningOfYear, 1)
+  const afterNextBeginningOfYear = addYears(beginningOfYear, 2)
   const lastBeginningOfYear = subYears(beginningOfYear, 1)
   const beforeLastBeginningOfYear = subYears(beginningOfYear, 2)
   const endOfYear = lastDayOfMonth(addMonths(beginningOfYear, 11))
@@ -27,6 +28,7 @@ export const useFinancialYear = (
   return {
     beginningOfYear,
     nextBeginningOfYear,
+    afterNextBeginningOfYear,
     lastBeginningOfYear,
     beforeLastBeginningOfYear,
     endOfYear,

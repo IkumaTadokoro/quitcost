@@ -59,6 +59,15 @@ describe('#nextBeginningOfYear', () => {
   })
 })
 
+describe('#afterNextBeginningOfYear', () => {
+  it('returns the after next year of beginningOfyear', () => {
+    const date = new Date('2022-03-14')
+    const { afterNextBeginningOfYear } = useFinancialYear(date, 4, 1)
+    const expected = new Date('2024-04-01')
+    expect(afterNextBeginningOfYear).toEqual(expected)
+  })
+})
+
 describe('#lastBeginningOfYear', () => {
   it('returns the last year of beginningOfyear', () => {
     const date = new Date('2022-03-14')
