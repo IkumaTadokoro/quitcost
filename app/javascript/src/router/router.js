@@ -97,16 +97,16 @@ router.afterEach((to) => {
     : DEFAULT_TITLE
   const content = to.meta.description || DEFAULT_DESCRIPTION
 
+  const ogTitle = document.querySelector("meta[property='og:title']")
+  const description = document.querySelector("meta[name='description']")
+  const ogDescription = document.querySelector(
+    "meta[property='og:description']"
+  )
+
   document.title = title
-  document
-    .querySelector("meta[property='og:title']")
-    .setAttribute('content', title)
-  document
-    .querySelector("meta[name='description']")
-    .setAttribute('content', content)
-  document
-    .querySelector("meta[property='og:description']")
-    .setAttribute('content', content)
+  if (ogTitle) ogTitle.setAttribute('content', title)
+  if (description) description.setAttribute('content', content)
+  if (ogDescription) description.setAttribute('content', content)
 })
 
 export default router
