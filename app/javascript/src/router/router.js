@@ -88,7 +88,8 @@ const router = createRouter({
 })
 
 const DEFAULT_TITLE = 'quitcost'
-const DEFAULT_DESCRIPTION = '「無職になったらいくらかかる？」を解決'
+const DEFAULT_DESCRIPTION =
+  'quitcost | 「無職になったらいくらかかる？」をいますぐ計算！'
 
 router.afterEach((to) => {
   const title = to.meta.title
