@@ -1818,6 +1818,18 @@
   resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-rc.17.tgz#e6dcf5b5bd3ae23595bdb154b9b578ebcdffd698"
   integrity sha512-7LHZKsFRV/HqDoMVY+cJamFzgHgsrmQFalROHC5FMWrzPzd+utG5e11krj1tVsnxYufGA2ABShX4nlcHXED+zQ==
 
+"@vue/vue3-jest@27.0.0-alpha.4":
+  version "27.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@vue/vue3-jest/-/vue3-jest-27.0.0-alpha.4.tgz#eb2e5eba1c7a0ae39e457ba2df7ac891a79a2402"
+  integrity sha512-RgEwjNvwdWmRngHqgt957fLT6riOkv/Kyl0ra8jo0Z8Dgosmu17dNqgBzLn9fTgNlTbHv4TQQdLRjczr+z2mlA==
+  dependencies:
+    "@babel/plugin-transform-modules-commonjs" "^7.2.0"
+    chalk "^2.1.0"
+    convert-source-map "^1.6.0"
+    extract-from-css "^0.4.4"
+    source-map "0.5.6"
+    tsconfig "^7.0.0"
+
 "@vueuse/core@^7.6.2":
   version "7.6.2"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-7.6.2.tgz#1b9aa92048991189fac31577ff439296efa5fb4a"
@@ -9714,18 +9726,6 @@ vue-template-compiler@^2.6.14:
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
-
-vue3-jest@^27.0.0-alpha.1:
-  version "27.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/vue3-jest/-/vue3-jest-27.0.0-alpha.1.tgz#ccc9ecd963a8ab54e43fbb4cad3c1d14c84c0613"
-  integrity sha512-F/pSFbpLcYVIv0ogNMFwT+W+r9tCRfLw84IIqqyocD1FZaW6m3RpfqwQsOXgYJVXFSdj4t3xbgj967s8WMrZjQ==
-  dependencies:
-    "@babel/plugin-transform-modules-commonjs" "^7.2.0"
-    chalk "^2.1.0"
-    convert-source-map "^1.6.0"
-    extract-from-css "^0.4.4"
-    source-map "0.5.6"
-    tsconfig "^7.0.0"
 
 vue@^3.2.26:
   version "3.2.26"
