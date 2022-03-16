@@ -3,7 +3,7 @@
     <div class="w-full bg-secondary rounded-full">
       <div
         v-if="progress"
-        class="bg-primary text-xs font-medium text-primary text-center p-0.5 leading-none rounded-full"
+        class="bg-primary text-xs font-medium text-primary text-center p-0.5 leading-none rounded-full h-3"
         :style="{ width: progress + '%' }"
         data-test-id="Progress"
       ></div>
