@@ -28,7 +28,5 @@ const props = defineProps({
   }
 })
 
-const progress = computed(() =>
-  Math.ceil((props.top / (props.bottom - 1)) * 100)
-)
+const progress = computed(() => Math.ceil((props.top / props.bottom) * 100))
 </script>
