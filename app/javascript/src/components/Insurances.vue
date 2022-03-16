@@ -183,124 +183,107 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import Swal from 'sweetalert2'
 
-export default {
-  components: {
-    VPagination
-  },
-  setup() {
-    const pageParam = () => {
-      const url = new URL(location.href)
-      const page = url.searchParams.get('page')
-      return parseInt(page || 1)
-    }
+const pageParam = () => {
+  const url = new URL(location.href)
+  const page = url.searchParams.get('page')
+  return parseInt(page || 1)
+}
 
-    const insurances = ref([])
-    const totalPages = ref(0)
-    const currentPage = ref(pageParam())
+const insurances = ref([])
+const totalPages = ref(0)
+const currentPage = ref(pageParam())
 
-    const newParams = computed(() => {
-      const params = new URL(location.href).searchParams
-      params.set('page', currentPage.value)
-      return params
+const newParams = computed(() => {
+  const params = new URL(location.href).searchParams
+  params.set('page', currentPage.value)
+  return params
+})
+
+const newUrl = computed(() => {
+  return `${location.pathname}?${newParams.value}`
+})
+
+const getInsurances = async () => {
+  const insurancesAPI = `/api/insurances.json?${newParams.value}`
+  const response = await fetch(insurancesAPI, {
+    method: 'GET',
+    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    credentials: 'same-origin',
+    redirect: 'manual'
+  })
+  const json = await response
+    .json()
+    .catch((e) => console.warn('Failed to parsing', e))
+  insurances.value = json.insurance
+  totalPages.value = parseInt(json.totalPages)
+}
+
+const token = () => {
+  const meta = document.querySelector('meta[name="csrf-token"]')
+  return meta ? meta.getAttribute('content') : ''
+}
+
+// FIXME: toastにデザインを適用する
+const toast = (title) => {
+  Swal.fire({
+    title: title,
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true
+  })
+}
+
+const deleteInsurance = async (insuranceId) => {
+  const insuranceAPI = `/api/insurances/${insuranceId}`
+  const result = confirm('本当にこのレコードを削除しますか')
+  if (result) {
+    await fetch(insuranceAPI, {
+      method: 'DELETE',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token()
+      },
+      credentials: 'same-origin',
+      redirect: 'manual'
     })
-
-    const newUrl = computed(() => {
-      return `${location.pathname}?${newParams.value}`
-    })
-
-    const getInsurances = async () => {
-      const insurancesAPI = `/api/insurances.json?${newParams.value}`
-      const response = await fetch(insurancesAPI, {
-        method: 'GET',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        credentials: 'same-origin',
-        redirect: 'manual'
-      })
-      const json = await response
-        .json()
-        .catch((e) => console.warn('Failed to parsing', e))
-      insurances.value = json.insurance
-      totalPages.value = parseInt(json.totalPages)
-    }
-
-    const token = () => {
-      const meta = document.querySelector('meta[name="csrf-token"]')
-      return meta ? meta.getAttribute('content') : ''
-    }
-
-    // FIXME: toastにデザインを適用する
-    const toast = (title) => {
-      Swal.fire({
-        title: title,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true
-      })
-    }
-
-    const deleteInsurance = async (insuranceId) => {
-      const insuranceAPI = `/api/insurances/${insuranceId}`
-      const result = confirm('本当にこのレコードを削除しますか')
-      if (result) {
-        await fetch(insuranceAPI, {
-          method: 'DELETE',
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': token()
-          },
-          credentials: 'same-origin',
-          redirect: 'manual'
-        })
-        toast('保険料率を削除しました。')
-        await getInsurances()
-      }
-    }
-
-    const switchPage = (pageNum) => {
-      currentPage.value = pageNum
-      history.pushState(null, null, newUrl.value)
-      getInsurances()
-    }
-
-    // e.g. 30000 → ¥30,000
-    const formatNumber = (number) => {
-      return new Intl.NumberFormat('ja', {
-        style: 'currency',
-        currency: 'JPY',
-        currencyDisplay: 'symbol'
-      }).format(number)
-    }
-
-    // e.g. 7.1 → 7.10%
-    const formatPercent = (decimal) => {
-      return `${new Intl.NumberFormat('ja', {
-        minimumFractionDigits: 2
-      }).format(decimal)}%`
-    }
-
-    getInsurances()
-
-    window.addEventListener('popstate', () => {
-      location.href = window.location.href
-    })
-
-    return {
-      insurances,
-      totalPages,
-      currentPage,
-      formatNumber,
-      formatPercent,
-      switchPage,
-      deleteInsurance
-    }
+    toast('保険料率を削除しました。')
+    await getInsurances()
   }
 }
+
+const switchPage = (pageNum) => {
+  currentPage.value = pageNum
+  history.pushState(null, null, newUrl.value)
+  getInsurances()
+}
+
+// e.g. 30000 → ¥30,000
+const formatNumber = (number) => {
+  return new Intl.NumberFormat('ja', {
+    style: 'currency',
+    currency: 'JPY',
+    currencyDisplay: 'symbol'
+  }).format(number)
+}
+
+// e.g. 7.1 → 7.10%
+const formatPercent = (decimal) => {
+  return `${new Intl.NumberFormat('ja', {
+    minimumFractionDigits: 2
+  }).format(decimal)}%`
+}
+
+getInsurances()
+
+window.addEventListener('popstate', () => {
+  location.href = window.location.href
+})
 </script>
