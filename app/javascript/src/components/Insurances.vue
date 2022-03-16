@@ -92,13 +92,13 @@
                 {{ formatPercent(insurance.medical_asset_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.medical_capita_basis) }}
+                {{ formatYen(insurance.medical_capita_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.medical_household_basis) }}
+                {{ formatYen(insurance.medical_household_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.medical_limit) }}
+                {{ formatYen(insurance.medical_limit) }}
               </td>
               <td class="admin-table-data-right">
                 {{ formatPercent(insurance.elderly_income_basis) }}
@@ -107,13 +107,13 @@
                 {{ formatPercent(insurance.elderly_asset_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.elderly_capita_basis) }}
+                {{ formatYen(insurance.elderly_capita_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.elderly_household_basis) }}
+                {{ formatYen(insurance.elderly_household_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.elderly_limit) }}
+                {{ formatYen(insurance.elderly_limit) }}
               </td>
               <td class="admin-table-data-right">
                 {{ formatPercent(insurance.care_income_basis) }}
@@ -122,13 +122,13 @@
                 {{ formatPercent(insurance.care_asset_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.care_capita_basis) }}
+                {{ formatYen(insurance.care_capita_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.care_household_basis) }}
+                {{ formatYen(insurance.care_household_basis) }}
               </td>
               <td class="admin-table-data-right">
-                {{ formatNumber(insurance.care_limit) }}
+                {{ formatYen(insurance.care_limit) }}
               </td>
               <td class="admin-table-data-center">
                 {{ insurance.january ? '○' : '-' }}
@@ -187,7 +187,10 @@
 import { computed, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
+import { useFormat } from '../composables/useFormat'
 import Swal from 'sweetalert2'
+
+const { formatYen, formatPercent } = useFormat()
 
 const pageParam = () => {
   const url = new URL(location.href)
@@ -263,22 +266,6 @@ const switchPage = (pageNum) => {
   currentPage.value = pageNum
   history.pushState(null, null, newUrl.value)
   getInsurances()
-}
-
-// e.g. 30000 → ¥30,000
-const formatNumber = (number) => {
-  return new Intl.NumberFormat('ja', {
-    style: 'currency',
-    currency: 'JPY',
-    currencyDisplay: 'symbol'
-  }).format(number)
-}
-
-// e.g. 7.1 → 7.10%
-const formatPercent = (decimal) => {
-  return `${new Intl.NumberFormat('ja', {
-    minimumFractionDigits: 2
-  }).format(decimal)}%`
 }
 
 getInsurances()

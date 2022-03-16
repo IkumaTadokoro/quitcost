@@ -50,7 +50,7 @@
                 {{ pension.year }}
               </td>
               <td class="admin-table-data-center">
-                {{ formatNumber(pension.contribution) }}
+                {{ formatYen(pension.contribution) }}
               </td>
             </tr>
           </tbody>
@@ -71,9 +71,12 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { useFormat } from '../composables/useFormat'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import Swal from 'sweetalert2'
+
+const { formatYen } = useFormat()
 
 const pageParam = () => {
   const url = new URL(location.href)
@@ -149,15 +152,6 @@ const switchPage = (pageNum) => {
   currentPage.value = pageNum
   history.pushState(null, null, newUrl.value)
   getPensions()
-}
-
-// e.g. 30000 → ¥30,000
-const formatNumber = (number) => {
-  return new Intl.NumberFormat('ja', {
-    style: 'currency',
-    currency: 'JPY',
-    currencyDisplay: 'symbol'
-  }).format(number)
 }
 
 getPensions()
