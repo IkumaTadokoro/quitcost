@@ -62,7 +62,7 @@
               </a>
             </td>
             <td class="admin-table-data-center">
-              <button @click="deleteInsurance(insurance.id)">
+              <button @click="destroy(insurance.id)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -174,14 +174,17 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
-import { useFormat } from '../composables/useFormat'
 import Swal from 'sweetalert2'
 import LoadingAnimation from './LoadingAnimation'
+import { useFormat } from '../composables/useFormat'
+import { useInsurances } from '../composables/useInsurances'
 
 const { formatYen, formatPercent } = useFormat()
+const { insurances, totalPages, getInsurances, deleteInsurance } =
+  useInsurances()
 
 const pageParam = () => {
   const url = new URL(location.href)
@@ -189,41 +192,22 @@ const pageParam = () => {
   return parseInt(page || 1)
 }
 
-const insurances = ref([])
-const totalPages = ref(0)
 const currentPage = ref(pageParam())
 
-const newParams = computed(() => {
+const newParams = $computed(() => {
   const params = new URL(location.href).searchParams
   params.set('page', currentPage.value)
   return params
 })
 
-const newUrl = computed(() => {
-  return `${location.pathname}?${newParams.value}`
-})
+const newUrl = $computed(() => `${location.pathname}?${newParams}`)
 
-const getInsurances = async () => {
-  const insurancesAPI = `/api/insurances.json?${newParams.value}`
-  const response = await fetch(insurancesAPI, {
-    method: 'GET',
-    headers: { 'X-Requested-With': 'XMLHttpRequest' },
-    credentials: 'same-origin',
-    redirect: 'manual'
-  })
-  const json = await response
-    .json()
-    .catch((e) => console.warn('Failed to parsing', e))
-  insurances.value = json.insurance
-  totalPages.value = parseInt(json.totalPages)
+const switchPage = (pageNum) => {
+  currentPage.value = pageNum
+  history.pushState(null, null, newUrl)
+  getInsurances(newParams)
 }
 
-const token = () => {
-  const meta = document.querySelector('meta[name="csrf-token"]')
-  return meta ? meta.getAttribute('content') : ''
-}
-
-// FIXME: toastにデザインを適用する
 const toast = (title) => {
   Swal.fire({
     title: title,
@@ -235,31 +219,14 @@ const toast = (title) => {
   })
 }
 
-const deleteInsurance = async (insuranceId) => {
-  const insuranceAPI = `/api/insurances/${insuranceId}`
+const destroy = async (insuranceId) => {
   const result = confirm('本当にこのレコードを削除しますか')
-  if (result) {
-    await fetch(insuranceAPI, {
-      method: 'DELETE',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': token()
-      },
-      credentials: 'same-origin',
-      redirect: 'manual'
-    })
-    toast('保険料率を削除しました。')
-    await getInsurances()
-  }
+  if (result) await deleteInsurance(insuranceId)
+  toast('保険料率を削除しました。')
+  await getInsurances(newParams)
 }
 
-const switchPage = (pageNum) => {
-  currentPage.value = pageNum
-  history.pushState(null, null, newUrl.value)
-  getInsurances()
-}
-
-getInsurances()
+onMounted(() => getInsurances(newParams))
 
 window.addEventListener('popstate', () => {
   location.href = window.location.href
