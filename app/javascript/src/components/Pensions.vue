@@ -69,116 +69,100 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import Swal from 'sweetalert2'
 
-export default {
-  components: {
-    VPagination
-  },
-  setup() {
-    const pageParam = () => {
-      const url = new URL(location.href)
-      const page = url.searchParams.get('page')
-      return parseInt(page || 1)
-    }
+const pageParam = () => {
+  const url = new URL(location.href)
+  const page = url.searchParams.get('page')
+  return parseInt(page || 1)
+}
 
-    const pensions = ref([])
-    const totalPages = ref(0)
-    const currentPage = ref(pageParam())
+const pensions = ref([])
+const totalPages = ref(0)
+const currentPage = ref(pageParam())
 
-    const newParams = computed(() => {
-      const params = new URL(location.href).searchParams
-      params.set('page', currentPage.value)
-      return params
+const newParams = computed(() => {
+  const params = new URL(location.href).searchParams
+  params.set('page', currentPage.value)
+  return params
+})
+
+const newUrl = computed(() => {
+  return `${location.pathname}?${newParams.value}`
+})
+
+const getPensions = async () => {
+  const pensionsAPI = `/api/pensions.json?${newParams.value}`
+  const response = await fetch(pensionsAPI, {
+    method: 'GET',
+    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    credentials: 'same-origin',
+    redirect: 'manual'
+  })
+  const json = await response
+    .json()
+    .catch((e) => console.warn('Failed to parsing', e))
+  pensions.value = json.pensions
+  totalPages.value = parseInt(json.totalPages)
+}
+
+const token = () => {
+  const meta = document.querySelector('meta[name="csrf-token"]')
+  return meta ? meta.getAttribute('content') : ''
+}
+
+// FIXME: toastにデザインを適用する
+const toast = (title) => {
+  Swal.fire({
+    title: title,
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true
+  })
+}
+
+const deletePension = async (pensionId) => {
+  const pensionAPI = `/api/pensions/${pensionId}`
+  const result = confirm('本当にこのレコードを削除しますか')
+  if (result) {
+    await fetch(pensionAPI, {
+      method: 'DELETE',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token()
+      },
+      credentials: 'same-origin',
+      redirect: 'manual'
     })
-
-    const newUrl = computed(() => {
-      return `${location.pathname}?${newParams.value}`
-    })
-
-    const getPensions = async () => {
-      const pensionsAPI = `/api/pensions.json?${newParams.value}`
-      const response = await fetch(pensionsAPI, {
-        method: 'GET',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        credentials: 'same-origin',
-        redirect: 'manual'
-      })
-      const json = await response
-        .json()
-        .catch((e) => console.warn('Failed to parsing', e))
-      pensions.value = json.pensions
-      totalPages.value = parseInt(json.totalPages)
-    }
-
-    const token = () => {
-      const meta = document.querySelector('meta[name="csrf-token"]')
-      return meta ? meta.getAttribute('content') : ''
-    }
-
-    // FIXME: toastにデザインを適用する
-    const toast = (title) => {
-      Swal.fire({
-        title: title,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true
-      })
-    }
-
-    const deletePension = async (pensionId) => {
-      const pensionAPI = `/api/pensions/${pensionId}`
-      const result = confirm('本当にこのレコードを削除しますか')
-      if (result) {
-        await fetch(pensionAPI, {
-          method: 'DELETE',
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': token()
-          },
-          credentials: 'same-origin',
-          redirect: 'manual'
-        })
-        toast('保険料率を削除しました。')
-        await getPensions()
-      }
-    }
-
-    const switchPage = (pageNum) => {
-      currentPage.value = pageNum
-      history.pushState(null, null, newUrl.value)
-      getPensions()
-    }
-
-    // e.g. 30000 → ¥30,000
-    const formatNumber = (number) => {
-      return new Intl.NumberFormat('ja', {
-        style: 'currency',
-        currency: 'JPY',
-        currencyDisplay: 'symbol'
-      }).format(number)
-    }
-
-    getPensions()
-
-    window.addEventListener('popstate', () => {
-      location.href = window.location.href
-    })
-
-    return {
-      pensions,
-      totalPages,
-      currentPage,
-      switchPage,
-      formatNumber,
-      deletePension
-    }
+    toast('保険料率を削除しました。')
+    await getPensions()
   }
 }
+
+const switchPage = (pageNum) => {
+  currentPage.value = pageNum
+  history.pushState(null, null, newUrl.value)
+  getPensions()
+}
+
+// e.g. 30000 → ¥30,000
+const formatNumber = (number) => {
+  return new Intl.NumberFormat('ja', {
+    style: 'currency',
+    currency: 'JPY',
+    currencyDisplay: 'symbol'
+  }).format(number)
+}
+
+getPensions()
+
+window.addEventListener('popstate', () => {
+  location.href = window.location.href
+})
 </script>
