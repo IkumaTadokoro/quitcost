@@ -1,18 +1,14 @@
 <template>
   <div class="container mx-auto">
     <div class="mx-auto">
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-3xl py-4">国民年金保険料一覧</h1>
-        </div>
-        <div>
-          <a
-            href="/admin/pensions/new"
-            class="inline-block text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm"
-            >新規登録</a
-          >
-        </div>
-      </div>
+      <header class="flex justify-between items-center">
+        <h1 class="text-3xl py-4">国民年金保険料一覧</h1>
+        <a
+          href="/admin/pensions/new"
+          class="inline-block text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm"
+          >新規登録</a
+        >
+      </header>
       <LoadingAnimation v-if="!pensions.length" />
       <div
         v-else
@@ -52,7 +48,7 @@
           </tbody>
         </table>
       </div>
-      <div class="flex justify-center py-4">
+      <nav class="flex justify-center py-4">
         <v-pagination
           v-model="currentPage"
           :pages="totalPages"
@@ -60,7 +56,7 @@
           active-color="#117766"
           @update:modelValue="switchPage"
         />
-      </div>
+      </nav>
     </div>
   </div>
 </template>
