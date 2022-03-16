@@ -6,7 +6,7 @@
         <span class="text-3xl font-semi-bold text-gray"> / </span>
         <span class="text-4xl text-primary">{{ zeroPadStepCounter }}</span>
       </h2>
-      <ProgressBar :top="current" :bottom="steps" />
+      <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
     <div class="px-24 m-16">
       <slot />

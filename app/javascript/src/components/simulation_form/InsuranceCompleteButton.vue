@@ -2,6 +2,7 @@
   <button
     type="button"
     class="border-0 w-48 p-3 focus:outline-none rounded-full text-sm bg-accent text-white hover:opacity-80 shadow-xl group relative cursor-pointer"
+    data-test-id="completeInsuranceButton"
     @click="completeInsurance"
   >
     <span
