@@ -13,11 +13,7 @@
           >
         </div>
       </div>
-      <div v-if="!pensions.length" class="flex justify-center my-64">
-        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
-        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full mx-8"></div>
-        <div class="animate-ping h-2 w-2 bg-green-800 rounded-full"></div>
-      </div>
+      <LoadingAnimation v-if="!pensions.length" />
       <div
         v-else
         class="overflow-x-auto bg-white rounded-md shadow overflow-y-auto relative mb-4"
@@ -75,6 +71,7 @@ import { useFormat } from '../composables/useFormat'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import Swal from 'sweetalert2'
+import LoadingAnimation from './LoadingAnimation'
 
 const { formatYen } = useFormat()
 

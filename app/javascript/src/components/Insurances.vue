@@ -13,11 +13,7 @@
           >
         </div>
       </div>
-      <div v-if="!insurances.length" class="flex justify-center my-64">
-        <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
-        <div class="animate-ping h-2 w-2 bg-primary rounded-full mx-8"></div>
-        <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
-      </div>
+      <LoadingAnimation v-if="!insurances.length" />
       <div
         v-else
         class="overflow-x-auto bg-white rounded-md shadow overflow-y-auto relative mb-4"
@@ -189,6 +185,7 @@ import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import { useFormat } from '../composables/useFormat'
 import Swal from 'sweetalert2'
+import LoadingAnimation from './LoadingAnimation'
 
 const { formatYen, formatPercent } = useFormat()
 
