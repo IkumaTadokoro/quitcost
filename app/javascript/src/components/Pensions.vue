@@ -34,7 +34,7 @@
                 </a>
               </td>
               <td class="admin-table-data-center">
-                <button @click="deletePension(pension.id)">
+                <button @click="destroy(pension.id)">
                   <i class="fas fa-trash"></i>
                 </button>
               </td>
@@ -62,14 +62,16 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useFormat } from '../composables/useFormat'
+import { onMounted, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
 import Swal from 'sweetalert2'
 import LoadingAnimation from './LoadingAnimation'
+import { useFormat } from '../composables/useFormat'
+import { usePensions } from '../composables/usePensions'
 
 const { formatYen } = useFormat()
+const { pensions, totalPages, getPensions, deletePension } = usePensions()
 
 const pageParam = () => {
   const url = new URL(location.href)
@@ -77,41 +79,16 @@ const pageParam = () => {
   return parseInt(page || 1)
 }
 
-const pensions = ref([])
-const totalPages = ref(0)
 const currentPage = ref(pageParam())
 
-const newParams = computed(() => {
+const newParams = $computed(() => {
   const params = new URL(location.href).searchParams
   params.set('page', currentPage.value)
   return params
 })
 
-const newUrl = computed(() => {
-  return `${location.pathname}?${newParams.value}`
-})
+const newUrl = $computed(() => `${location.pathname}?${newParams}`)
 
-const getPensions = async () => {
-  const pensionsAPI = `/api/pensions.json?${newParams.value}`
-  const response = await fetch(pensionsAPI, {
-    method: 'GET',
-    headers: { 'X-Requested-With': 'XMLHttpRequest' },
-    credentials: 'same-origin',
-    redirect: 'manual'
-  })
-  const json = await response
-    .json()
-    .catch((e) => console.warn('Failed to parsing', e))
-  pensions.value = json.pensions
-  totalPages.value = parseInt(json.totalPages)
-}
-
-const token = () => {
-  const meta = document.querySelector('meta[name="csrf-token"]')
-  return meta ? meta.getAttribute('content') : ''
-}
-
-// FIXME: toastにデザインを適用する
 const toast = (title) => {
   Swal.fire({
     title: title,
@@ -123,31 +100,20 @@ const toast = (title) => {
   })
 }
 
-const deletePension = async (pensionId) => {
-  const pensionAPI = `/api/pensions/${pensionId}`
+const destroy = async (pensionId) => {
   const result = confirm('本当にこのレコードを削除しますか')
-  if (result) {
-    await fetch(pensionAPI, {
-      method: 'DELETE',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': token()
-      },
-      credentials: 'same-origin',
-      redirect: 'manual'
-    })
-    toast('保険料率を削除しました。')
-    await getPensions()
-  }
+  if (result) await deletePension(pensionId)
+  toast('保険料率を削除しました。')
+  await getPensions(newParams)
 }
 
 const switchPage = (pageNum) => {
   currentPage.value = pageNum
-  history.pushState(null, null, newUrl.value)
-  getPensions()
+  history.pushState(null, null, newUrl)
+  getPensions(newParams)
 }
 
-getPensions()
+onMounted(() => getPensions(newParams))
 
 window.addEventListener('popstate', () => {
   location.href = window.location.href
