@@ -65,13 +65,14 @@
 import { onMounted, ref } from 'vue'
 import VPagination from '@hennge/vue3-pagination'
 import '@hennge/vue3-pagination/dist/vue3-pagination.css'
-import Swal from 'sweetalert2'
 import LoadingAnimation from './LoadingAnimation'
 import { useFormat } from '../composables/useFormat'
 import { usePensions } from '../composables/usePensions'
+import { useToast } from '../composables/useToast'
 
 const { formatYen } = useFormat()
 const { pensions, totalPages, getPensions, deletePension } = usePensions()
+const { toast } = useToast()
 
 const pageParam = () => {
   const url = new URL(location.href)
@@ -88,17 +89,6 @@ const newParams = $computed(() => {
 })
 
 const newUrl = $computed(() => `${location.pathname}?${newParams}`)
-
-const toast = (title) => {
-  Swal.fire({
-    title: title,
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true
-  })
-}
 
 const destroy = async (pensionId) => {
   const result = confirm('本当にこのレコードを削除しますか')
