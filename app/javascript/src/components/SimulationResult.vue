@@ -1,9 +1,5 @@
 <template>
-  <div v-if="loading" class="flex justify-center my-64">
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full mx-8"></div>
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
-  </div>
+  <LoadingAnimation v-if="loading" />
   <div v-else>
     <div class="max-w-screen-lg mx-auto pt-32 text-center">
       <div class="mb-6 mx-32">
@@ -126,6 +122,7 @@
 import { format } from 'date-fns'
 import { useRouter } from 'vue-router'
 import { useGlobalStore } from '../store/global'
+import LoadingAnimation from './LoadingAnimation'
 
 const router = useRouter()
 const { simulation } = useGlobalStore()
