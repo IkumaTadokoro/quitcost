@@ -1532,7 +1532,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@testing-library/dom@^8.5.0":
+"@testing-library/dom@^8.11.3", "@testing-library/dom@^8.5.0":
   version "8.11.3"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.11.3.tgz#38fd63cbfe14557021e88982d931e33fb7c1a808"
   integrity sha512-9LId28I+lx70wUiZjLvi1DB/WT2zGOxUh46glrSNMaWVx849kKAluezVzZrXJfTKKoQTmEOutLes/bHg4Bj3aA==
@@ -1545,6 +1545,13 @@
     dom-accessibility-api "^0.5.9"
     lz-string "^1.4.4"
     pretty-format "^27.0.2"
+
+"@testing-library/user-event@^14.0.0-beta":
+  version "14.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.0.0-beta.13.tgz#dd7d819588ac28e96b7e7af6d6d61b6f0a99f1a5"
+  integrity sha512-KjgkzbV3TmVOU6rUvNs7coezsPEVZKAcejG+GjxpmzB4JszyX9S6hyN729bIPFE7hl/5/LbfSn9KChUaTxd22Q==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@testing-library/vue@^6.5.1":
   version "6.5.1"
