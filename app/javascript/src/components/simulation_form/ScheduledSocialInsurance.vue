@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label">
+    <label for="scheduledSalary" class="form-label">
       <span class="inline-block">{{ `今年度（${from} ~ ${to}）の` }}</span
       ><span class="inline-block">「予定社会保険料」を教えてください</span>
-    </h2>
+    </label>
     <input
+      id="scheduledSalary"
       class="form-field text-right"
       type="text"
       :value="scheduledSocialInsurance"

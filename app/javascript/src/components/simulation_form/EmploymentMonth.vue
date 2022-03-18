@@ -1,7 +1,10 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label">転職予定月を教えてください</h2>
+    <label for="employmentMonth" class="form-label"
+      >転職予定月を教えてください</label
+    >
     <input
+      id="employmentMonth"
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '####/##' }"

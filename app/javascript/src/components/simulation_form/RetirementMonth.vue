@@ -1,7 +1,10 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label">退職予定月を教えてください</h2>
+    <label for="retirementMonth" class="form-label"
+      >退職予定月を教えてください</label
+    >
     <input
+      id="retirementMonth"
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '####/##' }"

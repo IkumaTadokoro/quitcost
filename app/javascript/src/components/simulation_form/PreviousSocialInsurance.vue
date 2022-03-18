@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label">
+    <label for="previousSocialInsurance" class="form-label">
       <span class="inline-block">{{ `昨年度（${from} ~ ${to}）の` }}</span
       ><span class="inline-block">「社会保険料」を教えてください</span>
-    </h2>
+    </label>
     <input
+      id="previousSocialInsurance"
       class="form-field text-right"
       type="text"
       :value="previousSocialInsurance"

@@ -1,7 +1,8 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label">年齢を教えてください</h2>
+    <label for="age" class="form-label">年齢を教えてください</label>
     <input
+      id="age"
       class="form-field text-right"
       type="text"
       :value="age"

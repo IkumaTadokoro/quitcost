@@ -1,9 +1,10 @@
 <template>
   <div class="text-center">
-    <h2 class="form-label whitespace-nowrap">
+    <label for="postalCode" class="form-label whitespace-nowrap">
       お住まいの地域の郵便番号を教えてください
-    </h2>
+    </label>
     <input
+      id="postalCode"
       class="form-field text-center"
       type="text"
       v-maska="{ mask: '###-####' }"
