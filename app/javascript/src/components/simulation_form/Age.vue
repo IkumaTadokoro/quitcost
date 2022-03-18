@@ -1,15 +1,14 @@
 <template>
-  <div class="text-center">
-    <h2 class="form-label">年齢を教えてください</h2>
-    <input
-      class="form-field text-right"
-      type="text"
-      :value="age"
-      @change="handleChange"
-      placeholder="30"
-    /><span class="form-supplement">歳</span>
-    <p class="form-error">{{ error }}</p>
-  </div>
+  <label for="age" class="form-label">年齢を教えてください</label>
+  <input
+    id="age"
+    class="form-field text-right"
+    type="text"
+    :value="age"
+    @change="handleChange"
+    placeholder="30"
+  /><span class="form-supplement">歳</span>
+  <p class="form-error">{{ error }}</p>
 </template>
 
 <script setup>
