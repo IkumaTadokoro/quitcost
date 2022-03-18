@@ -1,11 +1,7 @@
 <template>
   <form class="mt-20" @submit="onSubmit">
     <div class="flex">
-      <div>
-        <span class="text-6xl text-primary">{{ displayStep }}</span>
-        <span class="text-3xl font-semi-bold text-gray"> / </span>
-        <span class="text-4xl text-primary">{{ zeroPadStepCounter }}</span>
-      </div>
+      <ProgressStep :top="current + 1" :bottom="steps" />
       <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
     <div class="px-24 m-16 text-center">
@@ -27,6 +23,7 @@
 </template>
 
 <script setup>
+import ProgressStep from './ProgressStep'
 import ProgressBar from './ProgressBar'
 import { useForm } from 'vee-validate'
 import { computed } from 'vue'
@@ -45,9 +42,7 @@ const steps = $computed(() => simulation.steps)
 const params = $computed(() => simulation.params)
 
 const validationSchema = useValidationSchema(new Date(params.simulationDate))
-const displayStep = computed(() => ('00' + (current + 1)).slice(-2))
 const nextStep = computed(() => (next ? 'つぎの質問へ' : '計算結果へ'))
-const zeroPadStepCounter = computed(() => ('00' + steps).slice(-2))
 
 const { resetForm, handleSubmit } = useForm({
   validationSchema: computed(() => validationSchema[simulation.currentStep])
