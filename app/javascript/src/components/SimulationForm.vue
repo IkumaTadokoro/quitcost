@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <FormWizard :validation-schema="validationSchema" @submit="onSubmit">
+    <FormWizard @submit="onSubmit">
       <router-view></router-view>
     </FormWizard>
   </div>
@@ -8,15 +8,9 @@
 
 <script setup>
 import FormWizard from './FormWizard'
-import { useValidationSchema } from '../composables/useValidationSchema'
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from '../store/global'
 
-const { simulation } = useGlobalStore()
-const params = $computed(() => simulation.params)
 const router = useRouter()
-
-const validationSchema = useValidationSchema(new Date(params.simulationDate))
 
 const onSubmit = () => router.push('/simulations')
 </script>
