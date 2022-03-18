@@ -23,7 +23,7 @@ const onSubmit = () => router.push('/simulations')
 
 <style scope>
 .form-label {
-  @apply text-4xl h-32;
+  @apply text-4xl inline-block mb-12;
 }
 
 .form-field {

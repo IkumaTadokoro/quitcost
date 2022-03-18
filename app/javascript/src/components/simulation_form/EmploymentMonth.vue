@@ -1,23 +1,21 @@
 <template>
-  <div class="text-center">
-    <label for="employmentMonth" class="form-label"
-      >転職予定月を教えてください</label
-    >
-    <input
-      id="employmentMonth"
-      class="form-field text-center"
-      type="text"
-      v-maska="{ mask: '####/##' }"
-      :value="employmentMonth"
-      @change="handleChange"
-      placeholder="2022/02"
-    />
-    <p class="form-tips">
-      <i class="fas fa-info-circle mr-2"></i>計算可能な範囲：
-      {{ `${from} ~ ${to}` }}
-    </p>
-    <p class="form-error">{{ error }}</p>
-  </div>
+  <label for="employmentMonth" class="form-label"
+    >転職予定月を教えてください</label
+  >
+  <input
+    id="employmentMonth"
+    class="form-field text-center"
+    type="text"
+    v-maska="{ mask: '####/##' }"
+    :value="employmentMonth"
+    @change="handleChange"
+    placeholder="2022/02"
+  />
+  <p class="form-tips">
+    <i class="fas fa-info-circle mr-2"></i>計算可能な範囲：
+    {{ `${from} ~ ${to}` }}
+  </p>
+  <p class="form-error">{{ error }}</p>
 </template>
 
 <script setup>

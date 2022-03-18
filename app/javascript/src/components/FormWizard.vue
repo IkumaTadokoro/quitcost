@@ -8,7 +8,7 @@
       </h2>
       <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
-    <div class="px-24 m-16">
+    <div class="px-24 m-16 text-center">
       <slot />
     </div>
     <div class="flex justify-evenly">

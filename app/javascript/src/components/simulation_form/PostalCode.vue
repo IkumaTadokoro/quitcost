@@ -1,24 +1,22 @@
 <template>
-  <div class="text-center">
-    <label for="postalCode" class="form-label whitespace-nowrap">
-      お住まいの地域の郵便番号を教えてください
-    </label>
-    <input
-      id="postalCode"
-      class="form-field text-center"
-      type="text"
-      v-maska="{ mask: '###-####' }"
-      :value="postalCode"
-      @change="handleChange"
-      @blur="setAddress"
-      placeholder="100-0004"
-    />
-    <p class="form-tips">
-      <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ address }}
-    </p>
-    <p class="form-error">{{ error }}</p>
-    <p v-if="!error" class="form-error">{{ addressError }}</p>
-  </div>
+  <label for="postalCode" class="form-label whitespace-nowrap">
+    お住まいの地域の郵便番号を教えてください
+  </label>
+  <input
+    id="postalCode"
+    class="form-field text-center"
+    type="text"
+    v-maska="{ mask: '###-####' }"
+    :value="postalCode"
+    @change="handleChange"
+    @blur="setAddress"
+    placeholder="100-0004"
+  />
+  <p class="form-tips">
+    <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ address }}
+  </p>
+  <p class="form-error">{{ error }}</p>
+  <p v-if="!error" class="form-error">{{ addressError }}</p>
 </template>
 
 <script setup>
