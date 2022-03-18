@@ -1,11 +1,11 @@
 <template>
   <form class="mt-20" @submit="onSubmit">
     <div class="flex">
-      <h2>
+      <div>
         <span class="text-6xl text-primary">{{ displayStep }}</span>
         <span class="text-3xl font-semi-bold text-gray"> / </span>
         <span class="text-4xl text-primary">{{ zeroPadStepCounter }}</span>
-      </h2>
+      </div>
       <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
     <div class="px-24 m-16 text-center">
@@ -32,15 +32,9 @@ import { useForm } from 'vee-validate'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGlobalStore } from '../store/global'
+import { useValidationSchema } from '../composables/useValidationSchema'
 
 const emit = defineEmits(['next', 'submit'])
-const props = defineProps({
-  validationSchema: {
-    type: Object,
-    required: true
-  }
-})
-
 const { simulation } = useGlobalStore()
 const router = useRouter()
 
@@ -50,14 +44,13 @@ const next = $computed(() => simulation.nextStep.value)
 const steps = $computed(() => simulation.steps)
 const params = $computed(() => simulation.params)
 
+const validationSchema = useValidationSchema(new Date(params.simulationDate))
 const displayStep = computed(() => ('00' + (current + 1)).slice(-2))
 const nextStep = computed(() => (next ? 'つぎの質問へ' : '計算結果へ'))
 const zeroPadStepCounter = computed(() => ('00' + steps).slice(-2))
 
 const { resetForm, handleSubmit } = useForm({
-  validationSchema: computed(
-    () => props.validationSchema[simulation.currentStep]
-  )
+  validationSchema: computed(() => validationSchema[simulation.currentStep])
 })
 
 const onSubmit = handleSubmit((values) => {
