@@ -5,7 +5,9 @@
     "lint": "run-p lint:*",
     "lint:eslint": "eslint 'app/javascript/**/*.{js,vue}' --max-warnings=0",
     "lint:prettier": "prettier app/javascript/**/*.{js,vue} --check",
-    "test:unit": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "test:unit": "jest --passWithNoTests /app/javascript/test/unit",
+    "test:integrations": "jest --passWithNoTests /app/javascript/test/integrations"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
