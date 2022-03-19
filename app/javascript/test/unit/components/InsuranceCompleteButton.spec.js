@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import InsuranceCompleteButton from '../components/simulation_form/InsuranceCompleteButton'
+import InsuranceCompleteButton from 'components/simulation_form/InsuranceCompleteButton'
 
 describe('InsuranceCompleteButton', () => {
   describe('emit', () => {

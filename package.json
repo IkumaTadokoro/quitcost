@@ -5,7 +5,9 @@
     "lint": "run-p lint:*",
     "lint:eslint": "eslint 'app/javascript/**/*.{js,vue}' --max-warnings=0",
     "lint:prettier": "prettier app/javascript/**/*.{js,vue} --check",
-    "test:unit": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "test:unit": "jest --passWithNoTests /app/javascript/test/unit",
+    "test:integrations": "jest --passWithNoTests /app/javascript/test/integrations"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
@@ -41,6 +43,8 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@testing-library/dom": "^8.11.3",
+    "@testing-library/vue": "^6.5.1",
     "@vue/test-utils": "^2.0.0-rc.17",
     "@vue/vue3-jest": "27.0.0-alpha.4",
     "babel-jest": "^27.5.1",
@@ -57,7 +61,7 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/app/javascript/src"
+      "<rootDir>/app/javascript/test"
     ],
     "moduleFileExtensions": [
       "js",
@@ -69,7 +73,11 @@
     },
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+      "^@/(.*)$": "<rootDir>/app/javascript/src/$1",
+      "^components/(.*)$": "<rootDir>/app/javascript/src/components/$1",
+      "^composables/(.*)$": "<rootDir>/app/javascript/src/composables/$1",
+      "^store/(.*)$": "<rootDir>/app/javascript/src/store/$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/app/javascript/test/mocks/fileMock.js"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { useFinancialYear } from '../useFinancialYear'
+import { useFinancialYear } from 'composables/useFinancialYear'
 
 describe('#beginningOfYear', () => {
   const date = new Date('2022-03-14')
