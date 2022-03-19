@@ -1,4 +1,4 @@
-import simulationStore from '../simulation'
+import simulationStore from 'store/simulation'
 
 describe('#add_params', () => {
   const mockDate = new Date('2022-03-15')

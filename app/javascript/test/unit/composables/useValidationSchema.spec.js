@@ -1,4 +1,4 @@
-import { useValidationSchema } from '../useValidationSchema'
+import { useValidationSchema } from 'composables/useValidationSchema'
 
 describe('#validationSchema', () => {
   const baseDate = new Date('2022-03-15')

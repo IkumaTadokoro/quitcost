@@ -59,7 +59,7 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/app/javascript/src"
+      "<rootDir>/app/javascript/test"
     ],
     "moduleFileExtensions": [
       "js",
@@ -71,7 +71,11 @@
     },
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+      "^@/(.*)$": "<rootDir>/app/javascript/src/$1",
+      "^components/(.*)$": "<rootDir>/app/javascript/src/components/$1",
+      "^composables/(.*)$": "<rootDir>/app/javascript/src/composables/$1",
+      "^store/(.*)$": "<rootDir>/app/javascript/src/store/$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/app/javascript/test/mocks/fileMock.js"
     }
   }
 }
