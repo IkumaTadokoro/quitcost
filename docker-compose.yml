@@ -12,6 +12,15 @@ services:
     image: selenium/standalone-chrome:latest
     ports:
       - "4444:4444"
+  cypress:
+    image: "cypress/included:9.4.1"
+    depends_on:
+      - web
+    environment:
+      - CYPRESS_baseUrl=http://web:3000
+    working_dir: /e2e
+    volumes:
+      - ./e2e:/e2e
   web:
     build: .
     command: tail -f /dev/null
