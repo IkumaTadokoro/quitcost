@@ -3,11 +3,15 @@
     <span class="inline-block">{{ `今年度（${from} ~ ${to}）の` }}</span
     ><span class="inline-block">「予定社会保険料」を教えてください</span>
   </label>
+  <p class="mb-1 w-9/12 mx-auto text-right">
+    <span class="ml-2 text-red-600">{{ error }}</span>
+  </p>
   <input
     id="scheduledSalary"
     class="form-field text-right"
     type="text"
     :value="scheduledSocialInsurance"
+    :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     v-maska="{ mask: '#*' }"
     placeholder="500000"
@@ -28,7 +32,6 @@
       </ul>
     </div>
   </div>
-  <p class="form-error">{{ error }}</p>
   <InsuranceCompleteButton
     :salary="scheduledSalary"
     @completeInsurance="completeInsurance"

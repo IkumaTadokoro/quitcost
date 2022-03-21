@@ -15,19 +15,15 @@ const onSubmit = () => router.push('/simulations')
 
 <style scope>
 .form-label {
-  @apply h-20 text-4xl inline-block mb-2;
+  @apply h-24 text-4xl inline-block mb-2;
 }
 
 .form-field {
-  @apply px-6 py-2 w-9/12 rounded-md border-4 border-boundaryBlack focus:border-gray tracking-widest text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
+  @apply px-6 py-2 w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
 }
 
 .form-field-error {
-  @apply px-6 py-2 w-9/12 rounded-md border-4 border-red-600 tracking-widest text-5xl outline-none leading-8 placeholder-boundaryBlack;
-}
-
-.form-field-success {
-  @apply px-6 py-2 w-9/12 rounded-md border-4 border-primary tracking-widest text-5xl outline-none leading-8 placeholder-boundaryBlack;
+  @apply px-6 py-2 w-9/12 rounded-md border-4 border-red-500 focus:border-red-600 tracking-widest text-5xl outline-none leading-8 placeholder-boundaryBlack;
 }
 
 .form-tips {

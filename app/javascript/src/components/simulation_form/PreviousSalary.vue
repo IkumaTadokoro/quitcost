@@ -3,11 +3,15 @@
     <span class="inline-block">{{ `昨昨年度（${from} ~ ${to}）の` }}</span
     ><span class="inline-block">「所得」を教えてください</span>
   </label>
+  <p class="mb-1 w-9/12 mx-auto text-right">
+    <span class="ml-2 text-red-600">{{ error }}</span>
+  </p>
   <input
     id="previousSalary"
     class="form-field text-right"
     type="text"
     :value="previousSalary"
+    :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     v-maska="{ mask: '#*' }"
     placeholder="500000"
@@ -16,7 +20,6 @@
     <i class="fas fa-info-circle mr-2"></i
     >所得額は住民税決定通知書の「給与所得（所得金額調整控除後）」の値です
   </p>
-  <p class="form-error">{{ error }}</p>
 </template>
 
 <script setup>

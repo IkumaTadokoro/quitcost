@@ -2,12 +2,16 @@
   <label for="postalCode" class="form-label whitespace-nowrap">
     お住まいの地域の郵便番号を教えてください
   </label>
+  <p class="mb-1 w-9/12 mx-auto text-right">
+    <span class="ml-2 text-red-600">{{ error || addressError }}</span>
+  </p>
   <input
     id="postalCode"
     class="form-field text-center"
     type="text"
     v-maska="{ mask: '###-####' }"
     :value="postalCode"
+    :class="error || addressError ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     @blur="setAddress"
     placeholder="100-0004"
@@ -15,8 +19,6 @@
   <p class="form-tips">
     <i class="fas fa-info-circle mr-2"></i>お住まいの地域： {{ address }}
   </p>
-  <p class="form-error">{{ error }}</p>
-  <p v-if="!error" class="form-error">{{ addressError }}</p>
 </template>
 
 <script setup>
