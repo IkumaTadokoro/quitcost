@@ -15,7 +15,8 @@
     },
     "plugins": [
         "vue",
-        "jest"
+        "jest",
+        "cypress"
     ],
     "rules": {
         "vue/multi-word-component-names": 0
