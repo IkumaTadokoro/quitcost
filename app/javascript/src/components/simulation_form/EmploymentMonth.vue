@@ -2,12 +2,16 @@
   <label for="employmentMonth" class="form-label"
     >転職予定月を教えてください</label
   >
+  <p class="mb-1 w-9/12 mx-auto text-right">
+    <span class="ml-2 text-red-600">{{ error }}</span>
+  </p>
   <input
     id="employmentMonth"
     class="form-field text-center"
     type="text"
     v-maska="{ mask: '####/##' }"
     :value="employmentMonth"
+    :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     placeholder="2022/02"
   />
@@ -15,7 +19,6 @@
     <i class="fas fa-info-circle mr-2"></i>計算可能な範囲：
     {{ `${from} ~ ${to}` }}
   </p>
-  <p class="form-error">{{ error }}</p>
 </template>
 
 <script setup>

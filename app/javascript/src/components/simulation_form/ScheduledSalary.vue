@@ -3,11 +3,15 @@
     <span class="inline-block">{{ `今年度（${from} ~ ${to}）` }}の</span
     ><span class="inline-block">「予定所得額」を教えてください</span>
   </label>
+  <p class="mb-1 w-9/12 mx-auto text-right">
+    <span class="ml-2 text-red-600">{{ error }}</span>
+  </p>
   <input
     id="scheduledSalary"
     class="form-field text-right"
     type="text"
     :value="scheduledSalary"
+    :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     v-maska="{ mask: '#*' }"
     placeholder="500000"
@@ -16,7 +20,6 @@
     <i class="fas fa-info-circle mr-2"></i
     >予定所得額は「退職するまでの毎月の給与（満額）」と「賞与（満額）」の合計です
   </p>
-  <p class="form-error">{{ error }}</p>
 </template>
 
 <script setup>

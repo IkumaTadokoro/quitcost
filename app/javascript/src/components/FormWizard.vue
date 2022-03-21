@@ -4,10 +4,10 @@
       <ProgressStep :top="current + 1" :bottom="steps" />
       <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
-    <div class="px-24 m-16 text-center">
-      <slot />
+    <div class="h-80 px-24 m-12 text-center">
+      <router-view></router-view>
     </div>
-    <div class="flex justify-evenly">
+    <div class="flex px-24 justify-evenly">
       <button class="prev-button" v-if="prev" type="button" @click="goToPrev">
         まえの質問へ
       </button>
