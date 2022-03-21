@@ -13,7 +13,7 @@
     :value="retirementMonth"
     :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
-    placeholder="2022/02"
+    :placeholder="from"
   />
   <p class="form-tips">
     <i class="fas fa-info-circle mr-2"></i>計算可能な範囲：
