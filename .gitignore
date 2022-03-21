@@ -34,3 +34,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Cypress Artifacts
+/e2e/cypress/screenshots/
+/e2e/cypress/videos/
