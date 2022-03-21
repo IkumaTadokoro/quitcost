@@ -1,7 +1,7 @@
 <template>
   <label for="previousSalary" class="form-label">
     <span class="inline-block">{{ `昨昨年度（${from} ~ ${to}）の` }}</span
-    ><span class="inline-block">「所得」を教えてください</span>
+    ><span class="inline-block">「所得額」を教えてください</span>
   </label>
   <p class="mb-1 w-9/12 mx-auto text-right">
     <span class="ml-2 text-red-600">{{ error }}</span>
@@ -18,7 +18,7 @@
   />
   <p class="form-tips">
     <i class="fas fa-info-circle mr-2"></i
-    >所得額は住民税決定通知書の「給与所得（所得金額調整控除後）」の値です
+    >昨昨年度の所得額は住民税決定通知書の「給与所得（所得金額調整控除後）」の値です
   </p>
 </template>
 

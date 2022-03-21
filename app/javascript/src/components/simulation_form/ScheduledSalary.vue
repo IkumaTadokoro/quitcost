@@ -1,7 +1,7 @@
 <template>
   <label for="scheduledSalary" class="form-label">
     <span class="inline-block">{{ `今年度（${from} ~ ${to}）` }}の</span
-    ><span class="inline-block">「予定所得額」を教えてください</span>
+    ><span class="inline-block">「所得額」を教えてください</span>
   </label>
   <p class="mb-1 w-9/12 mx-auto text-right">
     <span class="ml-2 text-red-600">{{ error }}</span>
@@ -18,7 +18,7 @@
   />
   <p class="form-tips">
     <i class="fas fa-info-circle mr-2"></i
-    >予定所得額は「退職するまでの毎月の給与（満額）」と「賞与（満額）」の合計です
+    >今年度の所得額は「退職するまでの毎月の給与（満額）」と「賞与（満額）」の合計です
   </p>
 </template>
 
@@ -34,6 +34,7 @@ const { simulation } = useGlobalStore()
 const params = $computed(() => simulation.params)
 
 const base = new Date(params.simulationDate)
+
 const { beginningOfYear, endOfYear } = useFinancialYear(base, 1, 4)
 const from = format(beginningOfYear, 'yyyy年M月d日')
 const to = format(endOfYear, 'yyyy年M月d日')
