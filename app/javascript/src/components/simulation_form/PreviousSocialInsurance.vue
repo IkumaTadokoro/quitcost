@@ -18,7 +18,7 @@
   />
   <p class="form-tips">
     <i class="fas fa-info-circle mr-2"></i
-    >住民税の総額は、住民税決定通知書の「社会保険料」の値です
+    >昨昨年度の社会保険料は、住民税決定通知書の「社会保険料」の値です
   </p>
   <InsuranceCompleteButton
     :salary="previousSalary"

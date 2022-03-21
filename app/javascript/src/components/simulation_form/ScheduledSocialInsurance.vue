@@ -1,7 +1,7 @@
 <template>
   <label for="scheduledSalary" class="form-label">
     <span class="inline-block">{{ `今年度（${from} ~ ${to}）の` }}</span
-    ><span class="inline-block">「予定社会保険料」を教えてください</span>
+    ><span class="inline-block">「社会保険料」を教えてください</span>
   </label>
   <p class="mb-1 w-9/12 mx-auto text-right">
     <span class="ml-2 text-red-600">{{ error }}</span>
@@ -21,7 +21,7 @@
       <i class="fas fa-info-circle mr-2"></i>
     </div>
     <div class="text-left">
-      <p>予定社会保険料は以下の合計です。</p>
+      <p>今年度の社会保険料は以下の合計です。</p>
       <ul class="list-disc pl-6 pt-0.5">
         <li>
           退職するまでの毎月の「社会保険料」「厚生年金保険料」「雇用保険料」
