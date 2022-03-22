@@ -1,4 +1,6 @@
 {
   "pluginsFile": false,
-  "supportFile": false
+  "supportFile": false,
+  "viewportWidth": 1440,
+  "viewportHeight": 960
 }
