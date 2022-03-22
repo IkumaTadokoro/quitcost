@@ -1,0 +1,5 @@
+version: '3.2'
+
+services:
+  web:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -d -p 3000 -b '0.0.0.0' && bin/webpack-dev-server"
