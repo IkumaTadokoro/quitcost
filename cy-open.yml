@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  web:
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -d -p 3000 -b '0.0.0.0' && bin/webpack-dev-server"
+  cypress:
+    entrypoint: cypress open --project /e2e
+    environment:
+      - DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
