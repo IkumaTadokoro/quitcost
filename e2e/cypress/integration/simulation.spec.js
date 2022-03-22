@@ -24,10 +24,7 @@ describe('Simulation', () => {
           cy.contains('つぎの質問へ').click()
 
           cy.contains('郵便番号').should('be.visible')
-          cy.get('input').type('1000004{enter}')
-          cy.wait(500)
-          cy.contains('つぎの質問へ').click()
-          cy.contains('つぎの質問へ').click()
+          cy.get('input').type('1000004')
           cy.contains('つぎの質問へ').click()
 
           cy.contains('昨昨年度').should('be.visible')
@@ -73,10 +70,7 @@ describe('Simulation', () => {
           cy.contains('つぎの質問へ').click()
 
           cy.contains('郵便番号').should('be.visible')
-          cy.get('input').type('1000004{enter}')
-          cy.wait(500)
-          cy.contains('つぎの質問へ').click()
-          cy.contains('つぎの質問へ').click()
+          cy.get('input').type('1000004')
           cy.contains('つぎの質問へ').click()
 
           cy.contains('昨年度').should('be.visible')
@@ -112,10 +106,7 @@ describe('Simulation', () => {
           cy.contains('つぎの質問へ').click()
 
           cy.contains('郵便番号').should('be.visible')
-          cy.get('input').type('1000004{enter}')
-          cy.wait(500)
-          cy.contains('つぎの質問へ').click()
-          cy.contains('つぎの質問へ').click()
+          cy.get('input').type('1000004')
           cy.contains('つぎの質問へ').click()
 
           cy.contains('昨年度').should('be.visible')
@@ -159,10 +150,7 @@ describe('Simulation', () => {
         cy.contains('つぎの質問へ').click()
 
         cy.contains('郵便番号').should('be.visible')
-        cy.get('input').type('1000004{enter}')
-        cy.wait(500)
-        cy.contains('つぎの質問へ').click()
-        cy.contains('つぎの質問へ').click()
+        cy.get('input').type('1000004')
         cy.contains('つぎの質問へ').click()
 
         cy.contains('今年度').should('be.visible')
