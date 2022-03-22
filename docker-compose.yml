@@ -14,6 +14,8 @@ services:
       - "4444:4444"
   cypress:
     image: "cypress/included:9.4.1"
+    depends_on:
+      - web
     environment:
       - CYPRESS_baseUrl=http://web:3000
     working_dir: /e2e
