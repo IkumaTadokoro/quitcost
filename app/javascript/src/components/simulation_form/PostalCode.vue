@@ -13,7 +13,6 @@
     :value="postalCode"
     :class="error || addressError ? 'form-field-error' : 'form-field'"
     @change="handleChange"
-    @blur="setAddress"
     placeholder="100-0004"
   />
   <p class="form-tips">
@@ -22,7 +21,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useField } from 'vee-validate'
 import axios from 'axios'
@@ -39,7 +38,7 @@ let {
 } = useField('postalCode')
 let { value: address, errorMessage: addressError } = useField('address')
 
-const setAddress = async () => {
+watchEffect(async () => {
   address.value = ''
 
   if (!postalCode.value) return
@@ -61,11 +60,10 @@ const setAddress = async () => {
   } catch (err) {
     console.warn(err)
   }
-}
+})
 
 onMounted(async () => {
   postalCode.value = params.postalCode
   simulation.setCurrentStep(useRoute().name)
-  if (postalCode.value) await setAddress()
 })
 </script>
