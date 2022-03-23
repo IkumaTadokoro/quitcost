@@ -33,11 +33,7 @@ jobs:
       - name: Jest
         run: docker-compose run web yarn test
       - name: Cypress
-        run: |
-          docker-compose up -d web
-          docker-compose exec -T web bin/webpack
-          docker-compose exec -T web rails s -d
-          docker-compose up --exit-code-from cypress
+        run: docker-compose -f docker-compose.yml -f cypress.yml up --exit-code-from cypress
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
