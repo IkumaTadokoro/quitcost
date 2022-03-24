@@ -2,7 +2,7 @@
   <div>
     <div class="container mx-auto pt-8 pb-6">
       <div class="md:max-w-3xl mb-6 mx-auto px-4">
-        <img src="~logo.svg" alt="" />
+        <img src="~logo.svg" alt="quitcost" />
       </div>
       <div class="md:max-w-6xl mb-6 mx-auto bg-secondary p-2">
         <p class="text-center text-xs md:text-base">
