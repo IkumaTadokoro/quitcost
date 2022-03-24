@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="container mx-auto pt-8 pb-6">
+    <div class="container mx-auto pt-10 pb-6">
       <div class="md:max-w-3xl mb-6 mx-auto px-4">
         <img src="~logo.svg" alt="quitcost" />
       </div>
-      <div class="md:max-w-6xl mb-6 mx-auto bg-secondary p-2">
-        <p class="text-center text-xs md:text-base">
+      <div class="md:max-w-6xl mb-8 mx-auto p-2">
+        <p class="text-center text-xs md:text-base text-gray">
           転職準備のために仕事をやめたいけど、お金が心配...。
         </p>
-        <p class="text-center text-xs md:text-base">
+        <p class="text-center text-xs md:text-base text-gray">
           いくつかの質問に答えるだけで、無職期間でどれだけ「保険」「税金」「年金」がかかるか計算できます
         </p>
       </div>
@@ -22,14 +22,14 @@
       </div>
     </div>
   </div>
-  <div class="bg-boundaryBlack">
+  <div class="bg-secondary">
     <div class="container mx-auto py-8">
       <div
-        class="md:max-w-6xl mx-auto bg-white md:rounded-lg px-4 md:px-12 py-6"
+        class="md:max-w-6xl mx-auto bg-white md:rounded-lg px-4 md:px-12 py-6 shadow-sm"
       >
         <div class="mb-6">
           <h2
-            class="text-lg md:text-2xl text-center underline underline-offset-8 decoration-4 decoration-primary"
+            class="text-lg md:text-2xl text-center underline underline-offset-8 decoration-4 decoration-primary mb-4"
           >
             準備するもの（なくてもOK！）
           </h2>
