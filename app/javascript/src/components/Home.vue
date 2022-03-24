@@ -31,8 +31,12 @@
           <h2
             class="text-lg md:text-2xl text-center underline underline-offset-8 decoration-4 decoration-primary"
           >
-            準備するもの
+            準備するもの（なくてもOK！）
           </h2>
+          <p class="text-sm text-center text-gray">
+            <i class="fas fa-info-circle mr-1"></i>
+            額面の年収がだいたいいくらかわかれば計算できます！
+          </p>
         </div>
         <div class="flex flex-wrap gap-y-4">
           <div class="w-full md:w-1/2 px-4">
