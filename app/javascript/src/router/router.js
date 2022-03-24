@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home'
+import NotFound from '../components/NotFound'
 import SimulationForm from '../components/SimulationForm'
 import SimulationResult from '../components/SimulationResult'
 import RetirementMonth from '../components/simulation_form/RetirementMonth.vue'
@@ -17,6 +18,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home },
+    { path: '/:pathMatch(.*)*', component: NotFound },
     {
       path: '/simulations/new',
       component: SimulationForm,
