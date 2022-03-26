@@ -145,6 +145,26 @@ export default function simulationStore() {
       )
     },
 
+    get routes() {
+      return state.value.routes
+    },
+
+    get isFinished() {
+      return state.value.steps === state.value.currentStepIdx + 1
+    },
+
+    get accessibleRoute() {
+      const camelizeAnswer = Object.keys(state.value.params).map(
+        (route) => route[0].toUpperCase() + route.slice(1)
+      )
+      const completedRoute = camelizeAnswer.filter((route) =>
+        state.value.routes.includes(route)
+      )
+      const lastStep = state.value.routes.indexOf(completedRoute.at(-1)) + 1
+      const nextRoute = state.value.routes[lastStep]
+      return [...completedRoute, nextRoute]
+    },
+
     get result() {
       return state.value.result
     },

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import globalStore from '../store/global'
 import Home from '../components/Home'
 import NotFound from '../components/NotFound'
 import SimulationForm from '../components/SimulationForm'
@@ -83,10 +84,26 @@ const router = createRouter({
     },
     {
       path: '/simulations',
+      name: 'Result',
       component: SimulationResult,
       meta: { title: 'シミュレーション結果' }
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const { simulation } = globalStore()
+
+  if (to.name === 'Result' && !simulation.isFinished) {
+    router.push({ name: simulation.currentStep })
+  } else if (
+    !to.fullPath.indexOf('/simulations/new/') &&
+    !simulation.accessibleRoute.includes(to.name)
+  ) {
+    router.push({ name: simulation.currentStep })
+  } else {
+    next()
+  }
 })
 
 const DEFAULT_TITLE = 'quitcost'
