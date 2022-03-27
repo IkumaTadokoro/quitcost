@@ -2,9 +2,7 @@
   <label for="retirementMonth" class="form-label"
     >退職予定月を教えてください</label
   >
-  <p class="mb-1 w-9/12 mx-auto text-right">
-    <span class="ml-2 text-red-600">{{ error }}</span>
-  </p>
+  <p class="form-error">{{ error }}</p>
   <input
     id="retirementMonth"
     class="text-center"

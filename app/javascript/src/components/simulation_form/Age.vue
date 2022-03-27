@@ -1,8 +1,6 @@
 <template>
   <label for="age" class="form-label">年齢を教えてください</label>
-  <p class="mb-1 w-9/12 mx-auto text-right">
-    <span class="ml-2 text-red-600">{{ error }}</span>
-  </p>
+  <p class="form-error">{{ error }}</p>
   <input
     id="age"
     class="form-field text-right"
@@ -11,7 +9,7 @@
     :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
     placeholder="30"
-  /><span class="form-supplement">歳</span>
+  />
 </template>
 
 <script setup>

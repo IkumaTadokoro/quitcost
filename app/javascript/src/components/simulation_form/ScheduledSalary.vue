@@ -3,9 +3,7 @@
     <span class="inline-block">{{ `今年度（${from} ~ ${to}）` }}の</span
     ><span class="inline-block">「所得額」を教えてください</span>
   </label>
-  <p class="mb-1 w-9/12 mx-auto text-right">
-    <span class="ml-2 text-red-600">{{ error }}</span>
-  </p>
+  <p class="form-error">{{ error }}</p>
   <input
     id="scheduledSalary"
     class="form-field text-right"

@@ -1,10 +1,8 @@
 <template>
-  <label for="postalCode" class="form-label whitespace-nowrap">
+  <label for="postalCode" class="form-label">
     お住まいの地域の郵便番号を教えてください
   </label>
-  <p class="mb-1 w-9/12 mx-auto text-right">
-    <span class="ml-2 text-red-600">{{ error || addressError }}</span>
-  </p>
+  <p class="form-error">{{ error || addressError }}</p>
   <input
     id="postalCode"
     class="form-field text-center"
