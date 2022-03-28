@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   end
   get 'home/index'
   get 'privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
+  get 'tos', to: 'home#tos', as: 'tos'
   get '*path', to: 'home#index'
 end
