@@ -1,87 +1,98 @@
 <template>
   <LoadingAnimation v-if="loading" />
   <div v-else>
-    <div class="max-w-screen-lg mx-auto pt-32 text-center">
-      <div class="mb-6 mx-32">
-        <p class="text-3xl">
-          {{ formatDate(result.retirement_month) }}に退職して、{{
-            formatDate(result.employment_month)
-          }}に就職すると...
+    <div class="md:max-w-screen-lg md:mx-auto pt-12 md:pt-32 text-center">
+      <div class="flex md:flex-row md:justify-center flex-col mb-6">
+        <p class="text-lg md:text-3xl">
+          {{ formatDate(result.retirement_month) }}に退職して、
+        </p>
+        <p class="text-lg md:text-3xl">
+          {{ formatDate(result.employment_month) }}に就職すると...
         </p>
       </div>
-      <div class="mb-10 mx-42">
+      <div
+        class="flex md:flex-row md:justify-center md:items-end gap-8 md:gap-2 flex-col mb-10 md:mx-42"
+      >
         <p>
           <span>約</span>
-          <span class="mx-6">
-            <span class="text-8xl text-primary">{{
+          <span class="mx-4">
+            <span class="text-6xl md:text-8xl text-primary">{{
               formatAmount(result.grand_total)
             }}</span>
-            <span class="text-3xl text-primary ml-2">円</span>
+            <span class="text-base md:text-3xl text-primary ml-2">円</span>
           </span>
-          <span>かかります</span>
         </p>
+        <p>かかります</p>
       </div>
-      <div class="mb-20 mx-72 flex justify-between">
-        <div class="flex-1">
+      <div
+        class="mb-8 md:mb-20 md:justify-center flex md:flex-row flex-col md:gap-x-4 items-start md:px-56 px-24"
+      >
+        <div
+          class="flex flex-row justify-between items-center md:flex-col gap-y-2 md:basis-full w-full"
+        >
           <p
-            class="text-sm underline underline-offset-2 decoration-4 decoration-primary"
+            class="text-xs md:text-sm underline underline-offset-2 decoration-4 decoration-primary"
           >
             国民健康保険
           </p>
-          <p class="text-xl mt-2">
+          <p class="text-lg md:text-xl">
             {{ formatAmount(result.sub_total.insurance) }}円
           </p>
         </div>
-        <div class="flex-1">
+        <div
+          class="flex flex-row justify-between items-center md:flex-col gap-y-2 md:basis-full w-full"
+        >
           <p
-            class="text-sm underline underline-offset-2 decoration-4 decoration-red-600"
+            class="text-xs md:text-sm underline underline-offset-2 decoration-4 decoration-red-600"
           >
             国民年金
           </p>
-          <p class="text-xl mt-2">
+          <p class="text-lg md:text-xl">
             {{ formatAmount(result.sub_total.pension) }}円
           </p>
         </div>
-        <div class="flex-1">
+        <div
+          class="flex flex-row justify-between items-center md:flex-col gap-y-2 md:basis-full w-full"
+        >
           <p
-            class="text-sm underline underline-offset-2 decoration-4 decoration-yellow-500"
+            class="text-xs md:text-sm underline underline-offset-2 decoration-4 decoration-yellow-500"
           >
             住民税
           </p>
-          <p class="text-xl mt-2">
+          <p class="text-lg md:text-xl">
             {{ formatAmount(result.sub_total.residence) }}円
           </p>
         </div>
       </div>
-      <div class="flex flex-wrap justify-around mb-52 mx-52">
+      <div class="flex flex-wrap justify-around mb-8 md:mb-52 md:px-32">
         <button
-          class="text-lg w-64 flex justify-between items-center bg-primary text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary before:content-[''] before:w-3 before:h-3 before:rotate-45 before:border-solid before:border-white before:border-b-4 before:border-l-4 before:hover:border-gray"
+          class="text-sm md:text-lg w-52 md:w-64 flex justify-between items-center bg-primary text-white rounded-full px-6 md:px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary before:content-[''] before:w-2 md:before:w-3 before:h-2 md:before:h-3 before:rotate-45 before:border-solid before:border-white before:border-b-4 before:border-l-4 before:hover:border-gray"
           @click="moveForm"
         >
           もういちど計算する
         </button>
         <button
-          class="text-lg w-60 flex justify-evenly items-center bg-accent text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray"
+          class="hidden md:flex text-lg w-60 flex justify-evenly items-center bg-accent text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray"
           @click="scrollDetail"
         >
           詳細をみる
         </button>
       </div>
     </div>
-    <div class="bg-secondary py-12" id="detail">
-      <div class="max-w-screen-lg mx-auto p-12">
+    <div class="bg-secondary py-4 md:py-12" id="detail">
+      <div class="md:max-w-screen-lg md:mx-auto p-4 md:p-12">
         <h2
-          class="text-center text-3xl mb-12 underline underline-offset-8 decoration-4 decoration-primary"
+          class="text-center text-xl md:text-3xl mb-12 underline underline-offset-8 decoration-4 decoration-primary"
         >
           個人負担額の詳細
         </h2>
         <div
           v-for="monthly_payment in result.monthly_payment"
           :key="monthly_payment.month"
-          class="px-8 py-8 mb-4 last:mb-0 shadow-md bg-white rounded-xl"
+          class="px-6 md:px-8 py-5 md:py-8 mb-4 last:mb-0 shadow-md bg-white rounded-xl"
         >
           <div class="separator">
-            <p class="text-xl">
+            <p class="text-lg md:text-xl">
               {{ formatDate(monthly_payment.month) }}
             </p>
           </div>
@@ -106,9 +117,9 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center my-4">
         <button
-          class="w-52 flex justify-evenly items-center bg-primary text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-l-4 after:border-t-4 after:hover:border-gray"
+          class="text-sm md:text-lg w-48 md:w-52 flex justify-evenly items-center bg-primary text-white rounded-full px-4 md:px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-2 after:h-2 md:after:w-3 md:after:h-3 after:rotate-45 after:border-solid after:border-white after:border-l-4 after:border-t-4 after:hover:border-gray"
           @click="scrollTop"
         >
           ページ上部へ

@@ -1,5 +1,5 @@
 <template>
-  <div class="grow mx-32 flex justify-center items-center">
+  <div class="grow mx-4 md:mx-32 flex justify-center items-center">
     <div class="w-full bg-secondary rounded-full">
       <div
         v-if="progress"

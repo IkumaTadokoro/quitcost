@@ -33,7 +33,7 @@
           >
             準備するもの（なくてもOK！）
           </h2>
-          <p class="text-sm text-center text-gray">
+          <p class="text-xs md:text-sm text-center text-gray">
             <i class="fas fa-info-circle mr-1"></i>
             額面の年収がだいたいいくらかわかれば計算できます！
           </p>

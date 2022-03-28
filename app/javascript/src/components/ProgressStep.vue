@@ -1,8 +1,8 @@
 <template>
   <div>
-    <span class="text-6xl text-primary">{{ progress }}</span>
-    <span class="text-3xl font-semi-bold text-gray"> / </span>
-    <span class="text-4xl text-primary">{{ steps }}</span>
+    <span class="text-3xl md:text-6xl text-primary">{{ progress }}</span>
+    <span class="text-base md:text-3xl text-gray"> / </span>
+    <span class="text-2xl md:text-4xl text-primary">{{ steps }}</span>
   </div>
 </template>
 

@@ -150,7 +150,7 @@ export default function simulationStore() {
     },
 
     get isFinished() {
-      return state.value.steps === state.value.currentStepIdx + 1
+      return state.value.routes.length === state.value.currentStep + 1
     },
 
     get accessibleRoute() {
