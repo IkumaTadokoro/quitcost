@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     resources :pensions, only: %i(index destroy)
   end
   get 'home/index'
+  get 'privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
   get '*path', to: 'home#index'
 end
