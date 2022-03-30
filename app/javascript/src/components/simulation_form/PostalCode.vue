@@ -37,7 +37,7 @@ let {
 let { value: address, errorMessage: addressError } = useField('address')
 
 watchEffect(async () => {
-  address.value = ''
+  if (!params.postalCode && !postalCode.value) return
 
   if (!postalCode.value) return
   const zipCode = postalCode.value.replace(/[^\d]+/g, '')
@@ -53,7 +53,7 @@ watchEffect(async () => {
     if (!code) {
       address.value = `${pref} ${city}`
     } else {
-      return
+      address.value = ''
     }
   } catch (err) {
     console.warn(err)
