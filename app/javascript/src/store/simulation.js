@@ -1,7 +1,5 @@
 import { computed, watchEffect } from 'vue'
 import { useStorage } from '@vueuse/core'
-import axios from 'axios'
-import axiosJsonpAdapter from 'axios-jsonp'
 import { format } from 'date-fns'
 import { useFinancialYear } from '../composables/useFinancialYear'
 
@@ -64,29 +62,18 @@ export default function simulationStore() {
     state.value.routes = newRoute
   })
 
-  const searchAddress = async (params) => {
-    const zipCode = params.postalCode.replace(/[^\d]+/g, '')
-    if (!/^\d{7}$/.test(zipCode)) return
-    const response = await axios.get(
-      `https://api.zipaddress.net/?zipcode=${zipCode}`,
-      { adapter: axiosJsonpAdapter }
-    )
-
-    return response.data
-  }
-
   const formatDate = (date) => format(date, 'yyyy-MM-dd')
 
   const getResult = async () => {
     const params = state.value.params
-    const address = await searchAddress(params)
+    const [prefecture, city] = params.address.split(' ')
     const parameter = new URLSearchParams({
       simulation_date: formatDate(new Date(params.simulationDate)),
       retirement_month: formatDate(new Date(`${params.retirementMonth}/1`)),
       employment_month: formatDate(new Date(`${params.employmentMonth}/1`)),
       age: params.age,
-      prefecture: address.pref,
-      city: address.city,
+      prefecture,
+      city,
       previous_salary: params.previousSalary,
       salary: params.salary,
       scheduled_salary: params.scheduledSalary,
