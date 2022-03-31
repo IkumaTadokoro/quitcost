@@ -13,5 +13,12 @@ COPY Gemfile.lock /quitcost/Gemfile.lock
 RUN gem install bundler -v '2.2.31'
 RUN bundle install
 
+COPY package.json /quitcost/package.json
+COPY yarn.lock  /quitcost/yarn.lock
+RUN yarn install
+
 COPY . /quitcost
+# Compile assets
+RUN if [ "$RAILS_ENV" = "production" ]; then SECRET_KEY_BASE=$(rake secret) bundle exec rake assets:precompile; fi
+
 EXPOSE 3000
