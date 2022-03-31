@@ -14,7 +14,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fullhuman/postcss-purgecss": "4",
     "@hennge/vue3-pagination": "^1.0.17",
-    "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
     "@vue/compiler-sfc": "^3.2.26",
