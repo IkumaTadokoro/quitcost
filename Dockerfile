@@ -1,4 +1,6 @@
 FROM ruby:3.0.3
+ARG RAILS_ENV
+ENV RAILS_ENV=$RAILS_ENV
 
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
