@@ -4,7 +4,6 @@
 // that code so it'll be compiled.
 
 import Rails from '@rails/ujs'
-import * as ActiveStorage from '@rails/activestorage'
 import 'stylesheets/application.css'
 import 'src/main.js'
 import 'src/insurances.js'
@@ -15,4 +14,3 @@ import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
 
 Rails.start()
-ActiveStorage.start()
