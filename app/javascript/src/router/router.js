@@ -1,25 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import globalStore from '../store/global'
-import Home from '../components/Home'
-import NotFound from '../components/NotFound'
 import SimulationForm from '../components/SimulationForm'
-import SimulationResult from '../components/SimulationResult'
-import RetirementMonth from '../components/simulation_form/RetirementMonth.vue'
-import EmploymentMonth from '../components/simulation_form/EmploymentMonth.vue'
-import Age from '../components/simulation_form/Age'
-import PostalCode from '../components/simulation_form/PostalCode'
-import PreviousSalary from '../components/simulation_form/PreviousSalary'
-import Salary from '../components/simulation_form/Salary'
-import PreviousSocialInsurance from '../components/simulation_form/PreviousSocialInsurance'
-import SocialInsurance from '../components/simulation_form/SocialInsurance'
-import ScheduledSalary from '../components/simulation_form/ScheduledSalary'
-import ScheduledSocialInsurance from '../components/simulation_form/ScheduledSocialInsurance'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: Home },
-    { path: '/:pathMatch(.*)*', component: NotFound },
+    { path: '/', component: () => import('../components/Home') },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('../components/NotFound')
+    },
     {
       path: '/simulations/new',
       component: SimulationForm,
@@ -28,56 +18,68 @@ const router = createRouter({
         {
           path: 'retirement-month',
           name: 'RetirementMonth',
-          component: RetirementMonth,
+          component: () =>
+            import('../components/simulation_form/RetirementMonth.vue'),
           meta: { title: '退職予定月' }
         },
         {
           path: 'employment-month',
           name: 'EmploymentMonth',
-          component: EmploymentMonth,
+          component: () =>
+            import('../components/simulation_form/EmploymentMonth.vue'),
           meta: { title: '転職予定月' }
         },
-        { path: 'age', name: 'Age', component: Age, meta: { title: '年齢' } },
+        {
+          path: 'age',
+          name: 'Age',
+          component: () => import('../components/simulation_form/Age'),
+          meta: { title: '年齢' }
+        },
         {
           path: 'postal-code',
           name: 'PostalCode',
-          component: PostalCode,
+          component: () => import('../components/simulation_form/PostalCode'),
           meta: { title: '郵便番号' }
         },
         {
           path: 'previous-salary',
           name: 'PreviousSalary',
-          component: PreviousSalary,
+          component: () =>
+            import('../components/simulation_form/PreviousSalary'),
           meta: { title: '昨昨年度の所得' }
         },
         {
           path: 'previous-social-insurance',
           name: 'PreviousSocialInsurance',
-          component: PreviousSocialInsurance,
+          component: () =>
+            import('../components/simulation_form/PreviousSocialInsurance'),
           meta: { title: '昨昨年度の社会保険料' }
         },
         {
           path: 'salary',
           name: 'Salary',
-          component: Salary,
+          component: () => import('../components/simulation_form/Salary'),
           meta: { title: '昨年度の所得' }
         },
         {
           path: 'social-insurance',
           name: 'SocialInsurance',
-          component: SocialInsurance,
+          component: () =>
+            import('../components/simulation_form/SocialInsurance'),
           meta: { title: '昨年度の社会保険料' }
         },
         {
           path: 'scheduled-salary',
           name: 'ScheduledSalary',
-          component: ScheduledSalary,
+          component: () =>
+            import('../components/simulation_form/ScheduledSalary'),
           meta: { title: '今年度の所得' }
         },
         {
           path: 'scheduled-social-insurance',
           name: 'ScheduledSocialInsurance',
-          component: ScheduledSocialInsurance,
+          component: () =>
+            import('../components/simulation_form/ScheduledSocialInsurance'),
           meta: { title: '今年度の社会保険料' }
         }
       ]
@@ -85,7 +87,7 @@ const router = createRouter({
     {
       path: '/simulations',
       name: 'Result',
-      component: SimulationResult,
+      component: () => import('../components/SimulationResult'),
       meta: { title: 'シミュレーション結果' }
     }
   ]

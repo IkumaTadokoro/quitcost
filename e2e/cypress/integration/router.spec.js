@@ -34,7 +34,9 @@ describe('Router', () => {
 
         cy.contains('転職予定月').should('be.visible')
         cy.get('input').type('202303')
+
         cy.contains('つぎの質問へ').click()
+        cy.contains('年齢').should('be.visible')
 
         cy.contains('まえの質問へ').click()
         cy.contains('転職予定月').should('be.visible')
@@ -88,7 +90,9 @@ describe('Router', () => {
 
           cy.contains('転職予定月').should('be.visible')
           cy.get('input').type('202303')
+
           cy.contains('つぎの質問へ').click()
+          cy.contains('年齢').should('be.visible')
 
           cy.contains('まえの質問へ').click()
           cy.contains('転職予定月').should('be.visible')
