@@ -8,9 +8,13 @@ import 'stylesheets/application.css'
 import 'src/main.js'
 import 'src/insurances.js'
 import 'src/pensions.js'
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import {
+  faInfoCircle,
+  faEdit,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons'
 
+library.add(faInfoCircle, faEdit, faTrash)
+dom.watch()
 Rails.start()
