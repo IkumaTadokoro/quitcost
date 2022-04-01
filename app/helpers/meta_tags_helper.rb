@@ -14,16 +14,16 @@ module MetaTagsHelper
         type: 'website',
         site_name: 'quitcost',
         description: :description,
-        image: 'http://0.0.0.0:3000/ogp/ogp.png',
-        url: 'http://0.0.0.0:3000'
+        image: 'https://quitcost.herokuapp.com/ogp/ogp.png',
+        url: 'https://quitcost.herokuapp.com/'
       },
       twitter: {
         title: :title,
         card: 'summary_large_image',
         site: '@ikumatdkr',
         description: :description,
-        image: 'http://0.0.0.0:3000/ogp/ogp.png',
-        domain: 'http://0.0.0.0:3000'
+        image: 'https://quitcost.herokuapp.com/ogp/ogp.png',
+        domain: 'https://quitcost.herokuapp.com/'
       }
     }
   end
