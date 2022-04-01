@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           docker-compose build
-          docker-compose run web rails db:create
+          docker-compose run web rails db:setup
         env:
           RAILS_ENV: test
       - name: webpacker
