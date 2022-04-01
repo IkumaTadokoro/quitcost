@@ -7,7 +7,7 @@
     <div class="h-96 px-4 md:px-24 pt-12 text-center">
       <router-view></router-view>
     </div>
-    <div class="md:w-9/12 md:mx-auto mt-16 flex px-4 justify-evenly">
+    <div class="md:w-9/12 md:mx-auto mt-16 flex px-4 justify-evenly gap-x-4">
       <button class="prev-button" v-if="prev" type="button" @click="goToPrev">
         まえの質問へ
       </button>
@@ -71,7 +71,7 @@ const goToPrev = () => {
 }
 
 .form-field {
-  @apply px-6 py-2 md:w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-2xl md:text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
+  @apply md:px-6 py-2 md:w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-2xl md:text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
 }
 
 .form-field-error {
