@@ -25,26 +25,24 @@ class Simulation::Insurance
 
   def monthly_insurance
     yearly_insurance.flat_map do |year, fee|
-      payment_target_months = build_payment_target_month(year)
-      payment_terms = payment_terms_by_fiscal_year[year]
-      number_of_payment_duty = months_between(from: payment_terms.first, to: payment_terms.first.end_of_financial_year).count
-      total_fee = fee * number_of_payment_duty / PaymentTargetMonth::CALENDAR.count
-      target_months_in_range = payment_target_months.intersection(payment_terms.map(&:beginning_of_month))
-      remain_dues = payment_target_months.select { |month| month >= payment_terms.first }
-      fees_by_month = LocalTaxLaw.calc_installments(total_fee, remain_dues, municipal_ordinance: true)
+      unemployed_term = unemployed_term_by_fiscal_year[year]
+      subscription_term = months_between(from: unemployed_term.first, to: unemployed_term.first.end_of_financial_year)
+      payment_target_months = build_payment_target_month(year).select { |month| month >= unemployed_term.first }
 
-      payment_terms.map do |month|
-        insurance = target_months_in_range.include?(month) ? fees_by_month.shift : 0
-        { month: month, insurance: insurance }
+      actual_fee = fee * subscription_term.count / PaymentTargetMonth::CALENDAR.count
+      fees_by_payment_target_month = LocalTaxLaw.calc_installments(actual_fee, payment_target_months, municipal_ordinance: true)
+
+      unemployed_term.map do |month|
+        { month: month, insurance: payment_target_months.include?(month) ? fees_by_payment_target_month.shift : 0 }
       end
     end
   end
 
   def yearly_insurance
     result = {}
-    fiscal_years.map do |year|
+    fiscal_years.each do |year|
       salary = salary_table[year]
-      result[year] = LocalTaxLaw.calc_determined_amount { calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary) }
+      result[year] = LocalTaxLaw.calc_determined_amount { calc_medical(year, salary) + calc_elderly(year, salary) + calc_care(year, salary) }
     end
     result
   end
@@ -56,26 +54,26 @@ class Simulation::Insurance
   end
 
   def fiscal_years
-    all_payment_terms.map(&:financial_year).uniq
+    unemployed_term.map(&:financial_year).uniq
   end
 
-  def payment_terms_by_fiscal_year
-    all_payment_terms.group_by(&:financial_year)
+  def unemployed_term_by_fiscal_year
+    unemployed_term.group_by(&:financial_year)
   end
 
-  def all_payment_terms
-    months_between(from: from, to: to)
+  def unemployed_term
+    months_between(from: from, to: to).map(&:beginning_of_month)
   end
 
-  def calculate_medical(year, salary)
+  def calc_medical(year, salary)
     Simulation::Insurance::Medical.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
-  def calculate_elderly(year, salary)
+  def calc_elderly(year, salary)
     Simulation::Insurance::Elderly.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
-  def calculate_care(year, salary)
+  def calc_care(year, salary)
     Simulation::Insurance::Care.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 end
