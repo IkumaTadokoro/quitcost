@@ -11,10 +11,11 @@ import 'src/pensions.js'
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import {
   faInfoCircle,
+  faRobot,
   faEdit,
   faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faInfoCircle, faEdit, faTrash)
+library.add(faInfoCircle, faRobot, faEdit, faTrash)
 dom.watch()
 Rails.start()
