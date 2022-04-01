@@ -42,7 +42,7 @@ class Simulation::Insurance
     result = {}
     fiscal_years.each do |year|
       salary = salary_table[year]
-      result[year] = LocalTaxLaw.calc_determined_amount { calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary) }
+      result[year] = LocalTaxLaw.calc_determined_amount { calc_medical(year, salary) + calc_elderly(year, salary) + calc_care(year, salary) }
     end
     result
   end
@@ -65,15 +65,15 @@ class Simulation::Insurance
     months_between(from: from, to: to).map(&:beginning_of_month)
   end
 
-  def calculate_medical(year, salary)
+  def calc_medical(year, salary)
     Simulation::Insurance::Medical.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
-  def calculate_elderly(year, salary)
+  def calc_elderly(year, salary)
     Simulation::Insurance::Elderly.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 
-  def calculate_care(year, salary)
+  def calc_care(year, salary)
     Simulation::Insurance::Care.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
   end
 end
