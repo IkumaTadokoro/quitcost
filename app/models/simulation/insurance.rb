@@ -40,7 +40,7 @@ class Simulation::Insurance
 
   def yearly_insurance
     result = {}
-    fiscal_years.map do |year|
+    fiscal_years.each do |year|
       salary = salary_table[year]
       result[year] = LocalTaxLaw.calc_determined_amount { calculate_medical(year, salary) + calculate_elderly(year, salary) + calculate_care(year, salary) }
     end
