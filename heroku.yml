@@ -7,5 +7,6 @@ build:
     web: Dockerfile
   config:
     RAILS_ENV: production
+    RAILS_SERVE_STATIC_FILES: enabled
 run:
   web: bundle exec puma -C config/puma.rb
