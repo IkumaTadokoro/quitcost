@@ -36,19 +36,19 @@ class Simulation::Residence
 
   def monthly_residence
     fiscal_years.flat_map do |year|
-      payment_terms = payment_terms_by_fiscal_year[year]
-      beginning_of_terms = payment_terms.first
-      elapsed_month = months_between(from: beginning_of_terms.beginning_of_residence_fy, to: beginning_of_terms)
-      unpaid_fee = calc_special_collection(yearly_residence(year)).drop(elapsed_month.count).sum
-      remain_dues = DUES.map { |month| convert_time(year, month) }.select { |month| month >= beginning_of_terms }
-      due_months = remain_dues.empty? ? [beginning_of_terms] : remain_dues
-      fees_by_month = LocalTaxLaw.calc_installments(unpaid_fee, due_months)
-      payment_terms.map { |month| { month: month, residence: due_months.include?(month) ? fees_by_month.shift : 0 } }
+      unemployed_term = unemployed_term_by_fiscal_year[year]
+      payment_completed_term = months_between(from: unemployed_term.first.beginning_of_residence_fy, to: unemployed_term.first)
+      payment_target_months = dues(year).select { |month| month >= unemployed_term.first }.presence || [unemployed_term.first]
+
+      unpaid_fee = calc_special_collection(yearly_residence(year)).drop(payment_completed_term.count).sum
+      fees_by_month = LocalTaxLaw.calc_installments(unpaid_fee, payment_target_months)
+
+      unemployed_term.map { |month| { month: month, residence: payment_target_months.include?(month) ? fees_by_month.shift : 0 } }
     end
   end
 
-  def convert_time(year, month)
-    Time.zone.parse("#{month >= 4 ? year : year.next}-#{format('%02d', month)}-01")
+  def dues(year)
+    DUES.map { |month| Time.zone.parse("#{month >= 4 ? year : year.next}-#{format('%02d', month)}-01") }
   end
 
   def calc_special_collection(yearly_residence)
@@ -56,14 +56,14 @@ class Simulation::Residence
   end
 
   def fiscal_years
-    all_payment_terms.map(&:residence_financial_year).uniq
+    unemployed_term.map(&:residence_financial_year).uniq
   end
 
-  def payment_terms_by_fiscal_year
-    all_payment_terms.group_by(&:residence_financial_year)
+  def unemployed_term_by_fiscal_year
+    unemployed_term.group_by(&:residence_financial_year)
   end
 
-  def all_payment_terms
+  def unemployed_term
     months_between(from: from, to: to)
   end
 
