@@ -21,7 +21,7 @@ RSpec.describe 'Insurance', type: :system, js: true do
   end
 
   describe 'create' do
-    let(:insurance_form) { build(:insurance_form, :all_months_are_target) }
+    let(:insurance_form) { build(:insurance_form) }
     scenario 'create a new record' do
       sign_in user
       visit admin_insurances_path
@@ -47,44 +47,93 @@ RSpec.describe 'Insurance', type: :system, js: true do
         fill_in '均等割（介護分）', with: insurance_form.care_capita_basis
         fill_in '平等割（介護分）', with: insurance_form.care_household_basis
         fill_in '限度額（介護分）', with: insurance_form.care_limit
-        check '1月', allow_label_click: true
-        check '2月', allow_label_click: true
-        check '3月', allow_label_click: true
-        check '4月', allow_label_click: true
-        check '5月', allow_label_click: true
-        check '6月', allow_label_click: true
-        check '7月', allow_label_click: true
-        check '8月', allow_label_click: true
-        check '9月', allow_label_click: true
-        check '10月', allow_label_click: true
-        check '11月', allow_label_click: true
-        check '12月', allow_label_click: true
+        check 'insurance_month1'
+        check 'insurance_month3'
+        check 'insurance_month5'
+        check 'insurance_month7'
+        check 'insurance_month9'
+        check 'insurance_month11'
       end
 
       expect { click_button '登録' }
         .to change { Insurance.count }.from(0).to(1)
-                                      .and change { PaymentTargetMonth.count }.from(0).to(12)
+                                      .and change { PaymentTargetMonth.count }.from(0).to(6)
       assert_current_path admin_insurances_path
       assert_text '保険料率を保存しました。'
     end
   end
 
   describe 'update' do
-    before { @insurance = create(:insurance, :with_payment_target_months, months: [1]) }
+    before { @insurance = create(:insurance, :with_payment_target_months, months: [1, 2], year: 2021, local_gov_code: '162019') }
     scenario 'update a existing record' do
-      # FIXME: 更新系のテストの補強
       sign_in user
       visit admin_insurances_path
       click_link '国民健康保険料編集'
 
       expect(page).to have_content '国民健康保険料編集'
 
-      check '1月', allow_label_click: false
-      check '2月', allow_label_click: true
+      within 'form[name=insurance]' do
+        fill_in '所得割（医療分）', with: 7.2
+        fill_in '資産割（医療分）', with: 0.5
+        fill_in '均等割（医療分）', with: 10_000
+        fill_in '平等割（医療分）', with: 30_000
+        fill_in '限度額（医療分）', with: 20_000
+        fill_in '所得割（後期高齢者支援分）', with: 2.94
+        fill_in '資産割（後期高齢者支援分）', with: 0.0
+        fill_in '均等割（後期高齢者支援分）', with: 6000
+        fill_in '平等割（後期高齢者支援分）', with: 10_000
+        fill_in '限度額（後期高齢者支援分）', with: 21_000
+        fill_in '所得割（介護分）', with: 2.76
+        fill_in '資産割（介護分）', with: 0
+        fill_in '均等割（介護分）', with: 6728
+        fill_in '平等割（介護分）', with: 7890
+        fill_in '限度額（介護分）', with: 12_000
+        uncheck 'insurance_month1'
+        check 'insurance_month4'
+        check 'insurance_month5'
+        check 'insurance_month6'
+        check 'insurance_month7'
+        check 'insurance_month8'
+        check 'insurance_month9'
+        check 'insurance_month10'
+        check 'insurance_month11'
+        check 'insurance_month12'
+      end
 
       click_button '更新'
       assert_current_path admin_insurances_path
       assert_text '保険料率を更新しました。'
+
+      tds = page.all('td')
+      expect(tds[2]).to have_content '2021'
+      expect(tds[4]).to have_content '富山市'
+      expect(tds[6]).to have_content '7.20'
+      expect(tds[7]).to have_content '0.50'
+      expect(tds[8]).to have_content '¥10,000'
+      expect(tds[9]).to have_content '¥30,000'
+      expect(tds[10]).to have_content '¥20,000'
+      expect(tds[11]).to have_content '2.94'
+      expect(tds[12]).to have_content '0.00'
+      expect(tds[13]).to have_content '¥6,000'
+      expect(tds[14]).to have_content '¥10,000'
+      expect(tds[15]).to have_content '¥21,000'
+      expect(tds[16]).to have_content '2.76'
+      expect(tds[17]).to have_content '0.00'
+      expect(tds[18]).to have_content '¥6,728'
+      expect(tds[19]).to have_content '¥7,890'
+      expect(tds[20]).to have_content '¥12,000'
+      expect(tds[21]).to have_content '-'
+      expect(tds[22]).to have_content '○'
+      expect(tds[23]).to have_content '-'
+      expect(tds[24]).to have_content '○'
+      expect(tds[25]).to have_content '○'
+      expect(tds[26]).to have_content '○'
+      expect(tds[27]).to have_content '○'
+      expect(tds[28]).to have_content '○'
+      expect(tds[29]).to have_content '○'
+      expect(tds[30]).to have_content '○'
+      expect(tds[31]).to have_content '○'
+      expect(tds[32]).to have_content '○'
     end
   end
 
