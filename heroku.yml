@@ -8,5 +8,8 @@ build:
   config:
     RAILS_ENV: production
     RAILS_SERVE_STATIC_FILES: enabled
+release:
+  command:
+    - rake db:migrate
 run:
   web: bundle exec puma -C config/puma.rb
