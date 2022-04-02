@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/IkumaTadokoro/jp_local_gov.git
-  revision: 7a46d153dd17fd04d28e98e417e6647f58adec41
-  specs:
-    jp_local_gov (0.2.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +109,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jp_local_gov (0.3.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -330,7 +325,7 @@ DEPENDENCIES
   fiscali
   html2slim
   jbuilder (~> 2.7)
-  jp_local_gov!
+  jp_local_gov
   kaminari
   letter_opener_web
   listen (~> 3.3)
