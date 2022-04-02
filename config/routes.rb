@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :insurances, only: %i(index destroy)
     resources :pensions, only: %i(index destroy)
   end
-  get 'home/index'
+  resources :home, only: %i(index)
   get 'privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
   get 'tos', to: 'home#tos', as: 'tos'
   get '*path', to: 'home#index'
