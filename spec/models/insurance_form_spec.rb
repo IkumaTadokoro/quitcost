@@ -272,15 +272,15 @@ RSpec.describe InsuranceForm, type: :model do
       end
 
       context 'when failed to save' do
-        context 'when record is invalid' do
-          # TODO: 例外処理のテスト方法がわからないのであとで実装する
-          xit 'raises ActiveRecord::RecordInvalid' do
-            insurance_form_mock = double('Insurance Form')
-            allow(insurance_form_mock).to receive(:save).and_raise(ActiveRecord::RecordInvalid)
-            insurance_form = build(:insurance_form)
-            allow(insurance_form).to receive(:save).and_return(insurance_form_mock.save)
-            expect(insurance_form.save).to be_falsey
-          end
+        let!(:insurance_form) { build(:insurance_form, :all_months_are_target) }
+        context 'when insurance record is invalid' do
+          before { allow(insurance_form).to receive(:update_insurance!).and_raise(ActiveRecord::RecordInvalid) }
+          it { is_expected.to be_falsey }
+        end
+
+        context 'when payment_target_months record is invalid' do
+          before { allow(insurance_form).to receive(:update_payment_target_months!).and_raise(ActiveRecord::RecordInvalid) }
+          it { is_expected.to be_falsey }
         end
       end
     end
