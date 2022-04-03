@@ -7,7 +7,7 @@ class Simulation
   CATEGORY = %i[insurance pension residence].freeze
 
   def initialize(params)
-    @param_parser = ParamParser.new(params)
+    @parameter = Parameter.new(params)
   end
 
   def grand_total
@@ -26,26 +26,26 @@ class Simulation
   end
 
   def retirement_month
-    @param_parser.retirement_month
+    @parameter.retirement_month
   end
 
   def employment_month
-    @param_parser.employment_month
+    @parameter.employment_month
   end
 
   private
 
-  attr_reader :param_parser
+  attr_reader :parameter
 
   def insurance
-    Simulation::Insurance.calc(param_parser)
+    Simulation::Insurance.calc(parameter)
   end
 
   def pension
-    Simulation::Pension.calc(param_parser)
+    Simulation::Pension.calc(parameter)
   end
 
   def residence
-    Simulation::Residence.calc(param_parser)
+    Simulation::Residence.calc(parameter)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Simulation::ParamParser
+class Simulation::Parameter
   attr_reader :retirement_month, :employment_month, :prefecture, :city, :age, :local_gov_code, :salary_table, :social_insurance_table
 
   def initialize(params)

@@ -3,13 +3,13 @@
 class Simulation::Pension
   include MonthIterable
 
-  def self.calc(param_parser)
-    new(param_parser).call
+  def self.calc(parameter)
+    new(parameter).call
   end
 
-  def initialize(param_parser)
-    @from = param_parser.retirement_month
-    @to = param_parser.employment_month
+  def initialize(parameter)
+    @from = parameter.retirement_month
+    @to = parameter.employment_month
   end
 
   def call
