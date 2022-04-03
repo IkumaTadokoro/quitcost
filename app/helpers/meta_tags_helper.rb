@@ -7,7 +7,7 @@ module MetaTagsHelper
       title: 'quitcost',
       reverse: true,
       charset: 'utf-8',
-      description: '「無職になったらいくらかかる？」をいますぐ計算！',
+      description: '「無職になったらいくらかかる？」をいますぐ計算！ quitcost（クイットコスト）は転職準備でしばらく無職になる人のための、無職期間で『どんな』個人負担が『いくら』増えるのかを計算するサービスです',
       viewport: 'width=device-width, initial-scale=1.0',
       og: {
         title: :title,
