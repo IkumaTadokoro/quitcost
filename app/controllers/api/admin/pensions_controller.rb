@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class API::PensionsController < ApplicationController
+class API::Admin::PensionsController < API::Admin::BaseController
   def index
     @pensions = Pension.order(:year).all.page(params[:page])
   end
@@ -8,6 +8,6 @@ class API::PensionsController < ApplicationController
   def destroy
     pension = Pension.find(params[:id])
     pension.destroy
-    render status: :ok, json: { id: pension.id }
+    render status: :ok, json: { message: 'Deleted the Pension', data: pension }
   end
 end

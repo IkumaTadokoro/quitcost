@@ -16,8 +16,10 @@ Rails.application.routes.draw do
     end
   namespace :api do
     resource :simulations, only: %i(show)
-    resources :insurances, only: %i(index destroy)
-    resources :pensions, only: %i(index destroy)
+    namespace :admin do
+      resources :insurances, only: %i(index destroy)
+      resources :pensions, only: %i(index destroy)
+    end
   end
   resources :home, only: %i(index)
   get 'privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
