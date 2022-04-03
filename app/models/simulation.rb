@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Simulation
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-
   CATEGORY = %i[insurance pension residence].freeze
 
   def initialize(params)
