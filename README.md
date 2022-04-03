@@ -1,6 +1,6 @@
 # quitcost
 
-![image](https://user-images.githubusercontent.com/61409641/161371406-859942e7-3bc6-44c9-b5cb-ff570fc9a66f.png)
+![image](https://user-images.githubusercontent.com/61409641/161408130-22cdf06a-7a3b-4470-a648-18bf8b6a2b79.png)
 
 quitcostは**無職になったら**『**どんな**』個人負担が『**いくら**』増えるのかを簡単に知ることができるサービスです。
 
