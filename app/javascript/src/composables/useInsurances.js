@@ -5,7 +5,7 @@ export const useInsurances = () => {
   const totalPages = ref(0)
 
   const getInsurances = async (query) => {
-    const insurancesAPI = `/api/insurances.json?${query}`
+    const insurancesAPI = `/api/admin/insurances.json?${query}`
     const response = await fetch(insurancesAPI, {
       method: 'GET',
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -25,7 +25,7 @@ export const useInsurances = () => {
   }
 
   const deleteInsurance = async (insuranceId) => {
-    const insuranceAPI = `/api/insurances/${insuranceId}`
+    const insuranceAPI = `/api/admin/insurances/${insuranceId}`
     await fetch(insuranceAPI, {
       method: 'DELETE',
       headers: {

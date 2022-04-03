@@ -5,7 +5,7 @@ export const usePensions = () => {
   const totalPages = ref(0)
 
   const getPensions = async (query) => {
-    const pensionsAPI = `/api/pensions.json?${query}`
+    const pensionsAPI = `/api/admin/pensions.json?${query}`
     const response = await fetch(pensionsAPI, {
       method: 'GET',
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -25,7 +25,7 @@ export const usePensions = () => {
   }
 
   const deletePension = async (pensionId) => {
-    const pensionAPI = `/api/pensions/${pensionId}`
+    const pensionAPI = `/api/admin/pensions/${pensionId}`
     await fetch(pensionAPI, {
       method: 'DELETE',
       headers: {
