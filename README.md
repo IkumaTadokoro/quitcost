@@ -1,6 +1,6 @@
 # quitcost
 
-![image](https://user-images.githubusercontent.com/61409641/161408130-22cdf06a-7a3b-4470-a648-18bf8b6a2b79.png)
+![image](https://user-images.githubusercontent.com/61409641/161411721-2c357460-910a-4674-854d-ff541f82963a.png)
 
 quitcostは**無職になったら**『**どんな**』個人負担が『**いくら**』増えるのかを簡単に知ることができるサービスです。
 
@@ -19,18 +19,17 @@ quitcostを使えば、年齢や住所、昨年の年収を回答することで
 
 **ユーザー画面**
 
-<img width="1680" alt="CleanShot 2022-04-02 at 16 09 54@2x" src="https://user-images.githubusercontent.com/61409641/161371512-c5fc44b4-defe-476d-8b60-fbb3f395f35e.png">
+<img width="1680" alt="CleanShot 2022-04-03 at 13 32 49@2x" src="https://user-images.githubusercontent.com/61409641/161411632-00f67e70-7b86-43c3-9dc8-f992cf23a9c7.png">
 
-<img width="1680" alt="CleanShot 2022-04-02 at 16 11 01@2x" src="https://user-images.githubusercontent.com/61409641/161371555-386b0479-7630-4a68-9d33-dfd12a457ce7.png">
+<img width="1680" alt="CleanShot 2022-04-03 at 13 33 58@2x" src="https://user-images.githubusercontent.com/61409641/161411655-60813464-3bfb-43eb-b172-091f0f9ad932.png">
 
-![CleanShot 2022-04-02 at 16 11 53@2x](https://user-images.githubusercontent.com/61409641/161371571-1935cf06-e68d-4338-9a4e-83118caa6612.png)
-
+![CleanShot 2022-04-03 at 13 34 35@2x](https://user-images.githubusercontent.com/61409641/161411664-ad81f69d-c792-4a49-b169-6e3ade20b99a.png)
 
 **管理者画面**
 
-<img width="1680" alt="CleanShot 2022-04-02 at 16 13 10@2x" src="https://user-images.githubusercontent.com/61409641/161371624-d58524b6-8ba9-4ff2-84d2-05a031caa641.png">
+<img width="1680" alt="CleanShot 2022-04-03 at 13 35 14@2x" src="https://user-images.githubusercontent.com/61409641/161411684-4f493103-d4da-4f7a-8854-cfce316794f0.png">
 
-<img width="1680" alt="CleanShot 2022-04-02 at 16 13 31@2x" src="https://user-images.githubusercontent.com/61409641/161371656-e5a73535-18dc-4623-a5c2-81465a415a9b.png">
+<img width="1680" alt="CleanShot 2022-04-03 at 13 35 36@2x" src="https://user-images.githubusercontent.com/61409641/161411698-7e2d06e5-0704-4e3c-8dbf-1fb79b261f11.png">
 
 ## 利用方法
 
