@@ -51,7 +51,7 @@
           </div>
           <div class="w-full md:w-1/2 px-4">
             <p class="text-sm md:text-lg text-center mb-2 text-gray">
-              今年度の給与明細
+              給与明細
             </p>
             <img
               src="~salary.svg"
