@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Simulation::Insurance, type: :model do
   describe '.calc' do
-    subject { Simulation::Insurance.calc(param_parser) }
-    let(:param_parser) do
-      Simulation::ParamParser.new(
+    subject { Simulation::Insurance.calc(parameter) }
+    let(:parameter) do
+      Simulation::Parameter.new(
         {
           retirement_month: retirement_month,
           employment_month: employment_month,

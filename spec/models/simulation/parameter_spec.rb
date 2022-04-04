@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Simulation::ParamParser' do
+RSpec.describe 'Simulation::Parameter' do
   describe '#salary_table' do
-    subject { Simulation::ParamParser.new(params).salary_table }
+    subject { Simulation::Parameter.new(params).salary_table }
     let!(:params) do
       {
         retirement_month: '2022-06-01',
@@ -34,7 +34,7 @@ RSpec.describe 'Simulation::ParamParser' do
   end
 
   describe '#social_insurance_table' do
-    subject { Simulation::ParamParser.new(params).social_insurance_table }
+    subject { Simulation::Parameter.new(params).social_insurance_table }
     let!(:params) do
       {
         retirement_month: '2022-06-01',

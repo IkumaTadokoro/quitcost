@@ -3,16 +3,16 @@
 class Simulation::Insurance
   include MonthIterable
 
-  def self.calc(param_parser)
-    new(param_parser).calc
+  def self.calc(parameter)
+    new(parameter).calc
   end
 
-  def initialize(param_parser)
-    @from = param_parser.retirement_month
-    @to = param_parser.employment_month
-    @local_gov_code = param_parser.local_gov_code
-    @age = param_parser.age
-    @salary_table = param_parser.salary_table
+  def initialize(parameter)
+    @from = parameter.retirement_month
+    @to = parameter.employment_month
+    @local_gov_code = parameter.local_gov_code
+    @age = parameter.age
+    @salary_table = parameter.salary_table
   end
 
   def calc

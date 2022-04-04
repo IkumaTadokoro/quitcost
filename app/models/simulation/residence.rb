@@ -15,15 +15,15 @@ class Simulation::Residence
   SPECIAL_COLLECTION_DUES = (1..12).to_a.freeze
   NON_TAXABLE_SALARY_LIMIT = 1_000_000
 
-  def self.calc(param_parser)
-    new(param_parser).calc
+  def self.calc(parameter)
+    new(parameter).calc
   end
 
-  def initialize(param_parser)
-    @from = param_parser.retirement_month
-    @to = param_parser.employment_month
-    @salary_table = param_parser.salary_table
-    @social_insurance_table = param_parser.social_insurance_table
+  def initialize(parameter)
+    @from = parameter.retirement_month
+    @to = parameter.employment_month
+    @salary_table = parameter.salary_table
+    @social_insurance_table = parameter.social_insurance_table
   end
 
   def calc
