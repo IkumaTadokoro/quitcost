@@ -47,20 +47,22 @@ RSpec.describe Simulation, type: :model do
       create(:pension, year: 2022, contribution: 16_590)
 
       simulation = Simulation.new(
-        {
-          retirement_month: '2022-03-01',
-          employment_month: '2022-06-01',
-          prefecture: '東京都',
-          city: '千代田区',
-          age: '40',
-          simulation_date: '2022-02-11',
-          previous_salary: '2_000_000',
-          salary: '2_000_000',
-          scheduled_salary: '2_000_000',
-          previous_social_insurance: '100_000',
-          social_insurance: '100_000',
-          scheduled_social_insurance: '100_000'
-        }
+        Simulation::Parameter.new(
+          {
+            retirement_month: '2022-03-01',
+            employment_month: '2022-06-01',
+            prefecture: '東京都',
+            city: '千代田区',
+            age: '40',
+            simulation_date: '2022-02-11',
+            previous_salary: '2_000_000',
+            salary: '2_000_000',
+            scheduled_salary: '2_000_000',
+            previous_social_insurance: '100_000',
+            social_insurance: '100_000',
+            scheduled_social_insurance: '100_000'
+          }
+        )
       )
       expect(simulation.grand_total).to eq 80_781
     end
@@ -111,20 +113,22 @@ RSpec.describe Simulation, type: :model do
 
       expected = { insurance: 12_991, pension: 49_790, residence: 18_000 }
       simulation = Simulation.new(
-        {
-          retirement_month: '2022-03-01',
-          employment_month: '2022-06-01',
-          prefecture: '東京都',
-          city: '千代田区',
-          age: '40',
-          simulation_date: '2022-02-11',
-          previous_salary: '2_000_000',
-          salary: '2_000_000',
-          scheduled_salary: '2_000_000',
-          previous_social_insurance: '100_000',
-          social_insurance: '100_000',
-          scheduled_social_insurance: '100_000'
-        }
+        Simulation::Parameter.new(
+          {
+            retirement_month: '2022-03-01',
+            employment_month: '2022-06-01',
+            prefecture: '東京都',
+            city: '千代田区',
+            age: '40',
+            simulation_date: '2022-02-11',
+            previous_salary: '2_000_000',
+            salary: '2_000_000',
+            scheduled_salary: '2_000_000',
+            previous_social_insurance: '100_000',
+            social_insurance: '100_000',
+            scheduled_social_insurance: '100_000'
+          }
+        )
       )
       expect(simulation.sub_total).to eq expected
     end
@@ -179,20 +183,22 @@ RSpec.describe Simulation, type: :model do
         { month: Time.zone.parse('2022/05/01'), fee: { insurance: 0, pension: 16_590, residence: 0 } }
       ]
       simulation = Simulation.new(
-        {
-          retirement_month: '2022-03-01',
-          employment_month: '2022-06-01',
-          prefecture: '東京都',
-          city: '千代田区',
-          age: '40',
-          simulation_date: '2022-02-11',
-          previous_salary: '2_000_000',
-          salary: '2_000_000',
-          scheduled_salary: '2_000_000',
-          previous_social_insurance: '100_000',
-          social_insurance: '100_000',
-          scheduled_social_insurance: '100_000'
-        }
+        Simulation::Parameter.new(
+          {
+            retirement_month: '2022-03-01',
+            employment_month: '2022-06-01',
+            prefecture: '東京都',
+            city: '千代田区',
+            age: '40',
+            simulation_date: '2022-02-11',
+            previous_salary: '2_000_000',
+            salary: '2_000_000',
+            scheduled_salary: '2_000_000',
+            previous_social_insurance: '100_000',
+            social_insurance: '100_000',
+            scheduled_social_insurance: '100_000'
+          }
+        )
       )
       expect(simulation.monthly_payment).to eq expected
     end

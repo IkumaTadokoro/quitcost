@@ -3,8 +3,8 @@
 class Simulation
   CATEGORY = %i[insurance pension residence].freeze
 
-  def initialize(params)
-    @parameter = Parameter.new(params)
+  def initialize(parameter)
+    @parameter = parameter
   end
 
   def grand_total

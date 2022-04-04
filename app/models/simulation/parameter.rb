@@ -26,6 +26,21 @@ class Simulation::Parameter
     @social_insurance_table = build_social_insurance_table
   end
 
+  with_options presence: true do
+    validates :retirement_month
+    validates :employment_month
+    validates :local_gov_code
+    validates :age
+  end
+
+  validates :age, numericality: { greater_than_or_equal_to: 0 }
+  validates :retirement_month, comparison: { greater_than: :simulation_date }
+  validates :employment_month, comparison: { greater_than: :retirement_month }
+  validates :previous_salary, comparison: { greater_than_or_equal_to: :previous_social_insurance }
+  validates :salary, comparison: { greater_than: :social_insurance }
+  validates :scheduled_salary, comparison: { greater_than_or_equal_to: :scheduled_social_insurance }
+  validates_with RequiredSalaryAndSocialInsuranceValidator
+
   private
 
   # ActiveSupport::TimeWithZoneを前提にした処理設計になっているが、
