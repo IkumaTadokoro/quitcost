@@ -71,11 +71,11 @@ const goToPrev = () => {
 }
 
 .form-field {
-  @apply w-full md:px-6 py-2 md:w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-2xl md:text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
+  @apply w-full px-6 py-2 md:w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-2xl md:text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
 }
 
 .form-field-error {
-  @apply w-full md:px-6 py-2 md:w-9/12 rounded-md border-4 border-red-500 focus:border-red-600 tracking-widest text-2xl md:text-5xl outline-none leading-8 placeholder-boundaryBlack;
+  @apply w-full px-6 py-2 md:w-9/12 rounded-md border-4 border-red-500 focus:border-red-600 tracking-widest text-2xl md:text-5xl outline-none leading-8 placeholder-boundaryBlack;
 }
 
 .form-tips {
