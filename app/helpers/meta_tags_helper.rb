@@ -14,7 +14,7 @@ module MetaTagsHelper
         type: 'website',
         site_name: 'quitcost',
         description: :description,
-        image: 'https://quitcost.herokuapp.com/ogp/ogp.png',
+        image: image_url('ogp.png'),
         url: 'https://quitcost.herokuapp.com/'
       },
       twitter: {
@@ -22,7 +22,7 @@ module MetaTagsHelper
         card: 'summary_large_image',
         site: '@ikumatdkr',
         description: :description,
-        image: 'https://quitcost.herokuapp.com/ogp/ogp.png',
+        image: image_url('ogp.png'),
         domain: 'https://quitcost.herokuapp.com/'
       }
     }
