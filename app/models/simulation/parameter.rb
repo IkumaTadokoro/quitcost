@@ -34,11 +34,11 @@ class Simulation::Parameter
   end
 
   validates :age, numericality: { greater_than_or_equal_to: 0 }
-  validates :retirement_month, comparison: { greater_than: :simulation_date }
   validates :employment_month, comparison: { greater_than: :retirement_month }
   validates :previous_salary, comparison: { greater_than_or_equal_to: :previous_social_insurance }
-  validates :salary, comparison: { greater_than: :social_insurance }
+  validates :salary, comparison: { greater_than_or_equal_to: :social_insurance }
   validates :scheduled_salary, comparison: { greater_than_or_equal_to: :scheduled_social_insurance }
+  validate :month_of_retirement_month_should_be_greater_than_or_equal_simulation_date
   validates_with RequiredSalaryAndSocialInsuranceValidator
 
   private
@@ -73,5 +73,9 @@ class Simulation::Parameter
 
   def base_fiscal_year
     simulation_date.financial_year
+  end
+
+  def month_of_retirement_month_should_be_greater_than_or_equal_simulation_date
+    errors.add(:retirement_month, ": #{simulation_date.month}以降の月を指定してください") if retirement_month.month < simulation_date.month
   end
 end
