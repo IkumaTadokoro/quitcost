@@ -31,9 +31,7 @@ export default function simulationStore() {
         simulationDate: new Date()
       },
       routes: [...defaultRoute],
-      currentStep: 0,
-      loading: false,
-      result: {}
+      currentStep: 0
     },
     sessionStorage
   )
@@ -61,37 +59,6 @@ export default function simulationStore() {
 
     state.value.routes = newRoute
   })
-
-  const formatDate = (date) => format(date, 'yyyy-MM-dd')
-
-  const getResult = async () => {
-    const params = state.value.params
-    const [prefecture, city] = params.address.split(' ')
-    const parameter = new URLSearchParams({
-      simulation_date: formatDate(new Date(params.simulationDate)),
-      retirement_month: formatDate(new Date(`${params.retirementMonth}/1`)),
-      employment_month: formatDate(new Date(`${params.employmentMonth}/1`)),
-      age: params.age,
-      prefecture,
-      city,
-      previous_salary: params.previousSalary,
-      salary: params.salary,
-      scheduled_salary: params.scheduledSalary,
-      previous_social_insurance: params.previousSocialInsurance,
-      social_insurance: params.socialInsurance,
-      scheduled_social_insurance: params.scheduledSocialInsurance
-    }).toString()
-
-    const simulationApi = `/api/simulations?${parameter}`
-    const response = await fetch(simulationApi, {
-      method: 'GET',
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-      credentials: 'same-origin',
-      redirect: 'manual'
-    })
-    const json = await response.json()
-    return json.simulation
-  }
 
   return {
     get params() {
@@ -152,16 +119,26 @@ export default function simulationStore() {
       return [...completedRoute, nextRoute]
     },
 
-    get result() {
-      return state.value.result
-    },
+    get parameter() {
+      const formatDate = (date) => format(date, 'yyyy-MM-dd')
+      const params = state.value.params
+      const [prefecture, city] = params.address.split(' ')
+      const parameter = new URLSearchParams({
+        simulation_date: formatDate(new Date(params.simulationDate)),
+        retirement_month: formatDate(new Date(`${params.retirementMonth}/1`)),
+        employment_month: formatDate(new Date(`${params.employmentMonth}/1`)),
+        age: params.age,
+        prefecture,
+        city,
+        previous_salary: params.previousSalary,
+        salary: params.salary,
+        scheduled_salary: params.scheduledSalary,
+        previous_social_insurance: params.previousSocialInsurance,
+        social_insurance: params.socialInsurance,
+        scheduled_social_insurance: params.scheduledSocialInsurance
+      }).toString()
 
-    get loading() {
-      return state.value.loading
-    },
-
-    get numberOfStep() {
-      return state.value.route.length
+      return parameter
     },
 
     add_params(values) {
@@ -173,18 +150,8 @@ export default function simulationStore() {
 
     reset() {
       state.value.params = { simulationDate: new Date() }
-      state.value.result = {}
       state.value.routes = [...defaultRoute]
       state.value.currentStep = 0
-    },
-
-    async load_result() {
-      state.value.loading = true
-      try {
-        state.value.result = await getResult()
-      } finally {
-        state.value.loading = false
-      }
     }
   }
 }

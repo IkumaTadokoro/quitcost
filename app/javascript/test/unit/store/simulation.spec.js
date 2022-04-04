@@ -27,7 +27,6 @@ describe('#reset', () => {
   it('reset params, result, routes and currentStep', () => {
     simulation.reset()
     expect(simulation.params).toEqual({ simulationDate: mockDate })
-    expect(simulation.result).toEqual({})
     expect(simulation.steps).toEqual(10)
     expect(simulation.currentStepIdx).toEqual(0)
   })

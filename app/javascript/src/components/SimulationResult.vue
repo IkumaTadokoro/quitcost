@@ -138,10 +138,33 @@ import LoadingAnimation from './LoadingAnimation'
 const router = useRouter()
 const { simulation } = useGlobalStore()
 
-simulation.load_result()
+let result = $ref({})
+let loading = $ref(false)
+const parameter = $computed(() => simulation.parameter)
 
-const result = $computed(() => simulation.result)
-const loading = $computed(() => simulation.loading)
+const loadResult = async () => {
+  loading = true
+  try {
+    const simulationApi = `/api/simulations?${parameter}`
+    const response = await fetch(simulationApi, {
+      method: 'GET',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      credentials: 'same-origin',
+      redirect: 'manual'
+    })
+
+    if (!response.ok) throw new Error(response.statusText)
+
+    const json = await response.json()
+    result = json.simulation
+  } catch (e) {
+    console.warn(e)
+  } finally {
+    loading = false
+  }
+}
+
+loadResult()
 
 const formatDate = (dateString) => {
   return format(new Date(dateString), 'yyyy年MM月')
