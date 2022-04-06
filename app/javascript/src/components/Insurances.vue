@@ -166,7 +166,7 @@
         v-model="currentPage"
         :pages="totalPages"
         :range-size="1"
-        active-color="#117766"
+        active-color="#DFEEE5"
         @update:modelValue="switchPage"
       />
     </nav>
