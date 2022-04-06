@@ -15,6 +15,6 @@ jobs:
         with:
           base: production
           head: main
-          token: ${{ secrets.QUITCOST_GITHUB_TOKEN }}
+          token: ${{ secrets.GHPROJECT_TOKEN }}
           labels: release
           assign: true
