@@ -25,7 +25,7 @@
   <div class="bg-secondary">
     <div class="container mx-auto py-8">
       <div
-        class="md:max-w-6xl mx-auto bg-white md:rounded-lg px-4 md:px-12 py-6 shadow-sm"
+        class="md:max-w-4xl mx-auto bg-white md:rounded-lg px-4 md:px-12 py-6 shadow-sm"
       >
         <div class="mb-6">
           <h2
