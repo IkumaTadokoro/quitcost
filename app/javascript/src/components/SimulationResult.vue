@@ -18,7 +18,7 @@
           <p>
             <span>約</span>
             <span class="mx-4">
-              <span class="text-6xl md:text-8xl text-primary">{{
+              <span class="text-6xl md:text-8xl text-primary tracking-wider">{{
                 formatAmount(result.grand_total)
               }}</span>
               <span class="text-base md:text-3xl text-primary ml-2">円</span>
