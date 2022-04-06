@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="max-w-full w-11/12 mx-auto">
     <div class="mx-auto">
       <header class="flex justify-between items-center">
         <h1 class="text-3xl py-4">国民年金保険料一覧</h1>
