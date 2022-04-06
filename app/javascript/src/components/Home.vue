@@ -5,11 +5,12 @@
         <img src="~logo.svg" alt="quitcost" />
       </div>
       <div class="md:max-w-6xl mb-8 mx-auto p-2">
-        <p class="text-center text-xs md:text-base text-gray">
+        <p class="text-center text-xs md:text-base text-gray leading-6">
           転職準備のために仕事をやめたいけど、お金が心配...。
-        </p>
-        <p class="text-center text-xs md:text-base text-gray">
-          いくつかの質問に答えるだけで、無職期間でどれだけ「保険」「税金」「年金」がかかるか計算できます
+          <br />
+          いくつかの質問に答えるだけで、無職期間で<br
+            class="md:hidden"
+          />どれだけ「保険」「税金」「年金」がかかるか計算できます
         </p>
       </div>
       <div class="flex justify-center">
