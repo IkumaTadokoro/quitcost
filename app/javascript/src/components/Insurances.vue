@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="max-w-full w-11/12 mx-auto">
     <header class="flex justify-between items-center">
       <h1 class="text-3xl py-4">国民健康保険料一覧</h1>
       <a
@@ -166,7 +166,7 @@
         v-model="currentPage"
         :pages="totalPages"
         :range-size="1"
-        active-color="#117766"
+        active-color="#DFEEE5"
         @update:modelValue="switchPage"
       />
     </nav>
