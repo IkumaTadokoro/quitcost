@@ -31,10 +31,10 @@ html
                 = link_to 'ログアウト', destroy_user_session_path, method: :delete
     - if notice
       .w-full
-        .p-24.bg-secondary.items-center.text-white.leading-none.flex.py-3
-          span.flex.rounded-full.bg-primary.uppercase.px-2.py-1.text-xs.mr-3
+        .p-24.bg-secondary.items-center.leading-none.flex.py-3
+          span.flex.rounded-full.bg-primary.uppercase.px-2.py-1.text-xs.mr-3.text-white
             | INFO
-          span.font-semibold.mr-2.text-left.text-sm.lex-auto
+          span.mr-2.text-left.text-sm.lex-auto.text-black
             = notice
     - if alert
       .w-full
