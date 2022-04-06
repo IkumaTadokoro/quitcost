@@ -99,14 +99,16 @@
               </p>
             </div>
             <div class="px-2 pt-4">
-              <ul>
+              <ul
+                class="flex md:flex-row flex-col md:items-center md:justify-around gap-y-3"
+              >
                 <li
-                  class="type-icon before:content-['健康保険'] mb-4 before:bg-primary"
+                  class="type-icon before:content-['健康保険'] before:bg-primary"
                 >
                   {{ formatAmount(monthly_payment.fee.insurance) }}円
                 </li>
                 <li
-                  class="type-icon before:content-['国民年金'] mb-4 before:bg-red-600"
+                  class="type-icon before:content-['国民年金'] before:bg-red-600"
                 >
                   {{ formatAmount(monthly_payment.fee.pension) }}円
                 </li>
