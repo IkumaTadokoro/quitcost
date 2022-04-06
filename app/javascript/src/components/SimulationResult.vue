@@ -68,13 +68,13 @@
         </div>
         <div class="flex flex-wrap justify-around mb-8 md:mb-52 md:px-32">
           <button
-            class="text-sm md:text-lg w-52 md:w-64 flex justify-between items-center bg-primary text-white rounded-full px-6 md:px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary before:content-[''] before:w-2 md:before:w-3 before:h-2 md:before:h-3 before:rotate-45 before:border-solid before:border-white before:border-b-4 before:border-l-4 before:hover:border-gray"
+            class="text-sm md:text-lg w-52 md:w-64 flex justify-center items-center bg-primary text-white rounded-full px-6 md:pl-12 md:pr-4 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary before:content-[''] before:w-2 md:before:w-3 before:h-2 md:before:h-3 before:rotate-45 before:border-solid before:border-white before:border-b-4 before:border-l-4 before:hover:border-gray before:absolute relative before:left-8"
             @click="moveForm"
           >
             もういちど計算する
           </button>
           <button
-            class="hidden md:flex text-lg w-60 flex justify-evenly items-center bg-accent text-white rounded-full px-8 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray"
+            class="hidden md:flex text-lg w-64 flex justify-center items-center bg-accent text-white rounded-full pr-8 pl-4 py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray after:absolute relative after:right-8"
             @click="scrollDetail"
           >
             詳細をみる
