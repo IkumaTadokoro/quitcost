@@ -114,7 +114,9 @@ export default function simulationStore() {
       const completedRoute = camelizeAnswer.filter((route) =>
         state.value.routes.includes(route)
       )
-      const lastStep = state.value.routes.indexOf(completedRoute.at(-1)) + 1
+      const lastStep =
+        state.value.routes.indexOf(completedRoute[completedRoute.length - 1]) +
+        1
       const nextRoute = state.value.routes[lastStep]
       return [...completedRoute, nextRoute]
     },
@@ -125,8 +127,8 @@ export default function simulationStore() {
       const [prefecture, city] = params.address.split(' ')
       const parameter = new URLSearchParams({
         simulation_date: formatDate(new Date(params.simulationDate)),
-        retirement_month: formatDate(new Date(`${params.retirementMonth}/1`)),
-        employment_month: formatDate(new Date(`${params.employmentMonth}/1`)),
+        retirement_month: formatDate(new Date(`${params.retirementMonth}`)),
+        employment_month: formatDate(new Date(`${params.employmentMonth}`)),
         age: params.age,
         prefecture,
         city,

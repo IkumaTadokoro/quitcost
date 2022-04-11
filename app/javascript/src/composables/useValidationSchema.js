@@ -4,8 +4,8 @@ import { format } from 'date-fns'
 
 export const useValidationSchema = (baseDate) => {
   const { afterNextBeginningOfYear } = useFinancialYear(baseDate, 4)
-  const from = format(baseDate, 'yyyy/MM')
-  const to = format(afterNextBeginningOfYear, 'yyyy/MM')
+  const from = format(baseDate, 'yyyy-MM')
+  const to = format(afterNextBeginningOfYear, 'yyyy-MM')
 
   const numberPresence = (columnName) => {
     return number()
