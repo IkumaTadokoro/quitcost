@@ -114,7 +114,9 @@ export default function simulationStore() {
       const completedRoute = camelizeAnswer.filter((route) =>
         state.value.routes.includes(route)
       )
-      const lastStep = state.value.routes.indexOf(completedRoute.at(-1)) + 1
+      const lastStep =
+        state.value.routes.indexOf(completedRoute[completedRoute.length - 1]) +
+        1
       const nextRoute = state.value.routes[lastStep]
       return [...completedRoute, nextRoute]
     },
