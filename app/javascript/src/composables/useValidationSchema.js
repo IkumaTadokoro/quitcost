@@ -19,6 +19,7 @@ export const useValidationSchema = (baseDate) => {
       .nullable()
       .transform((value, original) => (original === '' ? null : value))
       .required(`${columnName}は必須です`)
+      .typeError('無効な日付形式です。')
   }
 
   const RetirementMonth = object({
