@@ -7,7 +7,7 @@
     id="employmentMonth"
     class="form-field text-center"
     type="text"
-    v-maska="{ mask: '####/##' }"
+    v-maska="{ mask: '####-##' }"
     :value="employmentMonth"
     :class="error ? 'form-field-error' : 'form-field'"
     @change="handleChange"
@@ -32,8 +32,8 @@ const params = $computed(() => simulation.params)
 
 const base = new Date(params.simulationDate)
 const { endOfYear } = useFinancialYear(addYears(base, 1), 4)
-const from = format(base, 'yyyy/MM')
-const to = format(addMonths(endOfYear, 1), 'yyyy/MM')
+const from = format(base, 'yyyy-MM')
+const to = format(addMonths(endOfYear, 1), 'yyyy-MM')
 
 let { value: retirementMonth } = useField('retirementMonth')
 let {

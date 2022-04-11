@@ -127,8 +127,8 @@ export default function simulationStore() {
       const [prefecture, city] = params.address.split(' ')
       const parameter = new URLSearchParams({
         simulation_date: formatDate(new Date(params.simulationDate)),
-        retirement_month: formatDate(new Date(`${params.retirementMonth}/1`)),
-        employment_month: formatDate(new Date(`${params.employmentMonth}/1`)),
+        retirement_month: formatDate(new Date(`${params.retirementMonth}`)),
+        employment_month: formatDate(new Date(`${params.employmentMonth}`)),
         age: params.age,
         prefecture,
         city,

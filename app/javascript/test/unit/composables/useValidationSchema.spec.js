@@ -28,28 +28,28 @@ describe('#validationSchema', () => {
     })
 
     it('is invalid with the month before the month of today', async () => {
-      const target = { retirementMonth: '2022/02' }
+      const target = { retirementMonth: '2022-02' }
       await expect(schema.validate(target)).rejects.toThrow(
-        '退職予定月には 2022/03 以降の月を指定してください'
+        '退職予定月には 2022-03 以降の月を指定してください'
       )
     })
 
     it('is valid with the month of today', async () => {
-      const target = { retirementMonth: '2022/03' }
+      const target = { retirementMonth: '2022-03' }
       await expect(schema.validate(target)).resolves.toEqual({
         retirementMonth: new Date('2022-03-01')
       })
     })
 
     it('is invalid a month later than the beginning of the financial year two years later', async () => {
-      const target = { retirementMonth: '2023/05' }
+      const target = { retirementMonth: '2023-05' }
       await expect(schema.validate(target)).rejects.toThrow(
-        '退職予定月には 2023/04 以前の月を指定してください'
+        '退職予定月には 2023-04 以前の月を指定してください'
       )
     })
 
     it('is valid with the beginning of the financial year two years later', async () => {
-      const target = { retirementMonth: '2023/04' }
+      const target = { retirementMonth: '2023-04' }
       await expect(schema.validate(target)).resolves.toEqual({
         retirementMonth: new Date('2023-04-01')
       })
@@ -67,21 +67,21 @@ describe('#validationSchema', () => {
     })
 
     it('is invalid the month before retirementMonth', async () => {
-      const target = { retirementMonth: '2022/08', employmentMonth: '2022/06' }
+      const target = { retirementMonth: '2022-08', employmentMonth: '2022-06' }
       await expect(schema.validate(target)).rejects.toThrow(
         '転職予定月には、退職予定月以降の月を指定してください'
       )
     })
 
     it('is invalid a month later than the beginning of the financial year two years later', async () => {
-      const target = { retirementMonth: '2022/08', employmentMonth: '2023/05' }
+      const target = { retirementMonth: '2022-08', employmentMonth: '2023-05' }
       await expect(schema.validate(target)).rejects.toThrow(
-        '転職予定月には 2023/04 以前の月を指定してください'
+        '転職予定月には 2023-04 以前の月を指定してください'
       )
     })
 
     it('is valid with the beginning of the financial year two years later', async () => {
-      const target = { retirementMonth: '2022/08', employmentMonth: '2023/04' }
+      const target = { retirementMonth: '2022-08', employmentMonth: '2023-04' }
       await expect(schema.validate(target)).resolves.toEqual({
         retirementMonth: new Date('2022-08-01'),
         employmentMonth: new Date('2023-04-01')
