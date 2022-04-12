@@ -2,7 +2,7 @@
 
 class API::Admin::PensionsController < API::Admin::BaseController
   def index
-    @pensions = Pension.order(year: 'DESC').all.page(params[:page])
+    @pensions = Pension.order(year: :desc).all.page(params[:page])
   end
 
   def destroy
