@@ -4,7 +4,7 @@ class Simulation::Insurance::Base
   BASIC_DEDUCTION = 430_000
 
   def self.calc(year:, local_gov_code:, income:, age:)
-    new(year, local_gov_code, income, age).calc
+    new(year, local_gov_code, income, age).calculate
   end
 
   def initialize(year, local_gov_code, income, age)
@@ -13,14 +13,6 @@ class Simulation::Insurance::Base
     @age = age
   end
 
-  def calc
-    calculate
-  end
-
-  private
-
-  attr_reader :rate, :age
-
   def calculate
     return 0 if age >= 75
 
@@ -28,6 +20,10 @@ class Simulation::Insurance::Base
     calculate_result = income_basis + capita_basis + household_basis
     calculate_result <= limit ? calculate_result : limit
   end
+
+  private
+
+  attr_reader :rate, :age
 
   # 所得割
   def income_basis
