@@ -21,7 +21,7 @@ class Simulation::Insurance::Base
     calculate_result <= limit ? calculate_result : limit
   end
 
-  private
+  protected
 
   attr_reader :rate, :age
 
