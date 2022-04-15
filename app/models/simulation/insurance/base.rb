@@ -14,30 +14,28 @@ class Simulation::Insurance::Base
   end
 
   def calculate
-    return 0 if age >= 75
+    return 0 if @age >= 75
 
-    limit = rate.send("#{name}_limit")
+    limit = @rate.send("#{name}_limit")
     calculate_result = income_basis + capita_basis + household_basis
     calculate_result <= limit ? calculate_result : limit
   end
 
   protected
 
-  attr_reader :rate, :age
-
   # 所得割
   def income_basis
-    (salary * rate.send("#{name}_income_basis") / 100).round
+    (salary * @rate.send("#{name}_income_basis") / 100).round
   end
 
   # 均等割
   def capita_basis
-    rate.send("#{name}_capita_basis")
+    @rate.send("#{name}_capita_basis")
   end
 
   # 世帯割
   def household_basis
-    rate.send("#{name}_household_basis")
+    @rate.send("#{name}_household_basis")
   end
 
   def name
