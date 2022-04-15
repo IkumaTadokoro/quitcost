@@ -8,7 +8,7 @@
   .flex.flex-col.mb-4
     = f.label :local_gov_code, class: 'admin-form-label'
     .w-full.rounded-md.border-2.border-boundaryBlack.focus:ring-1.focus:ring-primary.text-base.outline-none.py-1.px-3.leading-8.transition-colors.duration-200.ease-in-out
-      = f.collection_select :local_gov_code, JpLocalGov.all, :code, ->(lg) { "#{lg.prefecture} #{lg.city}" }, include_blank: true
+      = f.collection_select :local_gov_code, JpLocalGov.all, :code, ->(lg) { "#{lg.prefecture} #{lg.city}" }, {}, { id: 'js-local-gov-select' }
     h3.leading-7.text-lg.mt-8
       | 医療分
     .flex.flex-col.mb-4
