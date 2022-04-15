@@ -18,6 +18,7 @@
           <tr>
             <th class="admin-table-header">編集</th>
             <th class="admin-table-header">削除</th>
+            <th class="admin-table-header">コピー</th>
             <th class="admin-table-header">年度</th>
             <th class="admin-table-header">都道府県</th>
             <th class="admin-table-header">市区町村</th>
@@ -65,6 +66,13 @@
               <button @click="destroy(insurance.id)">
                 <i class="fas fa-trash"></i>
               </button>
+            </td>
+            <td class="admin-table-data-center">
+              <a
+                :href="`/admin/insurances/new?id=${insurance.id}`"
+                title="国民健康保険料複製"
+                ><i class="fas fa-clone"></i>
+              </a>
             </td>
             <td class="admin-table-data-center">{{ insurance.year }}</td>
             <td class="admin-table-data-center">

@@ -14,9 +14,10 @@ import {
   faInfoCircle,
   faRobot,
   faEdit,
-  faTrash
+  faTrash,
+  faClone
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faInfoCircle, faRobot, faEdit, faTrash)
+library.add(faInfoCircle, faRobot, faEdit, faTrash, faClone)
 dom.watch()
 Rails.start()
