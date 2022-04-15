@@ -8,6 +8,7 @@ import 'stylesheets/application.css'
 import 'src/main.js'
 import 'src/insurances.js'
 import 'src/pensions.js'
+import 'src/local-gov-select.js'
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import {
   faInfoCircle,

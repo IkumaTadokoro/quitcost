@@ -31,7 +31,8 @@ RSpec.describe 'Insurance', type: :system, js: true do
 
       within 'form[name=insurance]' do
         fill_in '年度', with: insurance_form.year
-        select "#{JpLocalGov.find(insurance_form.local_gov_code).prefecture} #{JpLocalGov.find(insurance_form.local_gov_code).city}", from: '市区町村名'
+        # select "#{JpLocalGov.find(insurance_form.local_gov_code).prefecture} #{JpLocalGov.find(insurance_form.local_gov_code).city}", from: '市区町村名'
+        first('.choices').click
         fill_in '所得割（医療分）', with: insurance_form.medical_income_basis
         fill_in '資産割（医療分）', with: insurance_form.medical_asset_basis
         fill_in '均等割（医療分）', with: insurance_form.medical_capita_basis
