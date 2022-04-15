@@ -29,11 +29,9 @@ class Simulation::Salary
 
   private
 
-  attr_reader :income
-
   def calculate_salary
-    value = TABLE.select { |row| row.include?(income) }.values.first
-    base = value[:divide] == 1 ? income : (income / value[:divide]).floor(-3)
+    value = TABLE.select { |row| row.include?(@income) }.values.first
+    base = value[:divide] == 1 ? @income : (@income / value[:divide]).floor(-3)
     (base * value[:multiply]).floor + value[:plus]
   end
 end

@@ -21,8 +21,6 @@ class Simulation::Insurance
 
   private
 
-  attr_reader :from, :to, :local_gov_code, :age, :salary_table
-
   def monthly_insurance
     yearly_insurance.flat_map do |year, fee|
       unemployed_term = unemployed_term_by_fiscal_year[year]
@@ -41,14 +39,14 @@ class Simulation::Insurance
   def yearly_insurance
     result = {}
     fiscal_years.each do |year|
-      salary = salary_table[year]
+      salary = @salary_table[year]
       result[year] = LocalTaxLaw.calc_determined_amount { calc_medical(year, salary) + calc_elderly(year, salary) + calc_care(year, salary) }
     end
     result
   end
 
   def build_payment_target_month(year)
-    months = Insurance.rate(year: year, local_gov_code: local_gov_code).payment_target_months.map(&:month)
+    months = Insurance.rate(year: year, local_gov_code: @local_gov_code).payment_target_months.map(&:month)
     diff = year - months.first.financial_year
     diff.zero? ?  months : months.map { |month| month.advance(years: diff) }
   end
@@ -62,18 +60,18 @@ class Simulation::Insurance
   end
 
   def unemployed_term
-    months_between(from: from, to: to).map(&:beginning_of_month)
+    months_between(from: @from, to: @to).map(&:beginning_of_month)
   end
 
   def calc_medical(year, salary)
-    Simulation::Insurance::Medical.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Medical.calc(year: year, local_gov_code: @local_gov_code, income: salary, age: @age)
   end
 
   def calc_elderly(year, salary)
-    Simulation::Insurance::Elderly.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Elderly.calc(year: year, local_gov_code: @local_gov_code, income: salary, age: @age)
   end
 
   def calc_care(year, salary)
-    Simulation::Insurance::Care.calc(year: year, local_gov_code: local_gov_code, income: salary, age: age)
+    Simulation::Insurance::Care.calc(year: year, local_gov_code: @local_gov_code, income: salary, age: @age)
   end
 end

@@ -32,17 +32,15 @@ class Simulation
 
   private
 
-  attr_reader :parameter
-
   def insurance
-    Simulation::Insurance.calc(parameter)
+    Simulation::Insurance.calc(@parameter)
   end
 
   def pension
-    Simulation::Pension.calc(parameter)
+    Simulation::Pension.calc(@parameter)
   end
 
   def residence
-    Simulation::Residence.calc(parameter)
+    Simulation::Residence.calc(@parameter)
   end
 end
