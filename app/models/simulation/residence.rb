@@ -32,8 +32,6 @@ class Simulation::Residence
 
   private
 
-  attr_reader :from, :to, :salary_table, :social_insurance_table
-
   def monthly_residence
     fiscal_years.flat_map do |year|
       unemployed_term = unemployed_term_by_fiscal_year[year]
@@ -64,11 +62,11 @@ class Simulation::Residence
   end
 
   def unemployed_term
-    months_between(from: from, to: to)
+    months_between(from: @from, to: @to)
   end
 
   def yearly_residence(year)
-    return 0 if salary_table[year] <= NON_TAXABLE_SALARY_LIMIT
+    return 0 if @salary_table[year] <= NON_TAXABLE_SALARY_LIMIT
 
     LocalTaxLaw.calc_determined_amount { income_basis(year) + capita_basis }
   end
@@ -98,10 +96,10 @@ class Simulation::Residence
   end
 
   def total_income(year)
-    Simulation::Salary.calc(salary_table[year])
+    Simulation::Salary.calc(@salary_table[year])
   end
 
   def income_deduction(year)
-    social_insurance_table[year] + BASIC_DEDUCTION
+    @social_insurance_table[year] + BASIC_DEDUCTION
   end
 end
