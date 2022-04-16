@@ -4,10 +4,10 @@
       <ProgressStep :top="current + 1" :bottom="steps" />
       <ProgressBar :top="current" :bottom="steps - 1" />
     </div>
-    <div class="h-96 px-4 md:px-24 pt-12 text-center">
+    <div class="h-96 px-4 pt-12 text-center md:px-24">
       <router-view></router-view>
     </div>
-    <div class="md:w-9/12 md:mx-auto mt-16 flex px-4 justify-evenly gap-x-4">
+    <div class="mt-16 flex justify-evenly gap-x-4 px-4 md:mx-auto md:w-9/12">
       <button class="prev-button" v-if="prev" type="button" @click="goToPrev">
         まえの質問へ
       </button>
@@ -67,34 +67,34 @@ const goToPrev = () => {
 
 <style scope>
 .form-label {
-  @apply h-20 md:h-24 text-xl md:text-4xl inline-block mb-8 md:mb-4;
+  @apply mb-8 inline-block h-20 text-xl md:mb-4 md:h-24 md:text-4xl;
 }
 
 .form-field {
-  @apply w-full px-6 py-2 md:w-9/12 rounded-md border-4 border-boundaryBlack focus:border-primary tracking-widest text-2xl md:text-5xl outline-none leading-8 transition-colors duration-200 ease-in-out placeholder-boundaryBlack;
+  @apply w-full rounded-md border-4 border-boundaryBlack px-6 py-2 text-2xl leading-8 tracking-widest placeholder-boundaryBlack outline-none transition-colors duration-200 ease-in-out focus:border-primary md:w-9/12 md:text-5xl;
 }
 
 .form-field-error {
-  @apply w-full px-6 py-2 md:w-9/12 rounded-md border-4 border-red-500 focus:border-red-600 tracking-widest text-2xl md:text-5xl outline-none leading-8 placeholder-boundaryBlack;
+  @apply w-full rounded-md border-4 border-red-500 px-6 py-2 text-2xl leading-8 tracking-widest placeholder-boundaryBlack outline-none focus:border-red-600 md:w-9/12 md:text-5xl;
 }
 
 .form-tips {
-  @apply mt-2 text-xs md:text-sm text-gray;
+  @apply mt-2 text-xs text-gray md:text-sm;
 }
 
 .form-error {
-  @apply flex md:w-9/12 md:mx-auto h-6 justify-end text-red-500 text-xs md:text-base;
+  @apply flex h-6 justify-end text-xs text-red-500 md:mx-auto md:w-9/12 md:text-base;
 }
 
 .next-button {
-  @apply flex justify-between items-center bg-primary text-white rounded-full text-sm md:text-lg w-40 md:w-52 px-5 md:px-8 py-3 md:py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-primary after:content-[''] after:w-2 md:after:w-3 after:h-2 md:after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray;
+  @apply flex w-40 items-center justify-between rounded-full border-4 border-primary bg-primary px-5 py-3 text-sm text-white duration-100 ease-in after:h-2 after:w-2 after:rotate-45 after:border-t-4 after:border-r-4 after:border-solid after:border-white after:content-[''] hover:bg-white hover:text-gray after:hover:border-gray md:w-52 md:px-8 md:py-5 md:text-lg md:after:h-3 md:after:w-3;
 }
 
 .submit-button {
-  @apply flex justify-evenly items-center bg-accent text-white rounded-full text-sm md:text-lg w-40 md:w-52 px-5 md:px-8 py-3 md:py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-accent after:content-[''] after:w-3 after:h-3 after:rotate-45 after:border-solid after:border-white after:border-t-4 after:border-r-4 after:hover:border-gray;
+  @apply flex w-40 items-center justify-evenly rounded-full border-4 border-accent bg-accent px-5 py-3 text-sm text-white duration-100 ease-in after:h-3 after:w-3 after:rotate-45 after:border-t-4 after:border-r-4 after:border-solid after:border-white after:content-[''] hover:bg-white hover:text-gray after:hover:border-gray md:w-52 md:px-8 md:py-5 md:text-lg;
 }
 
 .prev-button {
-  @apply flex justify-between items-center bg-secondary text-gray rounded-full text-sm md:text-lg w-40 md:w-52 px-5 md:px-8 py-3 md:py-5 ease-in duration-100 hover:bg-white hover:text-gray border-4 border-secondary before:content-[''] before:w-2 md:before:w-3 before:h-2 md:before:h-3 before:rotate-45 before:border-solid before:border-gray before:border-b-4 before:border-l-4 before:hover:border-gray;
+  @apply flex w-40 items-center justify-between rounded-full border-4 border-secondary bg-secondary px-5 py-3 text-sm text-gray duration-100 ease-in before:h-2 before:w-2 before:rotate-45 before:border-b-4 before:border-l-4 before:border-solid before:border-gray before:content-[''] hover:bg-white hover:text-gray before:hover:border-gray md:w-52 md:px-8 md:py-5 md:text-lg md:before:h-3 md:before:w-3;
 }
 </style>

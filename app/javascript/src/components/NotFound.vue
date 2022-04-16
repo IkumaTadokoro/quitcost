@@ -1,13 +1,13 @@
 <template>
-  <div class="container mx-auto pt-24 px-2">
+  <div class="container mx-auto px-2 pt-24">
     <div
-      class="md:max-w-2xl mx-auto p-8 border-4 border-boundaryBlack rounded-xl"
+      class="mx-auto rounded-xl border-4 border-boundaryBlack p-8 md:max-w-2xl"
     >
-      <h1 class="text-xl md:text-3xl text-center mb-4">
+      <h1 class="mb-4 text-center text-xl md:text-3xl">
         ご指定のページが見つかりません
       </h1>
       <p
-        class="text-lg md:text-2xl text-center mb-6 underline underline-offset-8 decoration-4 decoration-primary"
+        class="mb-6 text-center text-lg underline decoration-primary decoration-4 underline-offset-8 md:text-2xl"
       >
         404: Not Found
       </p>
