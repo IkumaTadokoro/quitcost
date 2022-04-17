@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center my-64">
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full mx-8"></div>
-    <div class="animate-ping h-2 w-2 bg-primary rounded-full"></div>
+  <div class="my-64 flex justify-center">
+    <div class="h-2 w-2 animate-ping rounded-full bg-primary"></div>
+    <div class="mx-8 h-2 w-2 animate-ping rounded-full bg-primary"></div>
+    <div class="h-2 w-2 animate-ping rounded-full bg-primary"></div>
   </div>
 </template>

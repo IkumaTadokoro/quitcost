@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <div class="px-4 pt-16 mb-8">
+    <div class="mb-8 px-4 pt-16">
       <FormWizard @submit="onSubmit" />
     </div>
   </div>

@@ -1,28 +1,28 @@
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50">
-    <div class="flex items-start justify-center min-h-screen pt-56">
+  <div class="fixed inset-0 z-10 overflow-y-auto bg-black bg-opacity-50">
+    <div class="flex min-h-screen items-start justify-center pt-56">
       <div
-        class="border-0 rounded-lg shadow-lg relative flex flex-col w-11/12 md:w-5/12 bg-white outline-none focus:outline-none"
+        class="relative flex w-11/12 flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none md:w-5/12"
       >
         <header
-          class="flex items-start justify-between p-5 border-b border-solid border-boundaryBlack rounded-t"
+          class="flex items-start justify-between rounded-t border-b border-solid border-boundaryBlack p-5"
         >
           <h3 class="text-xl">エラーが発生しました</h3>
         </header>
-        <article class="relative p-4 flex-auto">
-          <p class="text-black text-xs md:text-sm leading-relaxed">
+        <article class="relative flex-auto p-4">
+          <p class="text-xs leading-relaxed text-black md:text-sm">
             画面をリロードするか、時間をおいて、もう一度最初からお試しください。
           </p>
-          <p class="mt-1 text-black text-xs md:text-sm leading-relaxed">
+          <p class="mt-1 text-xs leading-relaxed text-black md:text-sm">
             エラーが出続ける場合は以下の「Twitterから連絡」から @ikuma-t
             までご連絡ください。
           </p>
         </article>
         <footer
-          class="flex items-center justify-end p-2 border-t border-solid border-boundaryBlack rounded-b"
+          class="flex items-center justify-end rounded-b border-t border-solid border-boundaryBlack p-2"
         >
           <a
-            class="text-white bg-sky-500 border border-solid rounded-md text-xs px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+            class="mr-1 mb-1 rounded-md rounded border border-solid bg-sky-500 px-3 py-3 text-xs text-white outline-none focus:outline-none"
             href="https://twitter.com/ikumatdkr"
             target="_blank"
             rel="noopener noreferrer"
@@ -30,7 +30,7 @@
             Twitterから連絡
           </a>
           <button
-            class="text-white bg-primary border border-solid rounded-md text-xs px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+            class="mr-1 mb-1 rounded-md rounded border border-solid bg-primary px-3 py-3 text-xs text-white outline-none focus:outline-none"
             @click="moveForm"
           >
             最初からやり直す

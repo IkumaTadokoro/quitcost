@@ -1,12 +1,12 @@
 <template>
   <button
     type="button"
-    class="border-0 w-40 md:w-48 p-3 focus:outline-none rounded-full text-xs md:text-sm bg-accent text-white hover:opacity-80 shadow-xl group relative cursor-pointer"
+    class="group relative w-40 cursor-pointer rounded-full border-0 bg-accent p-3 text-xs text-white shadow-xl hover:opacity-80 focus:outline-none md:w-48 md:text-sm"
     data-test-id="completeInsuranceButton"
     @click="completeInsurance"
   >
     <span
-      class="group-hover:opacity-100 group-hover:visible invisible opacity-0 absolute left-1/2 -translate-x-1/2 inline-block px-4 py-2 -bottom-10 md:-bottom-12 whitespace-nowrap text-xs leading-tight bg-gray text-white rounded-xl ease-in duration-200 before:content-[''] before:absolute before:left-1/2 before:-top-3 before:-ml-2 before:border-8 before:border-solid before:border-transparent before:border-b-8 before:border-b-gray"
+      class="invisible absolute left-1/2 -bottom-10 inline-block -translate-x-1/2 whitespace-nowrap rounded-xl bg-gray px-4 py-2 text-xs leading-tight text-white opacity-0 duration-200 ease-in before:absolute before:left-1/2 before:-top-3 before:-ml-2 before:border-8 before:border-b-8 before:border-solid before:border-transparent before:border-b-gray before:content-[''] group-hover:visible group-hover:opacity-100 md:-bottom-12"
       >{{ tooltipText }}</span
     >
     <i class="fas fa-robot mr-2"></i>おまかせで入力する

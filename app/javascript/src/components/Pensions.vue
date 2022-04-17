@@ -1,23 +1,23 @@
 <template>
-  <div class="max-w-full w-11/12 mx-auto">
+  <div class="mx-auto w-11/12 max-w-full">
     <div class="mx-auto">
-      <header class="flex justify-between items-center">
-        <h1 class="text-3xl py-4">国民年金保険料一覧</h1>
+      <header class="flex items-center justify-between">
+        <h1 class="py-4 text-3xl">国民年金保険料一覧</h1>
         <a
           href="/admin/pensions/new"
-          class="inline-block text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-green-900 rounded-full text-sm"
+          class="inline-block rounded-full border-0 bg-primary py-2 px-4 text-sm text-white hover:bg-green-900 focus:outline-none"
           >新規登録</a
         >
       </header>
       <LoadingAnimation v-if="!pensions.length" />
       <div
         v-else
-        class="overflow-x-auto bg-white rounded-md shadow overflow-y-auto relative mb-4"
+        class="relative mb-4 overflow-x-auto overflow-y-auto rounded-md bg-white shadow"
       >
         <table
-          class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative"
+          class="whitespace-no-wrap table-striped relative w-full table-auto border-collapse bg-white"
         >
-          <thead class="bg-boundaryBlack text-xs sticky top-0">
+          <thead class="sticky top-0 bg-boundaryBlack text-xs">
             <tr>
               <th class="admin-table-header">編集</th>
               <th class="admin-table-header">削除</th>
