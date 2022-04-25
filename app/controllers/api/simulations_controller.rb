@@ -12,6 +12,7 @@ class API::SimulationsController < ApplicationController
   def validate_parameter
     return if parameter.valid?
 
+    Sentry.capture_message(parameter.errors.full_messages.join("\n"))
     render json: { 'errors': parameter.errors.full_messages }, status: :bad_request
   end
 
