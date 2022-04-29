@@ -36,6 +36,8 @@ gem 'jp_local_gov'
 gem 'kaminari'
 gem 'meta-tags'
 gem 'rails-i18n'
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
