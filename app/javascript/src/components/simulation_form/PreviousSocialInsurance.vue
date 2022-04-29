@@ -1,6 +1,6 @@
 <template>
   <label for="previousSocialInsurance" class="form-label">
-    <span class="inline-block">{{ `昨年度（${from} ~ ${to}）の` }}</span
+    <span class="inline-block">{{ `昨昨年度（${from} ~ ${to}）の` }}</span
     ><span class="inline-block">「社会保険料」を教えてください</span>
   </label>
   <p class="form-error">{{ error }}</p>
