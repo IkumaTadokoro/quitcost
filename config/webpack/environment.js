@@ -2,6 +2,8 @@ const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
 const vue = require('./loaders/vue')
 const { DefinePlugin } = require('webpack')
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 
 function hotfixPostcssLoaderConfig(subloader) {
   const subloaderName = subloader.loader
@@ -34,6 +36,17 @@ environment.config.merge({
     ]
   }
 })
+
+const dotenvFiles = ['.env']
+dotenvFiles.forEach((dotenvFile) => {
+  dotenv.config({ path: dotenvFile, silent: true})
+})
+
+environment.plugins.prepend('Environment',
+  new webpack.EnvironmentPlugin(
+    JSON.parse(JSON.stringify(process.env))
+  )
+)
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.plugins.prepend(
